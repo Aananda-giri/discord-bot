@@ -1,0 +1,294 @@
+{"stream_links" : [
+     {
+                "name": "Radio Nepal",
+                "city" : "kathmandu",
+                "url": "https://radionepal.news/live/audio/mp3",
+                "image": "https://radionepal.gov.np/wp-content/themes/rdnp/images/logo-en.png",
+                "desc": "am/sw/fm radio",
+                "longDesc": "Radio Nepal, oldest radio of nepal."
+            },
+    {
+      "city" : "kathmandu",
+      "url": "http://ample-zeno-20.radiojar.com/wtuvp08xq1duv?rj-ttl=5&rj-token=AAABZjT4J-zC50cFCXhTzVpUQZ_nuhC1i5b5MxQeyzawGk83GXPmAQ",
+      "name": "Ujyaalo 90 Network ",
+      "image": "https://www.ujyaalonetwork.com/wp-content/uploads/2021/04/cropped-final-logo-ujyaalo.jpg"
+    },
+    {
+      "city" : "kathmandu",
+      "url": "https://streaming.softnep.net:10828/;stream.nsv&type=mp3",
+      "name": "Kalika FM",
+      "image": "http://www.kalikanews.com/images/logo.png"
+    },
+    {
+      "city" : "kathmandu",
+      "url": "https://live.itech.host:4515/stream",
+      "name": "Radio Lumbini",
+      "image": "https://www.radiolumbini.org/uploads/logo/logo2021-08-12-04-29-40.png"
+    },
+    {
+      "city" : "kathmandu",
+      "url": "https://streaming.softnep.net:10972/;stream.nsv&type=mp3",
+      "name": "Radio Thaha Sanchar Kathmandu",
+      "image": "https://thahasanchar.com/img/logo.png"
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8037/;stream.nsv&type=mp3",
+      "name": "Capital FM",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8115/;stream.nsv&type=mp3",
+      "name": "Radio Sarangi Morang",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8091/;stream.nsv&type=mp3",
+      "name": "Radio Annapurna Nepal",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://stream.zenolive.com/2w81t82wx3duv",
+      "name": "Radio Audio ",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8109/;stream.nsv&type=mp3",
+      "name": "Kalinchowk FM ",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8057/;stream.nsv&type=mp3&autostart=true",
+      "name": "Radio Makwanpur Hetauda",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8139/;stream.nsv&type=mp3",
+      "name": "Radio Makwanpur Gorkha",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8031/;stream.nsv&type=mp3&autostart=true",
+      "name": "Radio Triveni",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8141/;stream.nsv&type=mp3",
+      "name": "Radio Myagdi Kali",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8143/;stream.nsv&type=mp3",
+      "name": "Radio Bhojpuriya FM",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8003/;stream.nsv&type=mp3",
+      "name": "Butwal FM",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8101/;stream.nsv&type=mp3",
+      "name": "Radio Karnali",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8069/;stream.nsv&type=mp3",
+      "name": "Radio Devghat ",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8065/;stream.nsv&type=mp3",
+      "name": "Unique FM Rukum",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8063/;stream.nsv&type=mp3",
+      "name": "Afno FM Rukum ",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8061/;stream.nsv&type=mp3",
+      "name": "Radio Bihani",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8059/;stream.nsv&type=mp3",
+      "name": "KTM 90.3 FM",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8017/;stream.nsv&type=mp3",
+      "name": "Radio Birgunj",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8103/;stream.nsv&type=mp3",
+      "name": "Afno FM Okhaldhunga",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8047/;stream.nsv&type=mp3",
+      "name": "Radio Sangeet",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8007/;stream.nsv&type=mp3",
+      "name": "Radio Seti",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8013/;stream.nsv&type=mp3",
+      "name": "Radio Rasuwa",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8051/;stream.nsv&type=mp3",
+      "name": "Radio Melamchi",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8041/;stream.nsv&type=mp3",
+      "name": "Radio Sindhu",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8015/;stream.nsv&type=mp3",
+      "name": "Radio 24 Times",
+      "image":""
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8091/;stream.nsv&type=mp3",
+      "name": "Citizen FM",
+      "image": "http://radio.nepal.fm/wp-content/uploads/Citizen-FM.jpg"
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8101/;stream.nsv&type=mp3",
+      "name": "Radio Karnali Jumla",
+      "image": "http://radio.nepal.fm/wp-content/uploads/radiokarnali.jpg"
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8093/;stream.nsv&type=mp3",
+      "name": "Hamro Cricket",
+      "image": "http://radio.nepal.fm/wp-content/uploads/hamrocricket.jpg"
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://live.itechnepal.com:8580/stream",
+      "name": "Naya Nepal FM",
+      "image": "https://cdn-radiotime-logos.tunein.com/s184784d.png"
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8047/;stream.nsv&type=mp3",
+      "name": "Narayani FM Birgunj",
+      "image": "http://radio.nepal.fm/wp-content/uploads/Narayani-FM.jpg"
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8061/;stream.nsv&type=mp3",
+      "name": "RVL Nepali",
+      "image": "http://radio.nepal.fm/wp-content/uploads/Rvl-Radio.jpg"
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8065/;stream.nsv&type=mp3",
+      "name": "RVL Rock",
+      "image": "http://radio.nepal.fm/wp-content/uploads/Rvl-Radio.jpg"
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8083/;stream.nsv&type=mp3",
+      "name": "RVL SoftRock",
+      "image": "http://radio.nepal.fm/wp-content/uploads/Rvl-Radio.jpg"
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8063/;stream.nsv&type=mp3",
+      "name": "RVL Pop ",
+      "image": "http://radio.nepal.fm/wp-content/uploads/Rvl-Radio.jpg"
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8069/;stream.nsv&type=mp3",
+      "name": "RVL Metal ",
+      "image": "http://radio.nepal.fm/wp-content/uploads/Rvl-Radio.jpg"
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8075/;stream.nsv&type=mp3",
+      "name": "RVL Blues",
+      "image": "http://radio.nepal.fm/wp-content/uploads/Rvl-Radio.jpg"
+    },
+    {
+      "city" : "kathmandu",
+      "url": "http://streaming.softnep.net:8071/;stream.nsv&type=mp3",
+      "name": "RVL Dance ",
+      "image": "http://radio.nepal.fm/wp-content/uploads/Rvl-Radio.jpg"
+    },
+     {
+     "name": "Sub Pop Radio",
+     "city" : "kathmandu",
+      "url": "http://djboyradio.streamguys1.com/sub-pop-records.mp3",
+     "image": "station-sub.png",
+     "desc": "Midsized Record Label",
+     "longDesc": "Sub Pop is a record label founded in 1986 by Bruce Pavitt. In 1988, Sub Pop Records LLC was formed by Bruce Pavitt and Jonathan Poneman in Seattle, Washington. Sub Pop achieved fame in the late 1980s for first signing Nirvana, Soundgarden, Mudhoney and many other bands from the Seattle alternative rock scene."
+     },
+     {
+     "name": "Sounds of the 80s",
+     "city" : "kathmandu",
+      "url": "http://tuneinads.moodmedia.com/streams/tunein_sounds_of_the_80s_with_ads.mp3",
+     "image": "station-80s",
+     "desc": "Totally Rad",
+     "longDesc": "80s Baby! The '80s is not about nostalgia; it is about a decade of people, decisions and inventions that changed our future, told from the perspective of unknowing history makers who lived these iconic moments."
+     },
+     {
+     "name": "Clasic Rock",
+     "city" : "kathmandu",
+      "url": "http://rfcmedia.streamguys1.com/classicrock.mp3",
+     "image": "station-classicrock",
+     "desc": "Classic Rock Hits",
+     "longDesc": "Classic rock is a radio format which developed from the album-oriented rock (AOR) format in the early 1980s. In the United States, the classic rock format features music ranging generally from the late 1960s to the late 1980s, primarily focusing on commercially successful hard rock popularized in the 1970s. The radio format became increasingly popular with the baby boomer demographic by the end of the 1990s."
+     },
+     {
+     "name": "Radio 1190",
+     "city" : "kathmandu",
+      "url": "https://streamingv2.shoutcast.com/radio-1190",
+     "desc": "KVCU - Boulder, CO",
+     "longDesc": "Radio 1190 is the bomb.",
+     "image":"//images.squarespace-cdn.com/content/v1/554959f9e4b04cef2f6cfb06/1604967372117-TAICDXVH0QFNWYMU6HZE/radiowhite.png?format=1500w"
+     }
+    ]}
+    /*{
+      "city" : "kathmandu",
+      "url": "http://kantipur-stream.softnep.com:7248/;stream.nsv&type=mp3",
+      "name": "Radio Kantipur",
+      "image": ""
+    },*/

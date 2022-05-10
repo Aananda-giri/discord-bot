@@ -1,0 +1,26 @@
+db_unleash,unleash_ioe_noti
+- channel_id, 
+- subreddit
+
+db_subscription:
+- channel_id
+- country -> no. of news
+- 
+
+- ability to use db globally (dependency injection/inversion)
+- save db at end of each operation
+
+
+- working music
+- next in playlist
+- download music playlist
+
+- (6hrs) scrap first page
+- check new files
+- download new file
+- send new file
+
+- dislike -> delete file
+- like -> send file to custom news channel 
+- mistakenly dislike -> undo command
+- like + unlike -> delete if likes less than dislikes

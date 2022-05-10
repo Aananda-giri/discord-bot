@@ -1,0 +1,49 @@
+Todo:
+- Create invites, list messages, users, messages by users of servers the bot is in
+- Personalize start_unleashing/stop unleashing for individual servers
+
+- filter memes and avoid reddit mods messages
+  i.e. filter: ['mod']
+
+- filter memes without image
+
+Help:
+- Improve unleash reddit
+- help command groups, slash commands
+- Guild - to know anything about bot's servers
+- https://discord.com/developers/ -> select_bot -> BOT -> Server Members Intent {enable}
+- server wise command usage *statics*
+- commands in seperate file
+- functions, guilds in seperate file
+- *statics*
+- .jokes 10
+- .memes 10
+
+
+
+bot:
+- top.gg
+- https://discordbotlist.com/
+
+- https://discord.bots.gg/
+- https://bots.ondiscord.xyz/
+
+Databases:
+- db['unleash'] = [{channel_id:['jokes','memes'...]}, {channel_id2:['jokes','memes'...]}, ........]
+- db['responding'] = True or False
+- db['encouragements']
+- db['users']
+
+Commands_category:
+Example: 
+https://gist.github.com/EvieePy/d78c061a4798ae81be9825468fe146be
+
+Documentation:
+https://discordpy.readthedocs.io/en/v1.7.3/ext/commands/cogs.html
+
+
+Songs:
+  - delete them after playing
+  - loop (same/different songs)
+  - playlist (add/remove/skip/previous)
+
