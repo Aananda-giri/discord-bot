@@ -210,7 +210,7 @@ async def unleashing_tasks():
 async def on_ready():
   bot.loop.create_task(status_task())
   
-  # await unleashing_tasks()
+  await unleashing_tasks()
   
 
   print(f"Logged in as {bot.user.name}")
