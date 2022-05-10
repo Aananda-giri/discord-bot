@@ -575,7 +575,7 @@ if __name__ == "__main__":
   viber_thread.start()    # starts twitter thread
   
   # twitter_thread=threading.Thread(target = start_twitter_bot, args=(config.,))
-  bot.run(config.DISCORD_TEST_BOT)     # run discord bot
+  bot.run(config.DISCORD_TOKEN)     # run discord bot
 
   
 

@@ -64,7 +64,7 @@ class Commands(commands.Cog, name="reddit_commands"):
         # enabling a vent channel
         vent_db.add_one(context.channel.id)
         response_message = """
-        \n**vent channel enabled**
+        \n**vent channel enabled...**
         vent_channels make every message anonymous by deleting and re-posting user\'s messages
         please enter: `.vent` To to enable/disable a vent channel\n
         """
@@ -73,7 +73,7 @@ class Commands(commands.Cog, name="reddit_commands"):
         # disabling a vent channel
         vent_db.remove_one(str(context.channel.id))
         response_message = """
-        \n**vent channel disabled..**
+        \n**vent channel disabled...**
         vent_channels make every message anonymous by deleting and re-posting user\'s messages
         please enter `.vent` To to enable/disable a vent channel
         """
