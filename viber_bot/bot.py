@@ -197,7 +197,7 @@ def get_reply(viber_request):
                 result = requests.get(tmdb_url).json()
                 tv_id = result['results'][0]['id']
 
-                episode_url = "https://www.2embed.ru/embed/tmdb/tv?id={}&s={}&e={}/".format(tv_id, season, episode)
+                episode_url = f"https://www.2embed.ru/embed/tmdb/tv?id={tv_id}&s={season}&e={episode}/"
 
                 # e.g. https://www.2embed.ru/embed/tmdb/tv?id=84958&s=1&e=1
 

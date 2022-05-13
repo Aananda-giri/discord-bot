@@ -8,7 +8,8 @@
     '60' : 'migration to sqlie',
     '55' : 'telegram bot, source: https://www.youtube.com/watch?v=CNkiPN_WZfA',
     '25' : 'Merge unleash and subscribe, admin_cogs, help -> upgrade to new db', !! help cog stucking during loading_cogs
-    '120' : 'telegram, viber_bot imperfect configuration, vent channel added'
+    '120' : 'telegram, viber_bot imperfect configuration, vent channel added',
+    '30': 'vent channel debug'
 }
 
 # todo
