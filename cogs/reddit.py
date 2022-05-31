@@ -122,7 +122,7 @@ async def unleash_reddit(channel, subreddit, no_of_posts=5, author=False, last_s
         embed=get_embeded_message(channel, 'Unleashed List:', subreddits, author=False)
         await channel.send(embed=embed)
       except Exception as e:
-        print('\n Bro! looks like channel:{} doesn\'t exist (deleted maybe)\n err. message:{}\n'.format(channel.id), str(e))
+        print('\n Bro! looks like channel:{} doesn\'t exist (deleted maybe)\n err. message:{}\n'.format(channel.id if channel!=None else None), str(e))
 
 class RedditCommands(commands.Cog, name="reddit_commands"):
     def __init__(self, bot):

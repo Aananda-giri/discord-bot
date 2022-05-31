@@ -209,8 +209,7 @@ async def unleashing_tasks():
 @bot.event
 async def on_ready():
   bot.loop.create_task(status_task())
-  
-  await unleashing_tasks()
+  await bot.loop.create_task(unleashing_tasks())
   
 
   print(f"Logged in as {bot.user.name}")
