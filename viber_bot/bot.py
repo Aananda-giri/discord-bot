@@ -412,7 +412,7 @@ def start_bot(VIBER_AUTH_TOKEN, TMDB_KEY):
     TMDB_API_KEY = TMDB_KEY
 
     # runs the flask app
-    app.run(debug=True)
+    app.run(port=8081, debug=True)
 
 if __name__ == "__main__":
     start_bot(config.VIBER_AUTH_TOKEN, config.TMDB_API_KEY)

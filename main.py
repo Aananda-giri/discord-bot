@@ -232,9 +232,9 @@ async def on_ready():
   print(f"Python version: {platform.python_version()}")
   print(f"Running on: {platform.system()} {platform.release()} ({os.name})")
   print("-------------------")
-  # unleashing.start()
-  # unleash_ioe_notifications.start()
-  # unleash_news.start()
+  unleashing.start()
+  unleash_ioe_notifications.start()
+  unleash_news.start()
   
   # print_hi.start()
   # print_hi2.start()

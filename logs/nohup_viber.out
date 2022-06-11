@@ -3,13 +3,37 @@
    WARNING: This is a development server. Do not use it in a production deployment.
    Use a production WSGI server instead.
  * Debug mode: on
+ * Running on http://127.0.0.1:8081/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 128-028-575
+ * Serving Flask app "bot" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
 Traceback (most recent call last):
-  File "/home/ec2-user/saneora/saneora/viber_bot/__init__.py", line 10, in <module>
+  File "/media/data/programming/Projects/aws/saneora/viber_bot/__init__.py", line 10, in <module>
     start_bot(config.VIBER_AUTH_TOKEN, config.TMDB_API_KEY)
-  File "/home/ec2-user/saneora/saneora/viber_bot/bot.py", line 415, in start_bot
-    app.run(debug=True)
-  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/flask/app.py", line 990, in run
+  File "/media/data/programming/Projects/aws/saneora/viber_bot/bot.py", line 415, in start_bot
+    app.run(port=8081, debug=True)
+  File "/home/nathan/Documents/saneora_env/lib/python3.9/site-packages/flask/app.py", line 990, in run
     run_simple(host, port, self, **options)
-  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/werkzeug/serving.py", line 984, in run_simple
+  File "/home/nathan/Documents/saneora_env/lib/python3.9/site-packages/werkzeug/serving.py", line 984, in run_simple
+    s.bind(server_address)
+OSError: [Errno 98] Address already in use
+ * Serving Flask app "bot" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+Traceback (most recent call last):
+  File "/media/data/programming/Projects/aws/saneora/viber_bot/__init__.py", line 10, in <module>
+    start_bot(config.VIBER_AUTH_TOKEN, config.TMDB_API_KEY)
+  File "/media/data/programming/Projects/aws/saneora/viber_bot/bot.py", line 415, in start_bot
+    app.run(port=8081, debug=True)
+  File "/home/nathan/Documents/saneora_env/lib/python3.9/site-packages/flask/app.py", line 990, in run
+    run_simple(host, port, self, **options)
+  File "/home/nathan/Documents/saneora_env/lib/python3.9/site-packages/werkzeug/serving.py", line 984, in run_simple
     s.bind(server_address)
 OSError: [Errno 98] Address already in use

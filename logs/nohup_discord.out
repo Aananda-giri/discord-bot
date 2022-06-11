@@ -1,0 +1,50 @@
+'config.py' not found! Please add it and try again.
+'config.py' not found! Please add it and try again.
+Unhandled exception in internal background task 'unleashing'.
+Traceback (most recent call last):
+  File "/home/nathan/Documents/saneora_env/lib/python3.9/site-packages/asyncprawcore/requestor.py", line 64, in request
+    return await self._http.request(
+  File "/home/nathan/Documents/saneora_env/lib/python3.9/site-packages/aiohttp/client.py", line 619, in _request
+    break
+  File "/home/nathan/Documents/saneora_env/lib/python3.9/site-packages/aiohttp/helpers.py", line 656, in __exit__
+    raise asyncio.TimeoutError from None
+asyncio.exceptions.TimeoutError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/nathan/Documents/saneora_env/lib/python3.9/site-packages/discord/ext/tasks/__init__.py", line 101, in _loop
+    await self.coro(*args, **kwargs)
+  File "/media/data/programming/Projects/aws/saneora/main.py", line 106, in unleashing
+    await unleash_reddit(channel = channel, subreddit = each_sub, no_of_posts = int(subreddits[channel_id][each_sub]), author=False, last_sub=last_sub)
+  File "/media/data/programming/Projects/aws/saneora/cogs/reddit.py", line 40, in unleash_reddit
+    async for submission in submissions.hot(limit=int(no_of_posts / 4)):
+  File "/home/nathan/Documents/saneora_env/lib/python3.9/site-packages/asyncpraw/models/listing/generator.py", line 63, in __anext__
+    await self._next_batch()
+  File "/home/nathan/Documents/saneora_env/lib/python3.9/site-packages/asyncpraw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = await self._reddit.get(self.url, params=self.params)
+  File "/home/nathan/Documents/saneora_env/lib/python3.9/site-packages/asyncpraw/reddit.py", line 661, in get
+    return await self._objectify_request(method="GET", params=params, path=path)
+  File "/home/nathan/Documents/saneora_env/lib/python3.9/site-packages/asyncpraw/reddit.py", line 765, in _objectify_request
+    await self.request(
+  File "/home/nathan/Documents/saneora_env/lib/python3.9/site-packages/asyncpraw/reddit.py", line 967, in request
+    return await self._core.request(
+  File "/home/nathan/Documents/saneora_env/lib/python3.9/site-packages/asyncprawcore/sessions.py", line 370, in request
+    return await self._request_with_retries(
+  File "/home/nathan/Documents/saneora_env/lib/python3.9/site-packages/asyncprawcore/sessions.py", line 270, in _request_with_retries
+    response, saved_exception = await self._make_request(
+  File "/home/nathan/Documents/saneora_env/lib/python3.9/site-packages/asyncprawcore/sessions.py", line 187, in _make_request
+    response = await self._rate_limiter.call(
+  File "/home/nathan/Documents/saneora_env/lib/python3.9/site-packages/asyncprawcore/rate_limit.py", line 34, in call
+    kwargs["headers"] = await set_header_callback()
+  File "/home/nathan/Documents/saneora_env/lib/python3.9/site-packages/asyncprawcore/sessions.py", line 322, in _set_header_callback
+    await self._authorizer.refresh()
+  File "/home/nathan/Documents/saneora_env/lib/python3.9/site-packages/asyncprawcore/auth.py", line 423, in refresh
+    await self._request_token(
+  File "/home/nathan/Documents/saneora_env/lib/python3.9/site-packages/asyncprawcore/auth.py", line 153, in _request_token
+    response = await self._authenticator._post(url, **data)
+  File "/home/nathan/Documents/saneora_env/lib/python3.9/site-packages/asyncprawcore/auth.py", line 33, in _post
+    response = await self._requestor.request(
+  File "/home/nathan/Documents/saneora_env/lib/python3.9/site-packages/asyncprawcore/requestor.py", line 68, in request
+    raise RequestException(exc, args, kwargs)
+asyncprawcore.exceptions.RequestException: error with request 
