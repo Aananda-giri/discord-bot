@@ -108,7 +108,7 @@ async def unleashing():
           # print('Unleashed')
 
 
-@tasks.loop(hours=6)
+@tasks.loop(hours=16)
 async def unleash_news():
     # ---------------------------
         # unleash news
