@@ -200,16 +200,21 @@ async def unleash_ioe_notifications():
     pass
   return(1)
 
-async def unleashing_tasks():
-  await unleashing.start()
-  await unleash_ioe_notifications.start()
-    
+@tasks.loop(seconds=3)
+async def print_hi():
+  print('\n\n _________-hi================== \n\n')
+@tasks.loop(seconds=3)
+async def print_hi2():
+  print('\n\n _________-hi2================== \n\n')
 
+
+unleashing.start()
+unleash_ioe_notifications.start()
 # The code in this event is executed when the bot is ready
 @bot.event
 async def on_ready():
   bot.loop.create_task(status_task())
-  await bot.loop.create_task(unleashing_tasks())
+  # await bot.loop.create_task(unleashing_tasks())
   
 
   print(f"Logged in as {bot.user.name}")
