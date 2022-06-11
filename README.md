@@ -1,3 +1,17 @@
+### run bots:
+- installing requirements
+
+pip install -r requirements.txt
+
+- running bots in background
+bash ./bots_startup_scripts.sh
+
+- stopping bots
+
+ps -Af | grep -v grep | grep  main.py   # list processes
+ps -Af | grep -v grep | grep  __init__.py   # list processes <process_id>
+sudo kill -9 p_id  #  repeat for each process process listed by above command
+
 ### python packages:<br>
 replit
 scrapy

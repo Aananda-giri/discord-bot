@@ -11,6 +11,7 @@
     '120' : 'telegram, viber_bot imperfect configuration, vent channel added',
     '30': 'vent channel debug',
     '30' : 'awaken boot',
+    '105': 'shell scripts <in a file scripts> and debug: help, news'
 }
 
 # todo

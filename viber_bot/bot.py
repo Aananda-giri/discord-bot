@@ -29,6 +29,7 @@ from viberbot.api.messages import RichMediaMessage, PictureMessage, KeyboardMess
 from viberbot.api.viber_requests import ViberMessageRequest, ViberFailedRequest, ViberConversationStartedRequest
 from viberbot.api.viber_requests import ViberSubscribedRequest
 import os, random, requests, json, time, youtube_dl, datetime
+
 #from home.viberbot.mysite.discord_bot.db import run_discord_bot
 #For Chatterbot implementation
 #from chatterbot import ChatBot
@@ -413,7 +414,14 @@ def start_bot(VIBER_AUTH_TOKEN, TMDB_KEY):
     # runs the flask app
     app.run(debug=True)
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
+    start_bot(config.VIBER_AUTH_TOKEN, config.TMDB_API_KEY)
+
+  # viber_thread = threading.Thread(target = start_viber_bot, args=(config.VIBER_AUTH_TOKEN, config.TMDB_API_KEY))
+  # viber_thread.setDaemon(True)
+  # viber_thread.start()    # starts twitter thread
+  
+  
 #     app.run(host='https://viberbot.pythonanywhere.com/', port=8080, debug=True)
 #     #run_discord_bot()
 #     '''print('Hrlolo Woslld')

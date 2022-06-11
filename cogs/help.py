@@ -47,7 +47,8 @@ class Help(commands.Cog, name="help"):
             )
         
         if not args:
-            print('\n args is none')
+            print('\n argss is none')
+            
             embed.add_field(
                 name="Invite",
                 value=f"Usage: {config.BOT_PREFIX[0]}invite",
@@ -85,30 +86,24 @@ class Help(commands.Cog, name="help"):
                 value=f"Usage: {config.BOT_PREFIX}help",
                 inline=False
             )
+            print('hill')
+            # print('brief',list(context.bot.commands)[0].name, list(context.bot.commands)[0].brief, list(context.bot.commands)[0].help)
             
-            # ---------------------------------------------------
-            # ########## from previus version ###################
-            # ---------------------------------------------------
-            
-            # If there are no arguments, just list the commands:
-    
-            #bot.get_command(x.name).help
-            for i in context.bot.commands:
-                
+            for command in list(context.bot.commands):
+                print(command.name)
                 embed.add_field(
-                    name='***{}***'.format(i.name),
-                    brief = str(context.bot.get_command(args).brief),
-                    value=f'\t *usage:* {brief} \n\t ',
+                    name='***{}***'.format(command.name),
+                    value=f'\t *usage:* {str(command.help)} \n {str(command.brief)} \n\t ',
                     #value = f'*usage:* {str(context.bot.get_command(args).usage} \n\t {str(context.bot.get_command(args).brief}',
                     #value= '\t Usage: {}\n\t {}'.format(str(context.bot.get_command(args).help), str(context.bot.get_command(args).brief)),
                     inline=False,
                     #colour=discord.Color.blue()
                 )
-    
+                continue
                 #print(i.name)
                 #print(i)
                 #print(bot.get_command(i.name).help)
-            '''for i,command in enumerate(bot.commands):
+                '''for i,command in enumerate(bot.commands):
                 
                 help_embed.add_field(
                     name = command,
@@ -119,7 +114,7 @@ class Help(commands.Cog, name="help"):
                 name="Details",
                 value= '\t' +  "Type `.help <command name>` for more details about each command.",
                 inline=False)
-        
+            
         # If the argument is a command, get the help text from that command:
         elif args in command_names_list:
             print('\n args in commands')
@@ -133,9 +128,7 @@ class Help(commands.Cog, name="help"):
             print('\n args not in commands')
             embed.add_field(name="Nope.",
                                  value="Don't think I got that command, boss!", inline=False)
-        
-        
-        await context.send(embed=embed)
+        await context.channel.send(embed=embed)
 
 class AnimeHelp(commands.Cog, name="anime_help"):
     def __init__(self, bot):
@@ -179,7 +172,7 @@ class AnimeHelp(commands.Cog, name="anime_help"):
             )'''
         
         if not args:
-            print('\n args is none')
+            print('\n args2 is none')
             embed.add_field(
                 name="hello",
                 value=f"Usage: `{config.BOT_PREFIX[1]}hello` \n\t e.g: `.hello`",
@@ -215,5 +208,5 @@ class AnimeHelp(commands.Cog, name="anime_help"):
           await context.send(embed=embed)
 
 def setup(bot):
-    bot.add_cog(AnimeHelp(bot))
     bot.add_cog(Help(bot))
+    bot.add_cog(AnimeHelp(bot))

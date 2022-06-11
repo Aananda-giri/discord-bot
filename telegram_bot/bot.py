@@ -32,5 +32,10 @@ def start_bot(TOKEN):
 
     updater.start_polling()
     # updater.idle()
+if __name__ == "__main__":
+    startbot(config.TELEGRAM_TOKEN)
+    # telegram_thread = threading.Thread(target = start_bot, args=(config.TELEGRAM_TOKEN))
+    # telegram_thread.setDaemon(True) #runs without blocking the main program from exiting
+    # telegram_thread.start()    # starts telegram thread
 
-
+  

@@ -30,8 +30,8 @@ config.init()
 # environ["REPLIT_DB_URL"] = "https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NTExNDExMDAsImlhdCI6MTY1MTAyOTUwMCwiZGF0YWJhc2VfaWQiOiIwZDNkZTY3My04ZjM3LTQ4ZjktOGFmNS00OWU2MWUyNTMzMGYifQ.CpVO558CCW0s7b9C3rH6m77hW_ybOqHzVJVFwhf8fcv0sebcg5D26CiAilVybi5pfYVUHh3oLlWSaCCFiThVIA"
 from database import db
 
-from keep_alive import keep_alive
-#from ioe_crawler import get_new_notifications, run_spider
+# from keep_alive import keep_alive
+# from ioe_crawler import get_new_notifications, run_spider
 #import commands
 
 from discord.ext import tasks
@@ -41,8 +41,15 @@ from cogs.news import send_news
 
 #from discord import FFmpegPCMAudio
 from dotenv import load_dotenv
-from telegram_bot.bot import start_bot
-from viber_bot.bot import start_bot as start_viber_bot
+
+
+
+
+
+
+
+
+
 
 load_dotenv()
 
@@ -99,7 +106,10 @@ async def unleashing():
           await unleash_reddit(channel = channel, subreddit = each_sub, no_of_posts = int(subreddits[channel_id][each_sub]), author=False, last_sub=last_sub)
 
           # print('Unleashed')
-    
+
+
+@tasks.loop(hours=6)
+async def unleash_news():
     # ---------------------------
         # unleash news
     # ---------------------------
@@ -128,7 +138,7 @@ async def unleashing():
         await send_news(channel, country, how_many, last_country=last_country)
     # await unleash_ioe_notifications.start()
 
-@tasks.loop(hours=3)
+@tasks.loop(hours=4)
 async def unleash_ioe_notifications():
   # sending ioe_notifications to subscribed channels perodically: '3 hours'
   #n=json.load(open('ioe_notices.json','r'))
@@ -222,8 +232,10 @@ async def on_ready():
   print(f"Python version: {platform.python_version()}")
   print(f"Running on: {platform.system()} {platform.release()} ({os.name})")
   print("-------------------")
-  unleashing.start()
-  unleash_ioe_notifications.start()
+  # unleashing.start()
+  # unleash_ioe_notifications.start()
+  # unleash_news.start()
+  
   # print_hi.start()
   # print_hi2.start()
 
@@ -332,7 +344,7 @@ async def on_message(message):
           await message_channel.send(message_text)  # sending message
           return
 
-        processing_games = await process_games(message);
+        processing_games = await process_games(message)
         if not processing_games:
             print(f"\n{message.author}: {message.content}\n")
             await bot.process_commands(message)
@@ -573,17 +585,7 @@ if __name__ == "__main__":
       exception = f"{type(e).__name__}: {e}"
       extension = extension.replace("cogs.", "")
       print(f"Failed to load extension {extension}\n{exception}")
-  
-  # twitter_thread=threading.Thread(target = start_twitter_bot, args=(config.,))
   bot.run(config.DISCORD_TOKEN)     # run discord bot
-
-  # telegram_thread = threading.Thread(target = start_bot, args=(config.TELEGRAM_TOKEN,))
-  # telegram_thread.setDaemon(True) #runs without blocking the main program from exiting
-  # telegram_thread.start()    # starts telegram thread
-
-  # viber_thread =threading.Thread(target = start_viber_bot, args=(config.VIBER_AUTH_TOKEN, config.TMDB_API_KEY))
-  # viber_thread.setDaemon(True)
-  # viber_thread.start()    # starts twitter thread
 
 
 # keep_alive()
