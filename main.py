@@ -16,6 +16,7 @@ Version: 2.0
 #from cogs.music import get_stream, get_embed
 # from cogs.functions import YTDLSource, download_from_youtube, get_embeded_message
 import discord, asyncio, os, platform, sys, requests, json, threading
+from discord.ext import commands
 from discord.ext.commands import Bot
 
 if not os.path.isfile("config.py"):
@@ -200,16 +201,15 @@ async def unleash_ioe_notifications():
     pass
   return(1)
 
-@tasks.loop(seconds=3)
-async def print_hi():
-  print('\n\n _________-hi================== \n\n')
-@tasks.loop(seconds=3)
-async def print_hi2():
-  print('\n\n _________-hi2================== \n\n')
+# @tasks.loop(seconds=3)
+# async def print_hi():
+#   print('\n\n _________-hi================== \n\n')
+# @tasks.loop(seconds=3)
+# async def print_hi2():
+#   print('\n\n _________-hi2================== \n\n')
 
 
-unleashing.start()
-unleash_ioe_notifications.start()
+
 # The code in this event is executed when the bot is ready
 @bot.event
 async def on_ready():
@@ -222,6 +222,10 @@ async def on_ready():
   print(f"Python version: {platform.python_version()}")
   print(f"Running on: {platform.system()} {platform.release()} ({os.name})")
   print("-------------------")
+  unleashing.start()
+  unleash_ioe_notifications.start()
+  # print_hi.start()
+  # print_hi2.start()
 
 # Setup the game status task of the bot
 async def status_task():
@@ -570,18 +574,16 @@ if __name__ == "__main__":
       extension = extension.replace("cogs.", "")
       print(f"Failed to load extension {extension}\n{exception}")
   
-  telegram_thread = threading.Thread(target = start_bot, args=(config.TELEGRAM_TOKEN,))
-  telegram_thread.setDaemon(True) #runs without blocking the main program from exiting
-  telegram_thread.start()    # starts telegram thread
-
-  viber_thread =threading.Thread(target = start_viber_bot, args=(config.VIBER_AUTH_TOKEN, config.TMDB_API_KEY))
-  viber_thread.setDaemon(True)
-  viber_thread.start()    # starts twitter thread
-  
   # twitter_thread=threading.Thread(target = start_twitter_bot, args=(config.,))
   bot.run(config.DISCORD_TOKEN)     # run discord bot
 
-  
+  # telegram_thread = threading.Thread(target = start_bot, args=(config.TELEGRAM_TOKEN,))
+  # telegram_thread.setDaemon(True) #runs without blocking the main program from exiting
+  # telegram_thread.start()    # starts telegram thread
+
+  # viber_thread =threading.Thread(target = start_viber_bot, args=(config.VIBER_AUTH_TOKEN, config.TMDB_API_KEY))
+  # viber_thread.setDaemon(True)
+  # viber_thread.start()    # starts twitter thread
 
 
 # keep_alive()
