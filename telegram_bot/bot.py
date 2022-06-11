@@ -22,6 +22,7 @@ def contact(update, context):
     update.message.reply_text("You can contact Nathan on the discord server")
 
 def start_bot(TOKEN):
+    print(f'token:{TOKEN}')
     updater = telegram.ext.Updater(TOKEN, use_context=True)
     disp = updater.dispatcher
 
@@ -33,6 +34,13 @@ def start_bot(TOKEN):
     updater.start_polling()
     # updater.idle()
 if __name__ == "__main__":
+    print('bot is main')
+    # to make config importable
+    import sys
+    from os import path
+    sys.path.append( path.dirname( path.dirname( path.abspath("config") ) ) )
+    import config
+    
     startbot(config.TELEGRAM_TOKEN)
     # telegram_thread = threading.Thread(target = start_bot, args=(config.TELEGRAM_TOKEN))
     # telegram_thread.setDaemon(True) #runs without blocking the main program from exiting
