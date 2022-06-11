@@ -47,7 +47,7 @@ class Help(commands.Cog, name="help"):
             )
         
         if not args:
-            print('\n argss is none')
+            # print('\n argss is none')
             
             embed.add_field(
                 name="Invite",
@@ -86,11 +86,10 @@ class Help(commands.Cog, name="help"):
                 value=f"Usage: {config.BOT_PREFIX}help",
                 inline=False
             )
-            print('hill')
             # print('brief',list(context.bot.commands)[0].name, list(context.bot.commands)[0].brief, list(context.bot.commands)[0].help)
             
             for command in list(context.bot.commands):
-                print(command.name)
+                # print(command.name)
                 embed.add_field(
                     name='***{}***'.format(command.name),
                     value=f'\t *usage:* {str(command.help)} \n {str(command.brief)} \n\t ',
@@ -125,10 +124,10 @@ class Help(commands.Cog, name="help"):
     
         # If someone is just trolling:
         else:
-            print('\n args not in commands')
+            # print('\n args not in commands')
             embed.add_field(name="Nope.",
                                  value="Don't think I got that command, boss!", inline=False)
-        await context.channel.send(embed=embed)
+        await context.send(embed=embed)
 
 class AnimeHelp(commands.Cog, name="anime_help"):
     def __init__(self, bot):
@@ -172,7 +171,7 @@ class AnimeHelp(commands.Cog, name="anime_help"):
             )'''
         
         if not args:
-            print('\n args2 is none')
+            # print('\n args is none')
             embed.add_field(
                 name="hello",
                 value=f"Usage: `{config.BOT_PREFIX[1]}hello` \n\t e.g: `.hello`",
