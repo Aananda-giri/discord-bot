@@ -1,0 +1,1030 @@
+token:5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0
+Error while getting Updates: urllib3 HTTPError HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d798b7190>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 140, in _new_conn
+    conn = connection.create_connection(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/connection.py", line 83, in create_connection
+    raise err
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+OSError: [Errno 101] Network is unreachable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 614, in urlopen
+    httplib_response = self._make_request(conn, method, url,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 360, in _make_request
+    self._validate_conn(conn)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 857, in _validate_conn
+    super(HTTPSConnectionPool, self)._validate_conn(conn)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 289, in _validate_conn
+    conn.connect()
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 284, in connect
+    conn = self._new_conn()
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 149, in _new_conn
+    raise NewConnectionError(
+telegram.vendor.ptb_urllib3.urllib3.exceptions.NewConnectionError: <telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d798b7190>: Failed to establish a new connection: [Errno 101] Network is unreachable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 259, in _request_wrapper
+    resp = self._con_pool.request(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 68, in request
+    return self.request_encode_body(method, url, fields=fields,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 148, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/poolmanager.py", line 244, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 665, in urlopen
+    retries = retries.increment(method, url, error=e, _pool=self,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/retry.py", line 376, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+telegram.vendor.ptb_urllib3.urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d798b7190>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 646, in _network_loop_retry
+    if not action_cb():
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 597, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/extbot.py", line 224, in get_updates
+    updates = super().get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 130, in decorator
+    result = func(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 3054, in get_updates
+    self._post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 295, in _post
+    return self.request.post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 361, in post
+    result = self._request_wrapper(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 265, in _request_wrapper
+    raise NetworkError(f'urllib3 HTTPError {error}') from error
+telegram.error.NetworkError: urllib3 HTTPError HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d798b7190>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+Error while getting Updates: urllib3 HTTPError HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d798b7f70>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 140, in _new_conn
+    conn = connection.create_connection(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/connection.py", line 83, in create_connection
+    raise err
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+OSError: [Errno 101] Network is unreachable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 614, in urlopen
+    httplib_response = self._make_request(conn, method, url,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 360, in _make_request
+    self._validate_conn(conn)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 857, in _validate_conn
+    super(HTTPSConnectionPool, self)._validate_conn(conn)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 289, in _validate_conn
+    conn.connect()
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 284, in connect
+    conn = self._new_conn()
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 149, in _new_conn
+    raise NewConnectionError(
+telegram.vendor.ptb_urllib3.urllib3.exceptions.NewConnectionError: <telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d798b7f70>: Failed to establish a new connection: [Errno 101] Network is unreachable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 259, in _request_wrapper
+    resp = self._con_pool.request(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 68, in request
+    return self.request_encode_body(method, url, fields=fields,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 148, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/poolmanager.py", line 244, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 665, in urlopen
+    retries = retries.increment(method, url, error=e, _pool=self,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/retry.py", line 376, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+telegram.vendor.ptb_urllib3.urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d798b7f70>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 646, in _network_loop_retry
+    if not action_cb():
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 597, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/extbot.py", line 224, in get_updates
+    updates = super().get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 130, in decorator
+    result = func(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 3054, in get_updates
+    self._post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 295, in _post
+    return self.request.post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 361, in post
+    result = self._request_wrapper(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 265, in _request_wrapper
+    raise NetworkError(f'urllib3 HTTPError {error}') from error
+telegram.error.NetworkError: urllib3 HTTPError HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d798b7f70>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+Error while getting Updates: Bad Gateway
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 646, in _network_loop_retry
+    if not action_cb():
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 597, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/extbot.py", line 224, in get_updates
+    updates = super().get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 130, in decorator
+    result = func(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 3054, in get_updates
+    self._post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 295, in _post
+    return self.request.post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 361, in post
+    result = self._request_wrapper(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 290, in _request_wrapper
+    raise NetworkError('Bad Gateway')
+telegram.error.NetworkError: Bad Gateway
+Error while getting Updates: urllib3 HTTPError HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d781709d0>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 140, in _new_conn
+    conn = connection.create_connection(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/connection.py", line 83, in create_connection
+    raise err
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+OSError: [Errno 101] Network is unreachable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 614, in urlopen
+    httplib_response = self._make_request(conn, method, url,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 360, in _make_request
+    self._validate_conn(conn)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 857, in _validate_conn
+    super(HTTPSConnectionPool, self)._validate_conn(conn)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 289, in _validate_conn
+    conn.connect()
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 284, in connect
+    conn = self._new_conn()
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 149, in _new_conn
+    raise NewConnectionError(
+telegram.vendor.ptb_urllib3.urllib3.exceptions.NewConnectionError: <telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d781709d0>: Failed to establish a new connection: [Errno 101] Network is unreachable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 259, in _request_wrapper
+    resp = self._con_pool.request(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 68, in request
+    return self.request_encode_body(method, url, fields=fields,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 148, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/poolmanager.py", line 244, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 665, in urlopen
+    retries = retries.increment(method, url, error=e, _pool=self,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/retry.py", line 376, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+telegram.vendor.ptb_urllib3.urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d781709d0>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 646, in _network_loop_retry
+    if not action_cb():
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 597, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/extbot.py", line 224, in get_updates
+    updates = super().get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 130, in decorator
+    result = func(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 3054, in get_updates
+    self._post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 295, in _post
+    return self.request.post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 361, in post
+    result = self._request_wrapper(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 265, in _request_wrapper
+    raise NetworkError(f'urllib3 HTTPError {error}') from error
+telegram.error.NetworkError: urllib3 HTTPError HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d781709d0>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+Error while getting Updates: urllib3 HTTPError HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d79897e20>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 140, in _new_conn
+    conn = connection.create_connection(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/connection.py", line 83, in create_connection
+    raise err
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+OSError: [Errno 101] Network is unreachable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 614, in urlopen
+    httplib_response = self._make_request(conn, method, url,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 360, in _make_request
+    self._validate_conn(conn)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 857, in _validate_conn
+    super(HTTPSConnectionPool, self)._validate_conn(conn)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 289, in _validate_conn
+    conn.connect()
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 284, in connect
+    conn = self._new_conn()
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 149, in _new_conn
+    raise NewConnectionError(
+telegram.vendor.ptb_urllib3.urllib3.exceptions.NewConnectionError: <telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d79897e20>: Failed to establish a new connection: [Errno 101] Network is unreachable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 259, in _request_wrapper
+    resp = self._con_pool.request(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 68, in request
+    return self.request_encode_body(method, url, fields=fields,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 148, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/poolmanager.py", line 244, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 665, in urlopen
+    retries = retries.increment(method, url, error=e, _pool=self,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/retry.py", line 376, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+telegram.vendor.ptb_urllib3.urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d79897e20>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 646, in _network_loop_retry
+    if not action_cb():
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 597, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/extbot.py", line 224, in get_updates
+    updates = super().get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 130, in decorator
+    result = func(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 3054, in get_updates
+    self._post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 295, in _post
+    return self.request.post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 361, in post
+    result = self._request_wrapper(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 265, in _request_wrapper
+    raise NetworkError(f'urllib3 HTTPError {error}') from error
+telegram.error.NetworkError: urllib3 HTTPError HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d79897e20>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+Error while getting Updates: urllib3 HTTPError HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d78170070>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 140, in _new_conn
+    conn = connection.create_connection(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/connection.py", line 83, in create_connection
+    raise err
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+OSError: [Errno 101] Network is unreachable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 614, in urlopen
+    httplib_response = self._make_request(conn, method, url,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 360, in _make_request
+    self._validate_conn(conn)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 857, in _validate_conn
+    super(HTTPSConnectionPool, self)._validate_conn(conn)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 289, in _validate_conn
+    conn.connect()
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 284, in connect
+    conn = self._new_conn()
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 149, in _new_conn
+    raise NewConnectionError(
+telegram.vendor.ptb_urllib3.urllib3.exceptions.NewConnectionError: <telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d78170070>: Failed to establish a new connection: [Errno 101] Network is unreachable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 259, in _request_wrapper
+    resp = self._con_pool.request(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 68, in request
+    return self.request_encode_body(method, url, fields=fields,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 148, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/poolmanager.py", line 244, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 665, in urlopen
+    retries = retries.increment(method, url, error=e, _pool=self,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/retry.py", line 376, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+telegram.vendor.ptb_urllib3.urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d78170070>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 646, in _network_loop_retry
+    if not action_cb():
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 597, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/extbot.py", line 224, in get_updates
+    updates = super().get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 130, in decorator
+    result = func(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 3054, in get_updates
+    self._post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 295, in _post
+    return self.request.post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 361, in post
+    result = self._request_wrapper(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 265, in _request_wrapper
+    raise NetworkError(f'urllib3 HTTPError {error}') from error
+telegram.error.NetworkError: urllib3 HTTPError HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d78170070>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+Error while getting Updates: urllib3 HTTPError HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d78170190>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 140, in _new_conn
+    conn = connection.create_connection(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/connection.py", line 83, in create_connection
+    raise err
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+OSError: [Errno 101] Network is unreachable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 614, in urlopen
+    httplib_response = self._make_request(conn, method, url,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 360, in _make_request
+    self._validate_conn(conn)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 857, in _validate_conn
+    super(HTTPSConnectionPool, self)._validate_conn(conn)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 289, in _validate_conn
+    conn.connect()
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 284, in connect
+    conn = self._new_conn()
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 149, in _new_conn
+    raise NewConnectionError(
+telegram.vendor.ptb_urllib3.urllib3.exceptions.NewConnectionError: <telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d78170190>: Failed to establish a new connection: [Errno 101] Network is unreachable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 259, in _request_wrapper
+    resp = self._con_pool.request(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 68, in request
+    return self.request_encode_body(method, url, fields=fields,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 148, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/poolmanager.py", line 244, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 665, in urlopen
+    retries = retries.increment(method, url, error=e, _pool=self,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/retry.py", line 376, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+telegram.vendor.ptb_urllib3.urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d78170190>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 646, in _network_loop_retry
+    if not action_cb():
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 597, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/extbot.py", line 224, in get_updates
+    updates = super().get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 130, in decorator
+    result = func(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 3054, in get_updates
+    self._post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 295, in _post
+    return self.request.post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 361, in post
+    result = self._request_wrapper(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 265, in _request_wrapper
+    raise NetworkError(f'urllib3 HTTPError {error}') from error
+telegram.error.NetworkError: urllib3 HTTPError HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d78170190>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+Error while getting Updates: Bad Gateway
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 646, in _network_loop_retry
+    if not action_cb():
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 597, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/extbot.py", line 224, in get_updates
+    updates = super().get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 130, in decorator
+    result = func(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 3054, in get_updates
+    self._post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 295, in _post
+    return self.request.post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 361, in post
+    result = self._request_wrapper(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 290, in _request_wrapper
+    raise NetworkError('Bad Gateway')
+telegram.error.NetworkError: Bad Gateway
+Error while getting Updates: Bad Gateway
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 646, in _network_loop_retry
+    if not action_cb():
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 597, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/extbot.py", line 224, in get_updates
+    updates = super().get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 130, in decorator
+    result = func(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 3054, in get_updates
+    self._post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 295, in _post
+    return self.request.post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 361, in post
+    result = self._request_wrapper(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 290, in _request_wrapper
+    raise NetworkError('Bad Gateway')
+telegram.error.NetworkError: Bad Gateway
+Error while getting Updates: urllib3 HTTPError ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 614, in urlopen
+    httplib_response = self._make_request(conn, method, url,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 402, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 2, in raise_from
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 398, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/lib64/python3.9/http/client.py", line 1349, in getresponse
+    response.begin()
+  File "/usr/lib64/python3.9/http/client.py", line 316, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib64/python3.9/http/client.py", line 277, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib64/python3.9/socket.py", line 704, in readinto
+    return self._sock.recv_into(b)
+  File "/usr/lib64/python3.9/ssl.py", line 1241, in recv_into
+    return self.read(nbytes, buffer)
+  File "/usr/lib64/python3.9/ssl.py", line 1099, in read
+    return self._sslobj.read(len, buffer)
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 259, in _request_wrapper
+    resp = self._con_pool.request(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 68, in request
+    return self.request_encode_body(method, url, fields=fields,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 148, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/poolmanager.py", line 244, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 665, in urlopen
+    retries = retries.increment(method, url, error=e, _pool=self,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/retry.py", line 347, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/packages/six.py", line 685, in reraise
+    raise value.with_traceback(tb)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 614, in urlopen
+    httplib_response = self._make_request(conn, method, url,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 402, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 2, in raise_from
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 398, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/lib64/python3.9/http/client.py", line 1349, in getresponse
+    response.begin()
+  File "/usr/lib64/python3.9/http/client.py", line 316, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib64/python3.9/http/client.py", line 277, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib64/python3.9/socket.py", line 704, in readinto
+    return self._sock.recv_into(b)
+  File "/usr/lib64/python3.9/ssl.py", line 1241, in recv_into
+    return self.read(nbytes, buffer)
+  File "/usr/lib64/python3.9/ssl.py", line 1099, in read
+    return self._sslobj.read(len, buffer)
+telegram.vendor.ptb_urllib3.urllib3.exceptions.ProtocolError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 646, in _network_loop_retry
+    if not action_cb():
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 597, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/extbot.py", line 224, in get_updates
+    updates = super().get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 130, in decorator
+    result = func(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 3054, in get_updates
+    self._post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 295, in _post
+    return self.request.post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 361, in post
+    result = self._request_wrapper(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 265, in _request_wrapper
+    raise NetworkError(f'urllib3 HTTPError {error}') from error
+telegram.error.NetworkError: urllib3 HTTPError ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+Error while getting Updates: urllib3 HTTPError ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 614, in urlopen
+    httplib_response = self._make_request(conn, method, url,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 402, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 2, in raise_from
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 398, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/lib64/python3.9/http/client.py", line 1349, in getresponse
+    response.begin()
+  File "/usr/lib64/python3.9/http/client.py", line 316, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib64/python3.9/http/client.py", line 277, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib64/python3.9/socket.py", line 704, in readinto
+    return self._sock.recv_into(b)
+  File "/usr/lib64/python3.9/ssl.py", line 1241, in recv_into
+    return self.read(nbytes, buffer)
+  File "/usr/lib64/python3.9/ssl.py", line 1099, in read
+    return self._sslobj.read(len, buffer)
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 259, in _request_wrapper
+    resp = self._con_pool.request(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 68, in request
+    return self.request_encode_body(method, url, fields=fields,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 148, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/poolmanager.py", line 244, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 665, in urlopen
+    retries = retries.increment(method, url, error=e, _pool=self,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/retry.py", line 347, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/packages/six.py", line 685, in reraise
+    raise value.with_traceback(tb)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 614, in urlopen
+    httplib_response = self._make_request(conn, method, url,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 402, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 2, in raise_from
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 398, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/lib64/python3.9/http/client.py", line 1349, in getresponse
+    response.begin()
+  File "/usr/lib64/python3.9/http/client.py", line 316, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib64/python3.9/http/client.py", line 277, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib64/python3.9/socket.py", line 704, in readinto
+    return self._sock.recv_into(b)
+  File "/usr/lib64/python3.9/ssl.py", line 1241, in recv_into
+    return self.read(nbytes, buffer)
+  File "/usr/lib64/python3.9/ssl.py", line 1099, in read
+    return self._sslobj.read(len, buffer)
+telegram.vendor.ptb_urllib3.urllib3.exceptions.ProtocolError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 646, in _network_loop_retry
+    if not action_cb():
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 597, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/extbot.py", line 224, in get_updates
+    updates = super().get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 130, in decorator
+    result = func(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 3054, in get_updates
+    self._post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 295, in _post
+    return self.request.post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 361, in post
+    result = self._request_wrapper(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 265, in _request_wrapper
+    raise NetworkError(f'urllib3 HTTPError {error}') from error
+telegram.error.NetworkError: urllib3 HTTPError ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+Error while getting Updates: urllib3 HTTPError HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d78170460>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 140, in _new_conn
+    conn = connection.create_connection(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/connection.py", line 83, in create_connection
+    raise err
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+OSError: [Errno 101] Network is unreachable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 614, in urlopen
+    httplib_response = self._make_request(conn, method, url,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 360, in _make_request
+    self._validate_conn(conn)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 857, in _validate_conn
+    super(HTTPSConnectionPool, self)._validate_conn(conn)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 289, in _validate_conn
+    conn.connect()
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 284, in connect
+    conn = self._new_conn()
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 149, in _new_conn
+    raise NewConnectionError(
+telegram.vendor.ptb_urllib3.urllib3.exceptions.NewConnectionError: <telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d78170460>: Failed to establish a new connection: [Errno 101] Network is unreachable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 259, in _request_wrapper
+    resp = self._con_pool.request(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 68, in request
+    return self.request_encode_body(method, url, fields=fields,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 148, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/poolmanager.py", line 244, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 665, in urlopen
+    retries = retries.increment(method, url, error=e, _pool=self,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/retry.py", line 376, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+telegram.vendor.ptb_urllib3.urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d78170460>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 646, in _network_loop_retry
+    if not action_cb():
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 597, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/extbot.py", line 224, in get_updates
+    updates = super().get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 130, in decorator
+    result = func(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 3054, in get_updates
+    self._post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 295, in _post
+    return self.request.post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 361, in post
+    result = self._request_wrapper(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 265, in _request_wrapper
+    raise NetworkError(f'urllib3 HTTPError {error}') from error
+telegram.error.NetworkError: urllib3 HTTPError HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d78170460>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+Error while getting Updates: urllib3 HTTPError HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d798b7460>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 140, in _new_conn
+    conn = connection.create_connection(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/connection.py", line 83, in create_connection
+    raise err
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+OSError: [Errno 101] Network is unreachable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 614, in urlopen
+    httplib_response = self._make_request(conn, method, url,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 360, in _make_request
+    self._validate_conn(conn)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 857, in _validate_conn
+    super(HTTPSConnectionPool, self)._validate_conn(conn)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 289, in _validate_conn
+    conn.connect()
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 284, in connect
+    conn = self._new_conn()
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 149, in _new_conn
+    raise NewConnectionError(
+telegram.vendor.ptb_urllib3.urllib3.exceptions.NewConnectionError: <telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d798b7460>: Failed to establish a new connection: [Errno 101] Network is unreachable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 259, in _request_wrapper
+    resp = self._con_pool.request(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 68, in request
+    return self.request_encode_body(method, url, fields=fields,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 148, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/poolmanager.py", line 244, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 665, in urlopen
+    retries = retries.increment(method, url, error=e, _pool=self,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/retry.py", line 376, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+telegram.vendor.ptb_urllib3.urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d798b7460>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 646, in _network_loop_retry
+    if not action_cb():
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 597, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/extbot.py", line 224, in get_updates
+    updates = super().get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 130, in decorator
+    result = func(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 3054, in get_updates
+    self._post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 295, in _post
+    return self.request.post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 361, in post
+    result = self._request_wrapper(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 265, in _request_wrapper
+    raise NetworkError(f'urllib3 HTTPError {error}') from error
+telegram.error.NetworkError: urllib3 HTTPError HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d798b7460>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+Error while getting Updates: urllib3 HTTPError HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d79897700>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 140, in _new_conn
+    conn = connection.create_connection(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/connection.py", line 83, in create_connection
+    raise err
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+OSError: [Errno 101] Network is unreachable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 614, in urlopen
+    httplib_response = self._make_request(conn, method, url,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 360, in _make_request
+    self._validate_conn(conn)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 857, in _validate_conn
+    super(HTTPSConnectionPool, self)._validate_conn(conn)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 289, in _validate_conn
+    conn.connect()
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 284, in connect
+    conn = self._new_conn()
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 149, in _new_conn
+    raise NewConnectionError(
+telegram.vendor.ptb_urllib3.urllib3.exceptions.NewConnectionError: <telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d79897700>: Failed to establish a new connection: [Errno 101] Network is unreachable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 259, in _request_wrapper
+    resp = self._con_pool.request(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 68, in request
+    return self.request_encode_body(method, url, fields=fields,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 148, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/poolmanager.py", line 244, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 665, in urlopen
+    retries = retries.increment(method, url, error=e, _pool=self,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/retry.py", line 376, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+telegram.vendor.ptb_urllib3.urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d79897700>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 646, in _network_loop_retry
+    if not action_cb():
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 597, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/extbot.py", line 224, in get_updates
+    updates = super().get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 130, in decorator
+    result = func(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 3054, in get_updates
+    self._post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 295, in _post
+    return self.request.post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 361, in post
+    result = self._request_wrapper(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 265, in _request_wrapper
+    raise NetworkError(f'urllib3 HTTPError {error}') from error
+telegram.error.NetworkError: urllib3 HTTPError HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d79897700>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+Error while getting Updates: urllib3 HTTPError HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by ConnectTimeoutError(<telegram.vendor.ptb_urllib3.urllib3.connectionpool.HTTPSConnectionPool object at 0x7f7d7a0f8760>, 'Connect timed out. (connect timeout=5.0)'))
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 360, in _make_request
+    self._validate_conn(conn)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 857, in _validate_conn
+    super(HTTPSConnectionPool, self)._validate_conn(conn)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 289, in _validate_conn
+    conn.connect()
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 319, in connect
+    self.sock = ssl_wrap_socket(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/ssl_.py", line 324, in ssl_wrap_socket
+    return context.wrap_socket(sock, server_hostname=server_hostname)
+  File "/usr/lib64/python3.9/ssl.py", line 500, in wrap_socket
+    return self.sslsocket_class._create(
+  File "/usr/lib64/python3.9/ssl.py", line 1040, in _create
+    self.do_handshake()
+  File "/usr/lib64/python3.9/ssl.py", line 1309, in do_handshake
+    self._sslobj.do_handshake()
+socket.timeout: _ssl.c:1112: The handshake operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 614, in urlopen
+    httplib_response = self._make_request(conn, method, url,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 363, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=conn.timeout,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 321, in _raise_timeout
+    raise exc_cls(*args)
+telegram.vendor.ptb_urllib3.urllib3.exceptions.ConnectTimeoutError: (<telegram.vendor.ptb_urllib3.urllib3.connectionpool.HTTPSConnectionPool object at 0x7f7d7a0f8760>, 'Connect timed out. (connect timeout=5.0)')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 259, in _request_wrapper
+    resp = self._con_pool.request(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 68, in request
+    return self.request_encode_body(method, url, fields=fields,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 148, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/poolmanager.py", line 244, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 665, in urlopen
+    retries = retries.increment(method, url, error=e, _pool=self,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/retry.py", line 376, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+telegram.vendor.ptb_urllib3.urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by ConnectTimeoutError(<telegram.vendor.ptb_urllib3.urllib3.connectionpool.HTTPSConnectionPool object at 0x7f7d7a0f8760>, 'Connect timed out. (connect timeout=5.0)'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 646, in _network_loop_retry
+    if not action_cb():
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 597, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/extbot.py", line 224, in get_updates
+    updates = super().get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 130, in decorator
+    result = func(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 3054, in get_updates
+    self._post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 295, in _post
+    return self.request.post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 361, in post
+    result = self._request_wrapper(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 265, in _request_wrapper
+    raise NetworkError(f'urllib3 HTTPError {error}') from error
+telegram.error.NetworkError: urllib3 HTTPError HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by ConnectTimeoutError(<telegram.vendor.ptb_urllib3.urllib3.connectionpool.HTTPSConnectionPool object at 0x7f7d7a0f8760>, 'Connect timed out. (connect timeout=5.0)'))
+Error while getting Updates: urllib3 HTTPError HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d780f81c0>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 140, in _new_conn
+    conn = connection.create_connection(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/connection.py", line 83, in create_connection
+    raise err
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+OSError: [Errno 101] Network is unreachable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 614, in urlopen
+    httplib_response = self._make_request(conn, method, url,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 360, in _make_request
+    self._validate_conn(conn)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 857, in _validate_conn
+    super(HTTPSConnectionPool, self)._validate_conn(conn)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 289, in _validate_conn
+    conn.connect()
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 284, in connect
+    conn = self._new_conn()
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connection.py", line 149, in _new_conn
+    raise NewConnectionError(
+telegram.vendor.ptb_urllib3.urllib3.exceptions.NewConnectionError: <telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d780f81c0>: Failed to establish a new connection: [Errno 101] Network is unreachable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 259, in _request_wrapper
+    resp = self._con_pool.request(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 68, in request
+    return self.request_encode_body(method, url, fields=fields,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/request.py", line 148, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/poolmanager.py", line 244, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 691, in urlopen
+    return self.urlopen(method, url, body, headers, retries,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/connectionpool.py", line 665, in urlopen
+    retries = retries.increment(method, url, error=e, _pool=self,
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/vendor/ptb_urllib3/urllib3/util/retry.py", line 376, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+telegram.vendor.ptb_urllib3.urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d780f81c0>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 646, in _network_loop_retry
+    if not action_cb():
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 597, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/extbot.py", line 224, in get_updates
+    updates = super().get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 130, in decorator
+    result = func(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 3054, in get_updates
+    self._post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 295, in _post
+    return self.request.post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 361, in post
+    result = self._request_wrapper(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 265, in _request_wrapper
+    raise NetworkError(f'urllib3 HTTPError {error}') from error
+telegram.error.NetworkError: urllib3 HTTPError HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5396659125:AAGCO4gHk2qm0RY2trx7u6pO23OpwAO4hg0/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d780f81c0>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+Error while getting Updates: Bad Gateway
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 646, in _network_loop_retry
+    if not action_cb():
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/updater.py", line 597, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/ext/extbot.py", line 224, in get_updates
+    updates = super().get_updates(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 130, in decorator
+    result = func(*args, **kwargs)
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 3054, in get_updates
+    self._post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/bot.py", line 295, in _post
+    return self.request.post(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 361, in post
+    result = self._request_wrapper(
+  File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 290, in _request_wrapper
+    raise NetworkError('Bad Gateway')
+telegram.error.NetworkError: Bad Gateway
