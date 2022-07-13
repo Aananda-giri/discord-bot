@@ -61,7 +61,7 @@ class Commands(commands.Cog, name="reddit_commands"):
         vent_db = db('vent')
         vent_channels = vent_db.get_all()
 
-        if str(context.channel.id) not in vent_channels:
+        if int(context.channel.id) not in vent_channels:
             print('\n\n adding channel \n\n')
             # enabling a vent channel
             vent_db.add_one(context.channel.id)

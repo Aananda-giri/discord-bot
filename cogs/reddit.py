@@ -179,7 +179,7 @@ class RedditCommands(commands.Cog, name="reddit_commands"):
         elif subreddit == 'ioe_noti' or subreddit == 'ioe_notification' or subreddit == 'ioe_notifications' or subreddit == 'ioenoti' or subreddit == 'ioenotification' or subreddit == 'ioenotifications':
             # contain ioe notification from channel
             ioe_db = db('ioe_notifications')
-            if str(context.channel.id) in ioe_db.get_all():
+            if int(context.channel.id) in ioe_db.get_all():
                 
                 channel_id = str(context.channel.id)
                 message = ioe_db.remove_one(channel_id)

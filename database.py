@@ -150,7 +150,7 @@ class db:
         c = conn.cursor()   # create a cursor
         if self.table_name == 'ioe_notifications' or self.table_name == 'vent':
             c.execute("SELECT channel_id FROM '%s'" % self.table_name)
-            data = [str(tup[0]) for tup in c.fetchall()]
+            data = [tup[0] for tup in c.fetchall()]
         elif self.table_name == 'count' or self.table_name == 'chain_word':
             c.execute("SELECT * FROM '%s'" % self.table_name)
             data = {}
