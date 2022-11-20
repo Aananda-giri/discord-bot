@@ -1,12 +1,3 @@
-# replit version
-""""
-Copyright © Krypton 2020 - https://github.com/kkrypt0nn
-Description:
-This is a template to create your own discord bot in python.
-
-Version: 2.0
-"""
-
 # import json, random,
 # from discord.ext import commands
 # from discord import Member
@@ -96,11 +87,12 @@ async def unleashing():
     
     reddit_db = db('subreddit')
     subreddits = reddit_db.get_all()
-    
+    print('\n\nsubreddits: ', subreddits)
     for channel_id in subreddits:
         # subreddits[str(channel_id)] = {jokes:10, memes:11}
         len_subs = len(subreddits[str(channel_id)])
-        channel = bot.get_channel(id=int(channel_id))
+        print('\n\n channel_id1: {}\n\n'.format(channel_id))
+        channel = bot.get_channel(int(channel_id))
         for progress, each_sub in enumerate(subreddits[str(channel_id)]):
           last_sub = True if (progress == len_subs-1) else False
           await unleash_reddit(channel = channel, subreddit = each_sub, no_of_posts = int(subreddits[channel_id][each_sub]), author=False, last_sub=last_sub)

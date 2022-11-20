@@ -40,8 +40,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-client = discord.Client()
-
 async def proceed_count(message, new_count):
         print("\n Try processing count \n")
         

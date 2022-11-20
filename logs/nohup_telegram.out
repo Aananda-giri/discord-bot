@@ -7512,3 +7512,43 @@ Traceback (most recent call last):
   File "/home/ec2-user/saneora/saneora_env/lib/python3.9/site-packages/telegram/utils/request.py", line 265, in _request_wrapper
     raise NetworkError(f'urllib3 HTTPError {error}') from error
 telegram.error.NetworkError: urllib3 HTTPError EOF occurred in violation of protocol (_ssl.c:1129)
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/telegram_bot/__init__.py", line 41, in <module>
+    import config
+ModuleNotFoundError: No module named 'config'
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/telegram_bot/__init__.py", line 41, in <module>
+    import config
+ModuleNotFoundError: No module named 'config'
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/telegram_bot/__init__.py", line 41, in <module>
+    import config
+ModuleNotFoundError: No module named 'config'
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/telegram_bot/__init__.py", line 41, in <module>
+    import config
+ModuleNotFoundError: No module named 'config'
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/telegram_bot/__init__.py", line 41, in <module>
+    import config
+ModuleNotFoundError: No module named 'config'
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/telegram_bot/__init__.py", line 41, in <module>
+    import config
+ModuleNotFoundError: No module named 'config'
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/telegram_bot/__init__.py", line 41, in <module>
+    import config
+ModuleNotFoundError: No module named 'config'
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/telegram_bot/__init__.py", line 41, in <module>
+    import config
+ModuleNotFoundError: No module named 'config'
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/telegram_bot/__init__.py", line 41, in <module>
+    import config
+ModuleNotFoundError: No module named 'config'
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/telegram_bot/__init__.py", line 41, in <module>
+    import config
+ModuleNotFoundError: No module named 'config'
