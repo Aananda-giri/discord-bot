@@ -3,4 +3,3 @@ config.py
 database.py
 git_help.py
 test.py
-logs/*

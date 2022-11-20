@@ -205,3 +205,1657 @@ Traceback (most recent call last):
   File "/home/ec2-user/saneora/anon_env/lib/python3.9/site-packages/asyncprawcore/requestor.py", line 68, in request
     raise RequestException(exc, args, kwargs)
 asyncprawcore.exceptions.RequestException: error with request Timeout context manager should be used inside a task
+[2022-11-20 11:31:43] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session dc687c3133fb98ed1a0d650aa195812a.
+Loaded extension 'reddit'
+Loaded extension 'commands'
+Loaded extension 'news'
+Loaded extension 'anime'
+Loaded extension 'help'
+Logged in as Saneora
+Discord.py API version: 2.1.0
+Python version: 3.9.14
+Running on: Linux 5.14.0-162.6.1.el9_1.aarch64 (posix)
+-------------------
+
+ main.unleshing: start Unleashing Reddit
+
+
+subreddits:  {'870179809806925835': {'fuck': 8, 'hentai': 8, 'BustyPetite': 8}, '871074344133074945': {'wierd': 8, 'dankmemes': 8, 'memes': 8, 'india': 8}, '871074370469134366': {'oneliners': 8, 'dadjokes': 8}, '871080531511635988': {'creepy': 8}, '781766184642281482': {'ProgrammerHumor': 8, 'nepal': 8, 'dankmemes': 8, 'memes': 8}, '873611566673711124': {'nowornever': 8, 'selfimprovement': 8, 'financialliteracy': 8, 'zenhabits': 8, 'motivated': 8, 'personalfinance': 8, 'motivation': 8}, '886517321240297522': {'stocktips': 8, 'investing': 8, 'business': 8}, '886518514993754142': {'deeplearning': 8, 'MachineLearning': 8, 'machinelearning': 8}, '857318544671768636': {'hentai': 8}, '899848624429740052': {'hentai': 8}, '901642884627972157': {'darkmemers': 8, 'MemeEconomy': 8, 'dankmemes': 8}, '903017086752809006': {'dankmemes': 8}, '903017086975115328': {'dankmemes': 8}, '822752026520846356': {'AmongUsPorn': 8, 'DestinyCircleJerk': 8}, '921255420377591808': {'motivation': 8}, '937966597115609108': {'crazyfuckingvideos': 8, 'eyebleach': 8, 'thotbeatdowns': 8}}
+
+
+ channel_id1: 870179809806925835
+
+
+Got Notifications:  []
+
+ Done unleashing ioe_notices
+
+
+ unleashing news
+
+
+ unleash_subscriptions: channel_id:947808988915986453 <class 'str'> 
+
+
+
+ main.unleshing: start Unleashing Reddit
+
+
+subreddits:  {'870179809806925835': {'fuck': 8, 'hentai': 8, 'BustyPetite': 8}, '871074344133074945': {'wierd': 8, 'dankmemes': 8, 'memes': 8, 'india': 8}, '871074370469134366': {'oneliners': 8, 'dadjokes': 8}, '871080531511635988': {'creepy': 8}, '781766184642281482': {'ProgrammerHumor': 8, 'nepal': 8, 'dankmemes': 8, 'memes': 8}, '873611566673711124': {'nowornever': 8, 'selfimprovement': 8, 'financialliteracy': 8, 'zenhabits': 8, 'motivated': 8, 'personalfinance': 8, 'motivation': 8}, '886517321240297522': {'stocktips': 8, 'investing': 8, 'business': 8}, '886518514993754142': {'deeplearning': 8, 'MachineLearning': 8, 'machinelearning': 8}, '857318544671768636': {'hentai': 8}, '899848624429740052': {'hentai': 8}, '901642884627972157': {'darkmemers': 8, 'MemeEconomy': 8, 'dankmemes': 8}, '903017086752809006': {'dankmemes': 8}, '903017086975115328': {'dankmemes': 8}, '822752026520846356': {'AmongUsPorn': 8, 'DestinyCircleJerk': 8}, '921255420377591808': {'motivation': 8}, '937966597115609108': {'crazyfuckingvideos': 8, 'eyebleach': 8, 'thotbeatdowns': 8}}
+
+
+ channel_id1: 870179809806925835
+
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: P
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: I
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: P
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: I
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: U
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: N
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: D
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: K
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: A
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: K
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: I
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: I
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: M
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: P
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: I
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: P
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: I
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: K
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: A
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: K
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: A
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: L
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: A
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: N
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: D
+
+
+
+ author not black_listed 
+
+
+
+ratiode#8486: matthew wants to swim in your vomit shit
+
+
+
+ author not black_listed 
+
+
+
+ratiode#8486: i have photo evidence
+
+
+
+ author not black_listed 
+
+
+
+ratiode#8486: except i kind of dint
+
+
+
+ author not black_listed 
+
+
+
+ratiode#8486: but
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: Sie
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: 
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: Schwarz
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: 3350
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: De
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: E
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: E
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: E
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: F
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: F
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: Fff
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: S
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: Et
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: Hhhhg
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: Bleiben
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ author not black_listed 
+
+
+
+𝑃ℎ𝑜𝑏𝑖𝑎.#0212: 
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: .
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ author not black_listed 
+
+
+
+Philip#5812: 
+
+
+
+ author not black_listed 
+
+
+
+Philip#5812: 
+
+
+
+ author not black_listed 
+
+
+
+network#0101: Soon le ptit cv virtuel de la pute de Network Access @everyone
+
+
+
+ author not black_listed 
+
+
+
+VizeAdmiral GandalfvonHindenburg#9425: Haha
+
+
+
+ author not black_listed 
+
+
+
+VizeAdmiral GandalfvonHindenburg#9425: Peach einf. gebrochen
+
+
+
+ author not black_listed 
+
+
+
+Philip#5812: Ne danach wurde das Bündnis erfolgreich gebündelt
+
+
+
+ author not black_listed 
+
+
+
+</>#0100: Ez
+
+
+
+ author not black_listed 
+
+
+
+Philip#5812: <@668142965964931112>
+
+
+
+ author not black_listed 
+
+
+
+Philip#5812: <@668142965964931112>
+
+
+
+ author not black_listed 
+
+
+
+Philip#5812: <@668142965964931112>
+
+
+
+ author not black_listed 
+
+
+
+Philip#5812: <@668142965964931112>
+
+
+
+ author not black_listed 
+
+
+
+Philip#5812: <@668142965964931112>
+
+
+
+ author not black_listed 
+
+
+
+Philip#5812: <@668142965964931112>
+
+
+
+ author not black_listed 
+
+
+
+Philip#5812: <@668142965964931112>
+
+
+
+ author not black_listed 
+
+
+
+Philip#5812: <@668142965964931112>
+
+
+
+ author not black_listed 
+
+
+
+Philip#5812: <@668142965964931112>
+
+
+
+ author not black_listed 
+
+
+
+Philip#5812: <@668142965964931112>
+
+
+
+ author not black_listed 
+
+
+
+Philip#5812: <@668142965964931112>
+
+
+
+ author not black_listed 
+
+
+
+Philip#5812: <@668142965964931112>
+
+
+
+ author not black_listed 
+
+
+
+Philip#5812: <@668142965964931112>
+
+
+
+ author not black_listed 
+
+
+
+Philip#5812: <@668142965964931112>
+
+
+
+ author not black_listed 
+
+
+
+ole#5946: https://media.discordapp.net/attachments/847873538940731463/925352426977001512/image013.gif
+
+
+
+ author not black_listed 
+
+
+
+ole#5946: https://tenor.com/view/csgo-banging-table-angry-mad-rage-quit-gif-17478101
+
+
+
+ author not black_listed 
+
+
+
+Philip#5812: 
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ author not black_listed 
+
+
+
+Maneonfire#1151: 😂😂
+
+
+
+ author not black_listed 
+
+
+
+Maneonfire#1151: <@668142965964931112> <:images:982721894224625724>
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ author not black_listed 
+
+
+
+ole#5946: https://tenor.com/view/bongocat-cat-hammer-banhammer-ban-gif-21583086
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ author not black_listed 
+
+
+
+OVE#5282: 
+
+[2022-11-20 12:26:32] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session dc687c3133fb98ed1a0d650aa195812a.
+[2022-11-20 14:18:45] [ERROR   ] discord.ext.tasks: Unhandled exception in internal background task 'unleashing'.
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/anon_env/lib/python3.9/site-packages/asyncprawcore/requestor.py", line 64, in request
+    return await self._http.request(
+  File "/home/ec2-user/saneora/anon_env/lib64/python3.9/site-packages/aiohttp/client.py", line 467, in _request
+    with timer:
+  File "/home/ec2-user/saneora/anon_env/lib64/python3.9/site-packages/aiohttp/helpers.py", line 700, in __enter__
+    raise RuntimeError(
+RuntimeError: Timeout context manager should be used inside a task
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/saneora/anon_env/lib/python3.9/site-packages/discord/ext/tasks/__init__.py", line 239, in _loop
+    await self.coro(*args, **kwargs)
+  File "/home/ec2-user/saneora/main.py", line 98, in unleashing
+    await unleash_reddit(channel = channel, subreddit = each_sub, no_of_posts = int(subreddits[channel_id][each_sub]), author=False, last_sub=last_sub)
+  File "/home/ec2-user/saneora/cogs/reddit.py", line 40, in unleash_reddit
+    async for submission in submissions.hot(limit=int(no_of_posts / 4)):
+  File "/home/ec2-user/saneora/anon_env/lib/python3.9/site-packages/asyncpraw/models/listing/generator.py", line 63, in __anext__
+    await self._next_batch()
+  File "/home/ec2-user/saneora/anon_env/lib/python3.9/site-packages/asyncpraw/models/listing/generator.py", line 89, in _next_batch
+    self._listing = await self._reddit.get(self.url, params=self.params)
+  File "/home/ec2-user/saneora/anon_env/lib/python3.9/site-packages/asyncpraw/util/deprecate_args.py", line 51, in wrapped
+    return await _wrapper(*args, **kwargs)
+  File "/home/ec2-user/saneora/anon_env/lib/python3.9/site-packages/asyncpraw/reddit.py", line 707, in get
+    return await self._objectify_request(method="GET", params=params, path=path)
+  File "/home/ec2-user/saneora/anon_env/lib/python3.9/site-packages/asyncpraw/reddit.py", line 815, in _objectify_request
+    await self.request(
+  File "/home/ec2-user/saneora/anon_env/lib/python3.9/site-packages/asyncpraw/util/deprecate_args.py", line 51, in wrapped
+    return await _wrapper(*args, **kwargs)
+  File "/home/ec2-user/saneora/anon_env/lib/python3.9/site-packages/asyncpraw/reddit.py", line 1032, in request
+    return await self._core.request(
+  File "/home/ec2-user/saneora/anon_env/lib/python3.9/site-packages/asyncprawcore/sessions.py", line 370, in request
+    return await self._request_with_retries(
+  File "/home/ec2-user/saneora/anon_env/lib/python3.9/site-packages/asyncprawcore/sessions.py", line 270, in _request_with_retries
+    response, saved_exception = await self._make_request(
+  File "/home/ec2-user/saneora/anon_env/lib/python3.9/site-packages/asyncprawcore/sessions.py", line 187, in _make_request
+    response = await self._rate_limiter.call(
+  File "/home/ec2-user/saneora/anon_env/lib/python3.9/site-packages/asyncprawcore/rate_limit.py", line 34, in call
+    kwargs["headers"] = await set_header_callback()
+  File "/home/ec2-user/saneora/anon_env/lib/python3.9/site-packages/asyncprawcore/sessions.py", line 322, in _set_header_callback
+    await self._authorizer.refresh()
+  File "/home/ec2-user/saneora/anon_env/lib/python3.9/site-packages/asyncprawcore/auth.py", line 423, in refresh
+    await self._request_token(
+  File "/home/ec2-user/saneora/anon_env/lib/python3.9/site-packages/asyncprawcore/auth.py", line 153, in _request_token
+    response = await self._authenticator._post(url, **data)
+  File "/home/ec2-user/saneora/anon_env/lib/python3.9/site-packages/asyncprawcore/auth.py", line 33, in _post
+    response = await self._requestor.request(
+  File "/home/ec2-user/saneora/anon_env/lib/python3.9/site-packages/asyncprawcore/requestor.py", line 68, in request
+    raise RequestException(exc, args, kwargs)
+asyncprawcore.exceptions.RequestException: error with request Timeout context manager should be used inside a task
+[2022-11-20 14:46:11] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session dc687c3133fb98ed1a0d650aa195812a.
+[2022-11-20 15:42:28] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session dc687c3133fb98ed1a0d650aa195812a.
+
+
+ author not black_listed 
+
+
+
+OVE#5282: gott zum gruße
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ author not black_listed 
+
+
+
+Maneonfire#1151: 
+
+
+
+ author not black_listed 
+
+
+
+Maneonfire#1151: Grüße
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: <:emoji_35:985606577119694848>
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: 
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: 
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ author not black_listed 
+
+
+
+Fabi283#4210: 3351
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: 3352
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ author not black_listed 
+
+
+
+Maneonfire#1151: #panzergang
+
+
+
+ author not black_listed 
+
+
+
+Fabi283#4210: 3353
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: 3354
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: <:Hihi:1005718457104465980>
+
+
+
+ author not black_listed 
+
+
+
+Kaiser August#0926: Ich
+
+
+
+ author not black_listed 
+
+
+
+Kaiser August#0926: 3355
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: 3356
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: Bin
+
+
+
+ author not black_listed 
+
+
+
+Kaiser August#0926: schlau
+
+
+
+ author not black_listed 
+
+
+
+Kaiser August#0926: 3357
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: 3358
+
+
+
+ author not black_listed 
+
+
+
+Kaiser August#0926: 3359
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: Aber
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: 3360
+
+
+
+ author not black_listed 
+
+
+
+Kaiser August#0926: schlauer
+
+
+
+ author not black_listed 
+
+
+
+Kaiser August#0926: 3361
+
+
+
+ author not black_listed 
+
+
+
+Maneonfire#1151: <:emoji_35:985606577119694848>
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: .
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: 3362
+
+
+
+ author not black_listed 
+
+
+
+Kaiser August#0926: 3363
+
+
+
+ author not black_listed 
+
+
+
+Kaiser August#0926: Du
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: 3364
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: Bist
+
+
+
+ author not black_listed 
+
+
+
+Kaiser August#0926: 😂👌
+
+
+
+ author not black_listed 
+
+
+
+Kaiser August#0926: 3365
+
+
+
+ author not black_listed 
+
+
+
+Kaiser August#0926: dumm
+
+
+
+ author not black_listed 
+
+
+
+Maneonfire#1151: <:emoji_40:999604372617039872>
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: Abrr
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: 3366
+
+
+
+ author not black_listed 
+
+
+
+Kaiser August#0926: noch
+
+
+
+ author not black_listed 
+
+
+
+Kaiser August#0926: 3367
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ author not black_listed 
+
+
+
+Trissilp#2071: 3368
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: 3369
+
+
+
+ author not black_listed 
+
+
+
+Kurde.von.183{Jugoslawien}#2510: Dummer
+
+
+
+ author not black_listed 
+
+
+
+Maneonfire#1151: 3370
+
+
+
+ author not black_listed 
+
+
+
+Maneonfire#1151: Als
+
+
+
+ author not black_listed 
+
+
+
+Maneonfire#1151: .
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ author not black_listed 
+
+
+
+Akke__169#1568: <@724568553373564969>
+
+
+
+ author not black_listed 
+
+
+
+&&&#0100: 
+
+
+
+ author not black_listed 
+
+
+
+&&&#0100: faite comme elle @everyone
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+Got Notifications:  []
+
+ Done unleashing ioe_notices
+
+
+ main.unleshing: start Unleashing Reddit
+
+
+subreddits:  {'870179809806925835': {'fuck': 8, 'hentai': 8, 'BustyPetite': 8}, '871074344133074945': {'wierd': 8, 'dankmemes': 8, 'memes': 8, 'india': 8}, '871074370469134366': {'oneliners': 8, 'dadjokes': 8}, '871080531511635988': {'creepy': 8}, '781766184642281482': {'ProgrammerHumor': 8, 'nepal': 8, 'dankmemes': 8, 'memes': 8}, '873611566673711124': {'nowornever': 8, 'selfimprovement': 8, 'financialliteracy': 8, 'zenhabits': 8, 'motivated': 8, 'personalfinance': 8, 'motivation': 8}, '886517321240297522': {'stocktips': 8, 'investing': 8, 'business': 8}, '886518514993754142': {'deeplearning': 8, 'MachineLearning': 8, 'machinelearning': 8}, '857318544671768636': {'hentai': 8}, '899848624429740052': {'hentai': 8}, '901642884627972157': {'darkmemers': 8, 'MemeEconomy': 8, 'dankmemes': 8}, '903017086752809006': {'dankmemes': 8}, '903017086975115328': {'dankmemes': 8}, '822752026520846356': {'AmongUsPorn': 8, 'DestinyCircleJerk': 8}, '921255420377591808': {'motivation': 8}, '937966597115609108': {'crazyfuckingvideos': 8, 'eyebleach': 8, 'thotbeatdowns': 8}}
+
+
+ channel_id1: 870179809806925835
+
+
+
+
+ author not black_listed 
+
+
+
+dymulyy#2009: il as voulu me faire
+
+
+
+ author not black_listed 
+
+
+
+YK#2120: 
+
+
+
+ author not black_listed 
+
+
+
+network#0101: Regardez squi ce prepare @everyone
+
+
+
+ author not black_listed 
+
+
+
+YK#2120: <@235042377490890752> 🫵
+
+
+
+ author not black_listed 
+
+
+
+</>#0100: voici le graphique de DYMULY
+
+
+
+ author not black_listed 
+
+
+
+network#0101: ok pas mal
+
+
+
+ author not black_listed 
+
+
+
+network#0101: <@652076557845921814>
+
+
+
+ author not black_listed 
+
+
+
+network#0101: alors ???,
+
+
+
+ author not black_listed 
+
+
+
+network#0101: OUIIIII
+
+
+
+ author not black_listed 
+
+
+
+YK#2120: sdq cv ou quoi ùdr
+
+
+
+ author not black_listed 
+
+
+
+Feindflug#1312: Du
+
+
+
+ author not black_listed 
+
+
+
+iceaatana#7554: 
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ author not black_listed 
+
+
+
+iceaatana#7554: 
+
+
+
+ author not black_listed 
+
+
+
+iceaatana#7554: This has me rollibg😂😂
+
+
+
+ author not black_listed 
+
+
+
+iceaatana#7554: Same
+
+
+
+ author not black_listed 
+
+
+
+iceaatana#7554: 
+
+
+
+ author not black_listed 
+
+
+
+iceaatana#7554: Same man
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ author not black_listed 
+
+
+
+network#0101: hdmlh ett mon frrr
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ author not black_listed 
+
+
+
+jakke#8800: <@721342780269658203>
+
+
+
+ author not black_listed 
+
+
+
+iceaatana#7554: juuh ootas
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ author not black_listed 
+
+
+
+iceaatana#7554: tuun iha max 1h pääst
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ author not black_listed 
+
+
+
+B-Gargamel#3132: 3371
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+
+
+ Fired on_voice_state_update function 
+
+
+[2022-11-20 17:01:09] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session dc687c3133fb98ed1a0d650aa195812a.
