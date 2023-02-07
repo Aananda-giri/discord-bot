@@ -91,8 +91,11 @@ async def unleashing():
     for channel_id in subreddits:
         # subreddits[str(channel_id)] = {jokes:10, memes:11}
         len_subs = len(subreddits[str(channel_id)])
-        print('\n\n channel_id1: {}\n\n'.format(channel_id))
-        channel = bot.get_channel(int(channel_id))
+        try:
+          print('\n\n channel_id1: \'{}\'\n\n'.format(channel_id))
+          channel = bot.get_channel(int(channel_id))
+        except Exception as ex:
+          print(f"channel id:{channel_id} \nerror:\n {ex} ")
         for progress, each_sub in enumerate(subreddits[str(channel_id)]):
           last_sub = True if (progress == len_subs-1) else False
           await unleash_reddit(channel = channel, subreddit = each_sub, no_of_posts = int(subreddits[channel_id][each_sub]), author=False, last_sub=last_sub)
@@ -112,8 +115,11 @@ async def unleash_news():
     news_db = db('news').get_all()
     # subscription_db = json.loads(db['subscription'].replace("'", "\""))
     for channel_id in news_db:
-      print(f'\n\n unleash_subscriptions: channel_id:{channel_id} {type(channel_id)} \n\n')
-      channel = bot.get_channel(id=int(channel_id))
+      try:
+        print(f'\n\n unleash_subscriptions: channel_id:{channel_id} {type(channel_id)} \n\n')
+        channel = bot.get_channel(id=int(channel_id))
+      except Exception as ex:
+          print(f"channel id:{channel_id} \nerror:\n {ex} ")
       # db['subscription'][str(channel_id)]['countries']
       
       # countries = subscription_db[str(channel_id)]['countries']
@@ -302,7 +308,7 @@ def is_word(string):
     else:
         return False
     
-async def process_games(message):
+async def process_message(message):
     if str(message.channel.id) in config.count_ids and is_int(message.content):
               print('\nproceed count\n')
               await proceed_count(message, int(message.content))
@@ -310,7 +316,8 @@ async def process_games(message):
               print('\nproceed_chain\n')
               await proceed_chain(message)
     else:
-        return False
+      print(f"\n{message.author}: {message.content}\n")
+      await bot.process_commands(message)
 
 
 # The code in this event is executed every time someone sends a message, with or without the prefix
@@ -336,10 +343,7 @@ async def on_message(message):
           await message_channel.send(message_text)  # sending message
           return
 
-        processing_games = await process_games(message)
-        if not processing_games:
-            print(f"\n{message.author}: {message.content}\n")
-            await bot.process_commands(message)
+        processing_games = await process_message(message)
     else:
       # Send a message to let the user know he's blacklisted
       context = await bot.get_context(message)
