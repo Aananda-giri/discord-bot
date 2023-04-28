@@ -120,6 +120,7 @@ async def unleash_news():
         channel = bot.get_channel(id=int(channel_id))
       except Exception as ex:
           print(f"channel id:{channel_id} \nerror:\n {ex} ")
+          continue
       # db['subscription'][str(channel_id)]['countries']
       
       # countries = subscription_db[str(channel_id)]['countries']
