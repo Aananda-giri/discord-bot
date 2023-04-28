@@ -1,0 +1,7 @@
+{
+    "python.defaultInterpreterPath": "/home/machina/Documents/saneora_env/bin/python3",
+    "python.terminal.activateEnvInCurrentTerminal": true,
+    "diffEditor.wordWrap": "off",
+    "editor.wordWrap":"off"
+    // source /home/nathan/Documents/machine_env/bin/activate
+}

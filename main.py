@@ -22,7 +22,7 @@ config.init()
 from database import db
 
 # from keep_alive import keep_alive
-from cogs import get_new_notifications
+from cogs.ioe_crawler import get_new_notifications
 #import commands
 
 from discord.ext import tasks
