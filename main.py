@@ -22,7 +22,7 @@ config.init()
 from database import db
 
 # from keep_alive import keep_alive
-# from ioe_crawler import get_new_notifications, run_spider
+from cogs import get_new_notifications
 #import commands
 
 from discord.ext import tasks
@@ -142,8 +142,9 @@ async def unleash_ioe_notifications():
   #n=json.load(open('ioe_notices.json','r'))
   #notifications = {'topics': [n['topics'][0]], 'urls':[n['urls'][0]]}
   
-  notices = requests.get('http://ioee.herokuapp.com/api/')
-  notices = notices.json()['notices']
+  # notices = requests.get('http://ioee.herokuapp.com/api/')
+  # notices = notices.json()['notices']
+  notices = get_new_notifications()
   print('Got Notifications:  {}'.format(notices))
   notices.reverse()
   
