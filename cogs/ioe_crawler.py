@@ -19,31 +19,22 @@ class IoeSpider(scrapy.Spider):
         tds = response.css('td')
         i=[str(a) for a in range(1,11)]
         
-        #text of data
-        texts=[]
-        
-        #url of data
-        urls=[]
-        
+        notices = []
         for td in tds:
+            # tds[0] -> s.no  ,tds[1] -> title  , tds[2] -> notice date
             if td.css('td::text').get() in i:
-                texts.append(tds[tds.index(td)+1].css('span::text').get())
-                urls.append(str(response.url).split('/?')[0][:-1] + str(tds[tds.index(td)+1].css('a::attr(href)').get()))
+                title = tds[tds.index(td)+1].css('span::text').get()
+                url = str(response.url).split('/?')[0][:-1] + str(tds[tds.index(td)+1].css('a::attr(href)').get())
+                date = tds[tds.index(td)+2].css('td::text').get()
+                notices.append({'title':title, 'url':url, 'date':date})
         
         with open(os.path.join(current_path, 'new_notices.json'),'w') as file:
-            json.dump({'topics':texts, 'urls':urls}, file, indent = 4)
-        #break
-        #print('\n\n\n\n\n',{'topics':texts, 'urls':urls})
-        #yield{'topics':texts, 'urls':urls}
+            json.dump(notices, file, indent = 4)
+
         #next_page = response.css('li.PagedList-skipToNext a::attr(href)').get()
-        
-        #with open('data.json','w') as file:
-        #    json.dump({'texts':texts, 'urls':urls}, file, indent = 4)
         
         #if next_page is not None:
         #    yield response.follow(next_page, callback=self.parse)
-
-
 
 
 
@@ -80,41 +71,22 @@ def run_spider():
 def get_new_notifications(update=True):
   run_spider()
   with open(os.path.join(current_path, 'ioe_notices.json'), 'r') as file:
-    data = json.load(file)
-
-  old_topics = data['topics']
-  old_urls = data['urls']
-  print(f'\n old_data: {data}')
+    old_notices = json.load(file)
 
   with open(os.path.join(current_path, 'new_notices.json'), 'r') as file:
-    new = json.load(file)
-  print(new)
+    scraped_notices = json.load(file)
 
-  print(f'\n new_data: {new}')
-
-  scraped_topics = new['topics']
-  scraped_urls = new['urls']
-
-  #reverse because it would be easier to stack on top of old_data
-  scraped_topics.reverse()
-  scraped_urls.reverse()
-  # print(f'scraped_topics: {scraped_topics}')
-  # print(f'scraped_urls: {scraped_urls}')
+  new_notices = []
+  for notice in reversed(scraped_notices):
+     if notice not in old_notices:
+        old_notices.insert(0, notice)
+        new_notices.append(notice)
+        print('---------Adding new:\n\t topic {}\n\t url:{}'.format(notice['title'], notice['url'], notice['date']))
   
-  new_topics = []
-  new_urls = []
-
-  for i in range(len(scraped_topics)):
-    if scraped_topics[i] not in old_topics:
-        old_urls.insert(0, scraped_urls[i])
-        old_topics.insert(0, scraped_topics[i])
-        new_topics.insert(0, scraped_topics[i])
-        new_urls.insert(0, scraped_urls[i])
-        print('---------Adding new:\n\t topic {}\n\t url:{}'.format(scraped_topics[i], scraped_topics[i]))
   if update:
     with open(os.path.join(current_path, 'ioe_notices.json'),'w') as file:
-      json.dump({'topics':old_topics, 'urls':old_urls}, file, indent = 4)
+      json.dump(old_notices, file, indent = 4)
 
   ## Got new_topics and new_urls
-  return({'topics':new_topics, 'urls':new_urls})
+  return(new_notices)
 

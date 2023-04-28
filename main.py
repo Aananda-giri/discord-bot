@@ -9,6 +9,7 @@
 import discord, asyncio, os, platform, sys, requests, json, threading
 from discord.ext import commands
 from discord.ext.commands import Bot
+from urllib.parse import unquote, quote
 
 if not os.path.isfile("config.py"):
   sys.exit("'config.py' not found! Please add it and try again.")
@@ -147,7 +148,7 @@ async def unleash_ioe_notifications():
   # notices = notices.json()['notices']
   notices = get_new_notifications()
   print('Got Notifications:  {}'.format(notices))
-  notices.reverse()
+  # notices.reverse()
   
   #nathan_server = bot.get_channel(id=904750102126657616)
   #zaroom = bot.get_channel(id=934322824540209202)
@@ -161,6 +162,7 @@ async def unleash_ioe_notifications():
 
     # Space in url causing err: In embed.url: Not a well formed URL
     # %20 is for space
+    # url = quote(notice['url'])
     url = str(notice['url']).replace(' ','%20')
     
     embed = discord.Embed(
