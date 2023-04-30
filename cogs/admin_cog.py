@@ -19,5 +19,5 @@ class AdminCog(commands.Cog, name="admin"):
         await ctx.bot.logout()
         
 
-def setup(bot):
+async def setup(bot):
     bot.add_cog(AdminCog(bot))

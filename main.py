@@ -27,8 +27,8 @@ from cogs.ioe_crawler import get_new_notifications
 #import commands
 
 from discord.ext import tasks
-from cogs.reddit import unleash_reddit
-from cogs.news import send_news
+from cogs.reddit_cog import unleash_reddit
+from cogs.news_cog import send_news
 #import ffmpeg
 
 #from discord import FFmpegPCMAudio
@@ -573,21 +573,26 @@ async def on_command_error(context, error):
     await context.send(embed=embed)
     raise error
 
+
 # await only inside async function
-async def load_extension(extension):
-   await bot.load_extension(extension)
+async def load_extensions(extension):
+  for filename in os.listdir("./cogs"):
+        if filename.endswith("cog.py"):
+            try:
+                # cut off the .py from the file name
+                extension_name = f"cogs.{filename[:-3]}"
+                await bot.load_extension(extension_name)
+    
+                print(f"Loaded extension '{extension_name}'")
+            except Exception as e:
+                exception = f"{type(e).__name__}: {e}"
+                print(f"Failed to load extension {extension}\n{exception}")
+            # extension = extension.replace("cogs.", "")
+            # await bot.load_extension(extension)
+
 
 if __name__ == "__main__":
-  
-  for extension in config.STARTUP_COGS:
-    try:
-      asyncio.run(load_extension(extension))
-      extension = extension.replace("cogs.", "")
-      print(f"Loaded extension '{extension}'")
-    except Exception as e:
-      exception = f"{type(e).__name__}: {e}"
-      extension = extension.replace("cogs.", "")
-      print(f"Failed to load extension {extension}\n{exception}")
+  asyncio.run(load_extensions())
   bot.run(config.DISCORD_TOKEN)     # run discord bot
 
 
