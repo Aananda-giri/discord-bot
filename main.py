@@ -575,7 +575,7 @@ async def on_command_error(context, error):
 
 
 # await only inside async function
-async def load_extensions(extension):
+async def load_extensions():
   for filename in os.listdir("./cogs"):
         if filename.endswith("cog.py"):
             try:
