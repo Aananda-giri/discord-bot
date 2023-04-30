@@ -1,4 +1,4 @@
-import discord, os
+import discord, asyncio
 import math, asyncpraw, asyncprawcore
 from discord.ext import commands
 from cogs.functions import get_embeded_message
@@ -199,5 +199,7 @@ class RedditCommands(commands.Cog, name="reddit_commands"):
           #print(context.channel.id)
             #await context.send(context.channel.id)
 
-def setup(bot):
+async def setup(bot):
     bot.add_cog(RedditCommands(bot))
+
+asyncio.run(setup(bot))
