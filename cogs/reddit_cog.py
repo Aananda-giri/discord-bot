@@ -66,57 +66,63 @@ async def unleash_reddit(channel, subreddit, no_of_posts=5, author=False, last_s
 
 
     if donot_proceed != 1:
-        async for submission in submissions.top('day',
-                                                limit=int(no_of_posts / 2)):
-            # print('Unleash for loop:{}'.format('n'))
-            title = submission.title
-            body = submission.selftext
-            embed = discord.Embed(title=title,
-                                  url=submission.url,
-                                  description=body,
-                                  colour=discord.Color.red())
-            embed.set_image(url=submission.url)
-            #To set subreddit name in footer
-            embed.set_footer(text="subreddit: \"r/{}\"".format(subreddit))
-            # print('Submission_url: \"', submission.url, '\"')
-            if submission.url == '':
-                print('\nreddit.unleash_reddit:Guess What: empty submission url\n')
-            try:
-                if len(str(body)) < 2500:
-                    image_formats = ['jpg', 'jpeg', 'png']
-                    #checks if image_format in submission.url
-                    if sum([(i in str(submission.url))
-                            for i in image_formats]):
-                        
-                        await channel.send(embed=embed)
-                else:
-                    await channel.send(submission.url)
-            except:
-                pass
-        async for submission in submissions.new(limit=no_of_posts -
-                                                math.ceil(no_of_posts / 4)):
-            # print('Unleash for loop:{}'.format(0))
-            title = submission.title
-            body = submission.selftext
-            embed = discord.Embed(title=title,
-                                  url=submission.url,
-                                  description=body,
-                                  colour=discord.Color.red())
-            embed.set_image(url=submission.url)
-            #To set subreddit name in footer
-            embed.set_footer(text="subreddit: \"r/{}\"".format(subreddit))
-            # print('Submission_url: ', submission.url)
-            try:
-                if len(str(body)) < 2500:
-                    image_formats = ['jpg', 'jpeg', 'png']
-                    #checks if image_format in submission.url
-                    if sum([(i in str(submission.url))
-                            for i in image_formats]):
-                        await channel.send(embed=embed)
-                else:
-                    await channel.send(submission.url)
-            except:
-                pass
+        try:
+            async for submission in submissions.top('day',
+                                                    limit=int(no_of_posts / 2)):
+                # print('Unleash for loop:{}'.format('n'))
+                title = submission.title
+                body = submission.selftext
+                embed = discord.Embed(title=title,
+                                    url=submission.url,
+                                    description=body,
+                                    colour=discord.Color.red())
+                embed.set_image(url=submission.url)
+                #To set subreddit name in footer
+                embed.set_footer(text="subreddit: \"r/{}\"".format(subreddit))
+                # print('Submission_url: \"', submission.url, '\"')
+                if submission.url == '':
+                    print('\nreddit.unleash_reddit:Guess What: empty submission url\n')
+                try:
+                    if len(str(body)) < 2500:
+                        image_formats = ['jpg', 'jpeg', 'png']
+                        #checks if image_format in submission.url
+                        if sum([(i in str(submission.url))
+                                for i in image_formats]):
+                            
+                            await channel.send(embed=embed)
+                    else:
+                        await channel.send(submission.url)
+                except:
+                    pass
+        except Exception as e:
+            print(f'\n error in sending content from subreddit:{subreddit} to channel:{channel}\n')
+        try:
+            async for submission in submissions.new(limit=no_of_posts -
+                                                    math.ceil(no_of_posts / 4)):
+                # print('Unleash for loop:{}'.format(0))
+                title = submission.title
+                body = submission.selftext
+                embed = discord.Embed(title=title,
+                                    url=submission.url,
+                                    description=body,
+                                    colour=discord.Color.red())
+                embed.set_image(url=submission.url)
+                #To set subreddit name in footer
+                embed.set_footer(text="subreddit: \"r/{}\"".format(subreddit))
+                # print('Submission_url: ', submission.url)
+                try:
+                    if len(str(body)) < 2500:
+                        image_formats = ['jpg', 'jpeg', 'png']
+                        #checks if image_format in submission.url
+                        if sum([(i in str(submission.url))
+                                for i in image_formats]):
+                            await channel.send(embed=embed)
+                    else:
+                        await channel.send(submission.url)
+                except:
+                    pass
+        except Exception as e:
+            print(f'\n error in sending content from subreddit:{subreddit} to channel:{channel}\n')
     if last_sub:
       # send unleashed list at the end of sending posts
       try:
