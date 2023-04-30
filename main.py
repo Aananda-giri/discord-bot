@@ -586,7 +586,7 @@ async def load_extensions():
                 print(f"Loaded extension '{extension_name}'")
             except Exception as e:
                 exception = f"{type(e).__name__}: {e}"
-                print(f"Failed to load extension {extension}\n{exception}")
+                print(f"Failed to load extension {extension_name}\n{exception}")
             # extension = extension.replace("cogs.", "")
             # await bot.load_extension(extension)
 
