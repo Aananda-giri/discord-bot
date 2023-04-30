@@ -62,7 +62,7 @@ async def unleash_reddit(channel, subreddit, no_of_posts=5, author=False, last_s
             except:
                 pass
     except Exception as e:
-        print(f'\n error in sending content from subreddit:{subreddit} to channel:{channel}\n')
+        print(f'\n error in sending content from subreddit:{subreddit} to channel:{channel}\n, error:{e} \n')
 
 
     if donot_proceed != 1:
@@ -95,7 +95,7 @@ async def unleash_reddit(channel, subreddit, no_of_posts=5, author=False, last_s
                 except:
                     pass
         except Exception as e:
-            print(f'\n error in sending content from subreddit:{subreddit} to channel:{channel}\n')
+            print(f'\n error in sending content from subreddit:{subreddit} to channel:{channel}\n, error:{e}')
         try:
             async for submission in submissions.new(limit=no_of_posts -
                                                     math.ceil(no_of_posts / 4)):
@@ -122,7 +122,7 @@ async def unleash_reddit(channel, subreddit, no_of_posts=5, author=False, last_s
                 except:
                     pass
         except Exception as e:
-            print(f'\n error in sending content from subreddit:{subreddit} to channel:{channel}\n')
+            print(f'\n error in sending content from subreddit:{subreddit} to channel:{channel}, error:{e} \n')
     if last_sub:
       # send unleashed list at the end of sending posts
       try:
@@ -131,7 +131,7 @@ async def unleash_reddit(channel, subreddit, no_of_posts=5, author=False, last_s
         embed=get_embeded_message(channel, 'Unleashed List:', subreddits, author=False)
         await channel.send(embed=embed)
       except Exception as e:
-        print('\n Bro! looks like channel:{} doesn\'t exist (deleted maybe)\n err. message:{}\n'.format(channel.id if channel!=None else None), str(e))
+        print(f'\n error sending last sub channel:{channel}  subreddit:{subreddit}\n, error:{e}')
 
 class RedditCommands(commands.Cog, name="reddit_commands"):
     def __init__(self, bot):
