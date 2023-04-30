@@ -36,31 +36,34 @@ async def unleash_reddit(channel, subreddit, no_of_posts=5, author=False, last_s
     if no_of_posts == 1:
         donot_proceed = 1
         no_of_posts = 2
+    try:
+        async for submission in submissions.hot(limit=int(no_of_posts / 4)):
+            # print('Unleash for loop:{}'.format(0))
+            title = submission.title
+            body = submission.selftext
+            embed = discord.Embed(title=title,
+                                url=submission.url,
+                                description=body,
+                                colour=discord.Color.red())
+            embed.set_image(url=submission.url)
+            #To set subreddit name in footer
+            embed.set_footer(text="subreddit: \"r/{}\"".format(subreddit))#, icon_url=submissions.icon_img)#subreddit.icon_img)#, subreddit.banner_imgand subreddit.header_img )
+            # print('Submission_url: ', submission.url)
+            try:
+                #To filter lenthy messages > 2500 letters
+                if len(str(body)) < 2500:
+                    image_formats = ['jpg', 'jpeg', 'png']
 
-    async for submission in submissions.hot(limit=int(no_of_posts / 4)):
-        # print('Unleash for loop:{}'.format(0))
-        title = submission.title
-        body = submission.selftext
-        embed = discord.Embed(title=title,
-                              url=submission.url,
-                              description=body,
-                              colour=discord.Color.red())
-        embed.set_image(url=submission.url)
-        #To set subreddit name in footer
-        embed.set_footer(text="subreddit: \"r/{}\"".format(subreddit))#, icon_url=submissions.icon_img)#subreddit.icon_img)#, subreddit.banner_imgand subreddit.header_img )
-        # print('Submission_url: ', submission.url)
-        try:
-            #To filter lenthy messages > 2500 letters
-            if len(str(body)) < 2500:
-                image_formats = ['jpg', 'jpeg', 'png']
+                    #checks if image_format in submission.url
+                    if sum([(i in str(submission.url)) for i in image_formats]):
+                        await channel.send(embed=embed)
+                    else:
+                        await channel.send(submission.url)
+            except:
+                pass
+    except Exception as e:
+        print(f'\n error in sending content from subreddit:{subreddit} to channel:{channel}\n')
 
-                #checks if image_format in submission.url
-                if sum([(i in str(submission.url)) for i in image_formats]):
-                    await channel.send(embed=embed)
-                else:
-                    await channel.send(submission.url)
-        except:
-            pass
 
     if donot_proceed != 1:
         async for submission in submissions.top('day',
