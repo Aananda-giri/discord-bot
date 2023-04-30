@@ -20,4 +20,4 @@ class AdminCog(commands.Cog, name="admin"):
         
 
 async def setup(bot):
-    bot.add_cog(AdminCog(bot))
+    await bot.add_cog(AdminCog(bot))

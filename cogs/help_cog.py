@@ -207,5 +207,5 @@ class AnimeHelp(commands.Cog, name="anime_help"):
           await context.send(embed=embed)
 
 async def setup(bot):
-    bot.add_cog(Help(bot))
-    bot.add_cog(AnimeHelp(bot))
+    await bot.add_cog(Help(bot))
+    await bot.add_cog(AnimeHelp(bot))

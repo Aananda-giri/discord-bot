@@ -200,4 +200,4 @@ class RedditCommands(commands.Cog, name="reddit_commands"):
             #await context.send(context.channel.id)
 
 async def setup(bot):
-    bot.add_cog(RedditCommands(bot))
+    await bot.add_cog(RedditCommands(bot))

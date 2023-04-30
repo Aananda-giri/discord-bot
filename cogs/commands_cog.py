@@ -83,4 +83,4 @@ class Commands(commands.Cog, name="reddit_commands"):
 
 
 async def setup(bot):
-    bot.add_cog(Commands(bot))
+    await bot.add_cog(Commands(bot))

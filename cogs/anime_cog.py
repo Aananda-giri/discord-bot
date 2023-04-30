@@ -532,4 +532,4 @@ class anime(commands.Cog):
         await ctx.send(embed=embed)
 
 async def setup(bot):
-    bot.add_cog(anime(bot))
+    await bot.add_cog(anime(bot))

@@ -117,7 +117,7 @@ class News(commands.Cog, name="reddit_commands"):
     await context.send(embed=embed)
   
 async def setup(bot):
-    bot.add_cog(News(bot))
+    await bot.add_cog(News(bot))
 
 # ----------------------- #
       # archives #
