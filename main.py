@@ -573,12 +573,15 @@ async def on_command_error(context, error):
     await context.send(embed=embed)
     raise error
 
-
+# await only inside async function
+async def load_extension(extension):
+   await bot.load_extension(extension)
 
 if __name__ == "__main__":
+  
   for extension in config.STARTUP_COGS:
     try:
-      bot.load_extension(extension)
+      asyncio.run(load_extension(extension))
       extension = extension.replace("cogs.", "")
       print(f"Loaded extension '{extension}'")
     except Exception as e:
