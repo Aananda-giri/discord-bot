@@ -56,9 +56,9 @@ async def unleash_reddit(channel, subreddit, no_of_posts=5, author=False, last_s
 
                     #checks if image_format in submission.url
                     if sum([(i in str(submission.url)) for i in image_formats]):
-                        await channel.send(embed=embed)
+                        await channel.send(embed=embed, silent=True)
                     else:
-                        await channel.send(submission.url)
+                        await channel.send(submission.url, silent=True)
             except:
                 pass
     except Exception as e:
@@ -89,9 +89,9 @@ async def unleash_reddit(channel, subreddit, no_of_posts=5, author=False, last_s
                         if sum([(i in str(submission.url))
                                 for i in image_formats]):
                             
-                            await channel.send(embed=embed)
+                            await channel.send(embed=embed, silent=True)
                     else:
-                        await channel.send(submission.url)
+                        await channel.send(submission.url, silent=True)
                 except:
                     pass
         except Exception as e:
@@ -116,9 +116,9 @@ async def unleash_reddit(channel, subreddit, no_of_posts=5, author=False, last_s
                         #checks if image_format in submission.url
                         if sum([(i in str(submission.url))
                                 for i in image_formats]):
-                            await channel.send(embed=embed)
+                            await channel.send(embed=embed, silent=True)
                     else:
-                        await channel.send(submission.url)
+                        await channel.send(submission.url, silent=True)
                 except:
                     pass
         except Exception as e:
@@ -129,7 +129,7 @@ async def unleash_reddit(channel, subreddit, no_of_posts=5, author=False, last_s
         reddit_db = db('subreddit')
         subreddits = reddit_db.get_one(str(channel.id))
         embed=get_embeded_message(channel, 'Unleashed List:', subreddits, author=False)
-        await channel.send(embed=embed)
+        await channel.send(embed=embed, silent=True)
       except Exception as e:
         print(f'\n error sending last sub channel:{channel}  subreddit:{subreddit}\n, error:{e}')
 
