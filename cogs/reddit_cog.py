@@ -6,15 +6,14 @@ from cogs.functions import get_embeded_message
 from database import db
 import config
 
-reddit = asyncpraw.Reddit(
-    client_id= config.RD_CLIENT_ID,# os.environ['RD_CLIENT_ID'],
-    client_secret= config.RD_CLIENT_SECRET, # os.environ['rd_client_secret'],
-    password= config.RD_PASS,    # os.environ['rd_pass'],
-    user_agent="praw_test",
-    username="Alternative-Ad-8849",
-)
-
 async def sub_exists(subreddit_name):
+    reddit = asyncpraw.Reddit(
+        client_id= config.RD_CLIENT_ID,# os.environ['RD_CLIENT_ID'],
+        client_secret= config.RD_CLIENT_SECRET, # os.environ['rd_client_secret'],
+        password= config.RD_PASS,    # os.environ['rd_pass'],
+        user_agent="praw_test",
+        username="Alternative-Ad-8849",
+    )
     exists = True
     try:
         subreddit = await reddit.subreddit(subreddit_name, fetch=True)     # by default Async PRAW doesn't make network requests when subreddit is called
@@ -27,6 +26,13 @@ async def sub_exists(subreddit_name):
 
 
 async def unleash_reddit(channel, subreddit, no_of_posts=5, author=False, last_sub=False):
+    reddit = asyncpraw.Reddit(
+        client_id= config.RD_CLIENT_ID,# os.environ['RD_CLIENT_ID'],
+        client_secret= config.RD_CLIENT_SECRET, # os.environ['rd_client_secret'],
+        password= config.RD_PASS,    # os.environ['rd_pass'],
+        user_agent="praw_test",
+        username="Alternative-Ad-8849",
+    )
     #print(channel_id)  
     #channel = bot.get_channel(id=int(channel_id.strip()))
     #channel = bot
