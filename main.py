@@ -4,8 +4,9 @@
 # from discord.ext.commands import has_permissions, MissingPermissions
 # from prawcore import NotFound
 # from discord import FFmpegPCMAudio
-#from cogs.music import get_stream, get_embed
-# from cogs.functions import YTDLSource, download_from_youtube, get_embeded_message
+#from cogs.music import get_stream, 
+# from cogs.functions import YTDLSource, download_from_youtube, 
+from cogs.functions import get_embed
 import discord, asyncio, os, platform, sys, requests, json, threading
 from discord.ext import commands
 from discord.ext.commands import Bot
@@ -109,7 +110,7 @@ async def unleash_news():
     # ---------------------------
         # unleash news
     # ---------------------------
-    # @tasks.loop(hours=6)
+    # @tasks.floop(hours=6)
     # async def unlease_news():
     print("\n unleashing news")
     # for channel_id in db['subscription']):
@@ -589,7 +590,7 @@ async def load_extensions():
                 print(f"Failed to load extension {extension_name}\n{exception}")
             # extension = extension.replace("cogs.", "")
             # await bot.load_extension(extension)
-
+asyncio.run(load_extensions())
 
 if __name__ == "__main__":
   asyncio.run(load_extensions())
