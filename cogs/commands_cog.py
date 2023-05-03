@@ -2,13 +2,14 @@
 # import math, asyncpraw, asyncprawcore
 # from cogs.functions import YTDLSource, download_from_youtube, get_embeded_message
 
+import discord
 from discord.ext import commands
 from cogs.functions import get_embeded_message
 # from replit import db
 from database import db
 
 
-class Commands(commands.Cog, name="reddit_commands"):
+class Commands(commands.Cog, name="general_commands"):
     def __init__(self, bot):
         self.bot = bot
 
@@ -80,6 +81,53 @@ class Commands(commands.Cog, name="reddit_commands"):
         please enter `.vent` To to enable/disable a vent channel
         """
         await context.send(response_message)
+
+
+    @commands.command(name="whois")
+    async def whois(self, ctx, member:discord.Member =  None):
+
+        if member is None:
+            member = ctx.author
+            roles = [role for role in ctx.author.roles]
+
+        else:
+            roles = [role for role in member.roles]
+
+        embed = discord.Embed(title=f"{member}", colour=member.colour, timestamp=ctx.message.created_at)
+        embed.set_footer(text=f"Requested by: {ctx.author}", icon_url=ctx.author.avatar_url)
+        embed.set_author(name="About user:")#"درباره یوزر: ")
+        embed.add_field(name="Individual ID:", value=member.id, inline=False)
+        #embed.add_field(name="آی دی فرد:", value=member.id, inline=False)
+        
+        embed.add_field(name="Username: ",value=member.display_name, inline=False)
+        #embed.add_field(name="یوزر نیم:",value=member.display_name, inline=False)
+        
+        embed.add_field(name="User half code:",value=member.discriminator, inline=False)
+        #embed.add_field(name="کد یوزر نیم:",value=member.discriminator, inline=False)
+        
+        embed.add_field(name="current situation:", value=str(member.status).title(), inline=False)
+        #embed.add_field(name="وضعیت فعلی:", value=str(member.status).title(), inline=False)
+        
+        embed.add_field(name="Last visit:", value=f"{str(member.activity.type).title().split('.')[1]} {member.activity.name}" if member.activity is not None else "None", inline=False)
+        #embed.add_field(name="آخرین بازدید:", value=f"{str(member.activity.type).title().split('.')[1]} {member.activity.name}" if member.activity is not None else "None", inline=False)
+        
+        embed.add_field(name="Account creation date:", value=member.created_at.strftime("%a, %d, %B, %Y, %I, %M, %p UTC"), inline=False)
+        #embed.add_field(name="تاریخ ساخت اکانت:", value=member.created_at.strftime("%a, %d, %B, %Y, %I, %M, %p UTC"), inline=False)
+        
+        embed.add_field(name="Join date to server:", value=member.joined_at.strftime("%a, %d, %B, %Y, %I, %M, %p UTC"), inline=False)
+        #embed.add_field(name="تاریخ جوین به سرور:", value=member.joined_at.strftime("%a, %d, %B, %Y, %I, %M, %p UTC"), inline=False)
+        
+        embed.add_field(name=f"Individual rolls [{len(roles)}]", value=" **|** ".join([role.mention for role in roles]), inline=False)
+        #embed.add_field(name=f"رول های فرد [{len(roles)}]", value=" **|** ".join([role.mention for role in roles]), inline=False)
+        
+        embed.add_field(name="Top person roll:", value=member.top_role, inline=False)
+        #embed.add_field(name="بالا ترین رول فرد:", value=member.top_role, inline=False)
+        
+        embed.add_field(name="robot:", value=member.bot, inline=False)
+        #embed.add_field(name="ربات:", value=member.bot, inline=False)
+        await ctx.send(embed=embed)
+        return
+
 
 
 async def setup(bot):
