@@ -156,7 +156,7 @@ async def unleash_ioe_notifications():
   #veg = bot.get_channel(id=871256858587979816)
 
 
-  for notice in notices:
+  for notice in reversed(notices):
     #topic.reverse()
     #url.reverse()
     #print("notice: ".format(notice))
