@@ -35,6 +35,7 @@ class db:
         elif self.table_name == 'subreddit' or self.table_name == 'news':
             print(f'\n table_name: {self.table_name}\n')
             self.add_one_subscription(channel_id, gener, how_many)
+            return 'added one subreddit'
         else:
             print(f'\n table_name: {self.table_name} not found\n')
     def remove_one(self, channel_id, gener=None):
