@@ -160,7 +160,7 @@ class AnimeHelp(commands.Cog, name="anime_help"):
             name=context.message.author,
             #url="https://twitter.com/RealDrewData",
             icon_url=
-            context.author.avatar_url
+            context.author.avatar
         )
         
         '''embed.add_field(
