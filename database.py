@@ -32,6 +32,7 @@ class db:
           # 'ioe_notification and vent' tables have same structure
             self.add_one_ioe_notificaiton(channel_id)
         elif self.table_name == 'subreddit' or self.table_name == 'news':
+            print(f'\n table_name: {self.table_name}\n')
             self.add_one_subscription(channel_id, gener, how_many)
 
     def remove_one(self, channel_id, gener=None):
