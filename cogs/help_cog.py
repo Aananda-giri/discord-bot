@@ -13,7 +13,7 @@ class Help(commands.Cog, name="help"):
                  help='Plesae enter `.help` for help', aliases=['h'])
     async def help(self, context, *args):
         args = ' '.join(args).strip()
-        print('help invoked: ',args)
+        print('Normal help invoked: ',args)
         if args=='':
            args=None
         command_names_list = [x.name for x in self.bot.commands]
@@ -35,8 +35,9 @@ class Help(commands.Cog, name="help"):
             name=context.message.author,
             #url="https://twitter.com/RealDrewData",
             icon_url=
-            context.author.avatar_url
+            context.author.avatar
         )
+        print(f'avatar: {context.author.avatar}')
         
         embed.add_field(
                 name="List of supported commands:",
@@ -137,7 +138,7 @@ class AnimeHelp(commands.Cog, name="anime_help"):
                  help='Plesae enter `.help` for help', aliases=[])
     async def help(self, context, *args):
         args = ' '.join(args).strip()
-        print('help invoked: ',args)
+        print('Anime help invoked: ',args)
         if args=='':
            args=None
         command_names_list = [x.name for x in self.bot.commands]
