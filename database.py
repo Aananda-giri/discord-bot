@@ -28,6 +28,7 @@ class db:
     # create_reddit_table()
 
     def add_one(self, channel_id, gener=None, how_many=None):
+        print('\n\n add_one: table_name: {}\n\n'.format(self.table_name))
         if self.table_name == 'ioe_notifications' or self.table_name == 'vent':
           # 'ioe_notification and vent' tables have same structure
             self.add_one_ioe_notificaiton(channel_id)
