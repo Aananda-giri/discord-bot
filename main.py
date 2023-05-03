@@ -237,7 +237,7 @@ async def on_ready():
   print("-------------------")
   # unleashing.start() # reddit posts
   # unleash_ioe_notifications.start()
-  unleash_news.start()  # news
+  # unleash_news.start()  # news
   
   # print_hi.start()
   # print_hi2.start()

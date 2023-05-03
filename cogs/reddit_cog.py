@@ -176,8 +176,11 @@ class RedditCommands(commands.Cog, name="reddit_commands"):
                 
                 # Add to database
                 reddit_db.add_one(channel_id = channel_id, subreddit = subreddit, how_many=how_many)
+                
                 print(f'database.get_all:{reddit_db.get_all()}')
+                
                 embed = get_embeded_message(context, 'r/{subreddit} already unleashed to {}'.format(subreddit, context.channel))
+                print(f'embed:{embed}')
                 await unleash_reddit(context.channel, subreddit, 15)
             else:
                 print(f'\n reddit.unleash: sub_doesnt_exists : {subreddit}\n')
