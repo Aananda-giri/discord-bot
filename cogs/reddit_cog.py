@@ -176,7 +176,7 @@ class RedditCommands(commands.Cog, name="reddit_commands"):
                 print(f'd\n atabase.get_all:{reddit_db.get_all()}')
 
                 # Add to database
-                reddit_db.add_one(channel_id = channel_id, subreddit = subreddit, how_many=how_many)
+                reddit_db.add_one(channel_id = str(channel_id), subreddit = subreddit, how_many=how_many)
                 
                 embed = get_embeded_message(context, 'r/{subreddit} already unleashed to {}'.format(subreddit, context.channel))
                 print(f'embed:{embed}')
