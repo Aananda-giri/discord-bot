@@ -47,7 +47,7 @@ async def send_news(channel, country="", how_many = 10, language='en', last_coun
     print('\n news.send_news: Unleashed news\n')
   
 
-class News(commands.Cog, name="reddit_commands"):
+class News(commands.Cog, name="news_commands"):
   def __init(self, bot):
     self.bot=bot
   @commands.command(name='subscribe', aliases=[],  brief='subscribe to news', help='e.g. `.subscribe news us 3` To subscribe to \'us\' daily news 3 at a time')
@@ -99,6 +99,7 @@ class News(commands.Cog, name="reddit_commands"):
       # country not in news_db: message: 'Removed: news was never subscribed'  
       # f'removed daily news from channel: {context.channel.name}'
       news_db = db('news')
+      channel_id = str(context.channel.id)
       message = news_db.remove_many(channel_id, countries)
             
             
@@ -108,7 +109,7 @@ class News(commands.Cog, name="reddit_commands"):
   @commands.command(name='subscription', aliases=['subscriptions', 'subscribed'],  brief='unleahes the subreddit to the channel', help='e.g.To unleash r/jokes `.unleash jokes`')
   async def subscription(self, context, *what):
     # get metadata of subscribed news
-    new_db = db('news')
+    news_db = db('news')
     channel_id = str(context.channel.id)
     channel_news_data = news_db.get_one(channel_id)
     
