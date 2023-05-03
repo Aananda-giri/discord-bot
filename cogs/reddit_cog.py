@@ -150,12 +150,12 @@ class RedditCommands(commands.Cog, name="reddit_commands"):
         
         what = ' '.join(args)
         subreddit = what.strip().split(' ')[0]
-        # print('\n\nreddit.unleash: subreddit:{subreddit}, args:{args}\n\n')
+        print('\n\nreddit.unleash: subreddit:{subreddit}, args:{args}\n\n')
         try:
             how_many = int(subreddit[-1])
         except:
             how_many = 8
-        # print('\n Unleash initiated\n subreddit:{} \n'.format(subreddit))
+        print('\n Unleash initiated\n subreddit:{} \n'.format(subreddit))
         if subreddit == '':
             embed = get_embeded_message(context, 'Please enter the subreddit to be unleashed')
         elif subreddit == 'ioe_noti' or subreddit == 'ioe_notification' or subreddit == 'ioe_notifications' or subreddit == 'ioenoti' or subreddit == 'ioenotification' or subreddit == 'ioenotifications':
@@ -169,10 +169,10 @@ class RedditCommands(commands.Cog, name="reddit_commands"):
             if subreddit.startswith(('/r/', 'r/')):
               subreddit = subreddit.split('r/')[-1]
               # -1 gets the last element in the list
-            # print(context.channel.id)
+            print(context.channel.id)
             #if "unleash" not in db.keys():db['unleash']={}
             if await sub_exists(subreddit):
-                # print('\n sub_exists : {}\n'.format(subreddit))
+                print('\n sub_exists : {}\n'.format(subreddit))
                 message = reddit_db.add_one(channel_id = channel_id, subreddit = subreddit, how_many=how_many)
                 
                 embed = embed = get_embeded_message(context, 'r/{subreddit} already unleashed to {}'.format(subreddit, context.channel))
