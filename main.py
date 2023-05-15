@@ -351,7 +351,7 @@ async def on_message(message):
           else:
 
               # Create a list of file objects from the attachments
-              files = [await attachment.to_file() for attachment in attachments]
+              files = [await attachment.to_file() for attachment in message.attachments]
 
               # Send the files along with the message text
               
