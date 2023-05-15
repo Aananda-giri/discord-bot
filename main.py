@@ -207,11 +207,11 @@ async def unleash_ioe_notifications():
     #print('got_notifications {}'.format(notices))
   
   print('\n Done unleashing ioe_notices\n')
-  try:
-      await unleashing.start()
-      print('\n\nunleash ioe continue\n\n')
-  except Exception as ex:
-    print(f'\n\n Error unleashing : {ex} \n\n')
+  # try:
+  #     await unleashing.start()
+  #     print('\n\nunleash ioe continue\n\n')
+  # except Exception as ex:
+  #   print(f'\n\n Error unleashing : {ex} \n\n')
   return(1)
 
 # @tasks.loop(seconds=3)
@@ -235,9 +235,9 @@ async def on_ready():
   print(f"Python version: {platform.python_version()}")
   print(f"Running on: {platform.system()} {platform.release()} ({os.name})")
   print("-------------------")
-  unleashing.start() # reddit posts
-  unleash_ioe_notifications.start()
-  unleash_news.start()  # news
+  # unleashing.start() # reddit posts
+  # unleash_ioe_notifications.start()
+  # unleash_news.start()  # news
   
   # print_hi.start()
   # print_hi2.start()
@@ -341,11 +341,27 @@ async def on_message(message):
         print('\n\n author not black_listed \n\n')
         if int(message.channel.id) in vent_channels and message.clean_content != '.vent':
           print(f'\n\n channel{message.channel.id} in \'vent\' table:{vent_channels} clean_content:{message.clean_content}\n\n')
-          message_text = message.content
+          
           message_channel = message.channel
           
-          await message.delete()  # deleting message
-          await message_channel.send(message_text)  # sending message
+          
+          # Check if the message has an image attachment
+          if len(message.attachments) == 0:
+            # await ctx.send("This message doesn't contain an image attachment.")
+            message_text = message.content
+            await message.delete()  # deleting message
+            
+            await message_channel.send(message_text)  # sending message
+          
+          else:
+              # Get the first attachment (assuming there's only one)
+              attachment = message.attachments[0]
+
+              # Create a file object from the attachment
+              file = await attachment.to_file()
+
+              # Send the file as a new message
+              await message_channel.send(file=file)
           return
 
         processing_games = await process_message(message)
