@@ -149,6 +149,7 @@ async def proceed_chain(message):
 
 
 def get_embeded_message(context, title, description='', author=True):
+    print(f'\n embed_title: {title}\n')
     embed = discord.Embed(
             title=title,
             description=description,
