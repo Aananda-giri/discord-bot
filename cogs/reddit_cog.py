@@ -176,7 +176,7 @@ class RedditCommands(commands.Cog, name="reddit_commands"):
                 
 
                 # Add to database
-                reddit_db.add_one(channel_id = str(channel_id), subreddit = subreddit, how_many=how_many)
+                reddit_db.add_one(str(channel_id), subreddit, how_many)
 
                 print(f'\n database.get_all:{reddit_db.get_all()}')
                 
