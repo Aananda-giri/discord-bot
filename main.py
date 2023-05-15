@@ -338,7 +338,7 @@ async def on_message(message):
           print(f'\n\n channel{message.channel.id} in \'vent\' table:{vent_channels} clean_content:{message.clean_content}\n\n')
           
           message_channel = message.channel
-          
+          print(f'content_types:{[a.content_type for a in message.attachments]}')
           
           # Check if the message has an image attachment
           if len(message.attachments) == 0:
@@ -355,16 +355,9 @@ async def on_message(message):
 
               # Send the files along with the message text
               
-              await message_channel.send(str(message.clean_content), files=files)
-              await message_channel.send(message.content, files=files)
-              # Get the first attachment (assuming there's only one)
-              # attachment = message.attachments[0]
-
-              # # Create a file object from the attachment
-              # file = await attachment.to_file()
-
-              # # Send the file as a new message
-              # await message_channel.send(file=file)
+              await message_channel.send(message.clean_content, files=files)
+              # await message_channel.send(message.content, files=files)
+              
           return
 
         processing_games = await process_message(message)
