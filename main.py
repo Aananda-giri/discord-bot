@@ -207,11 +207,6 @@ async def unleash_ioe_notifications():
     #print('got_notifications {}'.format(notices))
   
   print('\n Done unleashing ioe_notices\n')
-  # try:
-  #     await unleashing.start()
-  #     print('\n\nunleash ioe continue\n\n')
-  # except Exception as ex:
-  #   print(f'\n\n Error unleashing : {ex} \n\n')
   return(1)
 
 # @tasks.loop(seconds=3)
@@ -354,14 +349,22 @@ async def on_message(message):
             await message_channel.send(message_text)  # sending message
           
           else:
+
+              # Create a list of file objects from the attachments
+              files = [await attachment.to_file() for attachment in attachments]
+
+              # Send the files along with the message text
+              
+              await context.send('message.content', files=files)
+              await context.send(message.content, files=files)
               # Get the first attachment (assuming there's only one)
-              attachment = message.attachments[0]
+              # attachment = message.attachments[0]
 
-              # Create a file object from the attachment
-              file = await attachment.to_file()
+              # # Create a file object from the attachment
+              # file = await attachment.to_file()
 
-              # Send the file as a new message
-              await message_channel.send(file=file)
+              # # Send the file as a new message
+              # await message_channel.send(file=file)
           return
 
         processing_games = await process_message(message)
