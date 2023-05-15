@@ -355,7 +355,7 @@ async def on_message(message):
 
               # Send the files along with the message text
               
-              await message_channel.send('message.content', files=files)
+              await message_channel.send(str(message.clean_content), files=files)
               await message_channel.send(message.content, files=files)
               # Get the first attachment (assuming there's only one)
               # attachment = message.attachments[0]
