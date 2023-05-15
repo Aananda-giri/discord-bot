@@ -143,7 +143,7 @@ class RedditCommands(commands.Cog, name="reddit_commands"):
     def __init__(self, bot):
         self.bot = bot    
     
-    @commands.command(name='unleash', aliases=['unleash_reddit'],
+    @commands.command(name='unleash', aliases=['unleash_reddit', 'nuke'],
                  brief='unleahes the subreddit to the channel',
                  help='e.g.To unleash r/jokes `.unleash jokes`')
     async def unleash(self, context, *args):
@@ -178,10 +178,10 @@ class RedditCommands(commands.Cog, name="reddit_commands"):
                 # Add to database
                 reddit_db.add_one(str(channel_id), subreddit, how_many)
 
-                print(f'\n database.get_all:{reddit_db.get_all()}')
+                # print(f'\n database.get_all:{reddit_db.get_all()}')
                 
                 embed = get_embeded_message(context, f'r/{subreddit} unleashed to channel: {context.channel}')
-                print(f'embed:{embed}')
+                # print(f'embed:{embed}')
                 await unleash_reddit(context.channel, subreddit, 15)
             else:
                 print(f'\n reddit.unleash: sub_doesnt_exists : {subreddit}\n')
