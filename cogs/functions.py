@@ -166,7 +166,7 @@ def get_embeded_message(context, title, description='', author=True):
             inline=True
         )
     if author: #author=False for perodic unleash/subscription
-      embed.set_footer(text=f'{context.author}',icon_url=context.author.avatar_url)
+      embed.set_footer(text=f'{context.author}',icon_url=context.author.avatar)
     return(embed)
 
 # Good subreddit unleashing
