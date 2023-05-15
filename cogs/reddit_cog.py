@@ -65,8 +65,8 @@ async def unleash_reddit(channel, subreddit, no_of_posts=5, author=False, last_s
                         await channel.send(embed=embed, silent=True)
                     else:
                         await channel.send(submission.url, silent=True)
-            except:
-                pass
+            except Exception as ex:
+                print(f'err. in sending content from subreddit:{subreddit} to channel:{channel}, error:{ex}')
     except Exception as e:
         print(f'\n error in sending content from subreddit:{subreddit} to channel:{channel}\n, error:{e} \n')
 
@@ -98,8 +98,8 @@ async def unleash_reddit(channel, subreddit, no_of_posts=5, author=False, last_s
                             await channel.send(embed=embed, silent=True)
                     else:
                         await channel.send(submission.url, silent=True)
-                except:
-                    pass
+                except Exception as ex:
+                    print(f'err. in sending content from subreddit:{subreddit} to channel:{channel}, error:{ex}')
         except Exception as e:
             print(f'\n error in sending content from subreddit:{subreddit} to channel:{channel}\n, error:{e}')
         try:
@@ -125,8 +125,8 @@ async def unleash_reddit(channel, subreddit, no_of_posts=5, author=False, last_s
                             await channel.send(embed=embed, silent=True)
                     else:
                         await channel.send(submission.url, silent=True)
-                except:
-                    pass
+                except Exception as ex:
+                    print(f'err. in sending content from subreddit:{subreddit} to channel:{channel}, error:{ex}')
         except Exception as e:
             print(f'\n error in sending content from subreddit:{subreddit} to channel:{channel}, error:{e} \n')
     if last_sub:

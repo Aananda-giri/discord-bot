@@ -210,8 +210,8 @@ async def unleash_ioe_notifications():
   try:
       await unleashing.start()
       print('\n\nunleash ioe continue\n\n')
-  except:
-    pass
+  except Exception as ex:
+    print(f'\n\n Error unleashing : {ex} \n\n')
   return(1)
 
 # @tasks.loop(seconds=3)
