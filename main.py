@@ -230,9 +230,9 @@ async def on_ready():
   print(f"Python version: {platform.python_version()}")
   print(f"Running on: {platform.system()} {platform.release()} ({os.name})")
   print("-------------------")
-  # unleashing.start() # reddit posts
-  # unleash_ioe_notifications.start()
-  # unleash_news.start()  # news
+  unleashing.start() # reddit posts
+  unleash_ioe_notifications.start()
+  unleash_news.start()  # news
   
   # print_hi.start()
   # print_hi2.start()
@@ -349,17 +349,13 @@ async def on_message(message):
             await message_channel.send(message_text)  # sending message
           
           else:
-
               # Create a list of file objects from the attachments
               files = [await attachment.to_file() for attachment in message.attachments]
 
-              # Send the files along with the message text
-              
               await message.delete()  # deleting message
 
-              # await message_channel.send(message.clean_content, files=files)
+              # Send the files along with the message text
               await message_channel.send(message.content, files=files)
-              
           return
 
         processing_games = await process_message(message)

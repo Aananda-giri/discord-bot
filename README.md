@@ -77,7 +77,11 @@ sharing global variables across models
 * https://docs.python.org/3/faq/programming.html#how-do-i-share-global-variables-across-modules
 
 ## todo
-- update reddit help
+- [ ] update reddit help
 - unleash redit -> enable/disable   -> via abstraction
 - replit.py: store to db/backup
 time=35 # replit.py basics
+
+# Done
+- [X] Debug unleash reddit
+- [X] vent: echo message attachments
