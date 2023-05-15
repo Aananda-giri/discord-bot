@@ -355,8 +355,8 @@ async def on_message(message):
 
               # Send the files along with the message text
               
-              await message_channel.send(message.clean_content, files=files)
-              # await message_channel.send(message.content, files=files)
+              # await message_channel.send(message.clean_content, files=files)
+              await message_channel.send(message.content, files=files)
               
           return
 
