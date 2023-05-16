@@ -26,6 +26,8 @@ class db:
         conn.commit()  # commit our command
         conn.close()  # close our connection
     # create_reddit_table()
+    
+  
 
     def add_one(self, channel_id, gener=None, how_many=None):
         print('\n\n add_one: table_name: {}\n\n'.format(self.table_name))
@@ -37,7 +39,7 @@ class db:
             self.add_one_subscription(channel_id, gener, how_many)
             return 'added one subreddit'
         else:
-            print(f'\n table_name: {self.table_name} not found\n')
+            print(f'\n table_name: \'{self.table_name}\' not found\n')
     def remove_one(self, channel_id, gener=None):
         if self.table_name == 'ioe_notifications' or self.table_name == 'vent':
             self.remove_one_ioe_notificaiton(channel_id)
@@ -46,7 +48,7 @@ class db:
         elif self.table_name == 'vent':
             self.remove_one_vent_channel(channel_id)
 
-    def remove_many(self, channe_id, gener=None):
+    def remove_many(self, channel_id, gener=None):
         if self.table_name == 'news':
             # list of countries given in gener
             for country in gener:
@@ -137,6 +139,12 @@ class db:
         conn.commit()  # commit our command
         conn.close()  # close our connection
         return data
+    
+    def exists(self, channel_id):
+        if self.get_one(channel_id) == {}:
+            return False
+        else:
+            return True
 
     # remove_one_reddit(123, 'sub2')
     def get_all(self):
@@ -157,16 +165,29 @@ class db:
             data = [tup[0] for tup in c.fetchall()]
         elif self.table_name == 'count' or self.table_name == 'chain_word':
             c.execute("SELECT * FROM '%s'" % self.table_name)
-            data = {}
+            data = []
             for tup in c.fetchall():
-                data['channel_id'] = str(tup[0])
+                
+                print(f'tup is :{tup[:]}') 
+                # tuple: (12, '12', '12', 12, 12)  --> (channel_id, current_word, current_author, current_score, highest_score)
+                
+                # data[str(tup[0])] = tup[1:]
+                
+                d = {}
+                d['channel_id'] = str(tup[0])
                 if self.table_name == 'count':
-                    data['current_count'] = tup[1]
+                    d['current_count'] = tup[1]
                 else:
-                    data['current_word'] = tup[1]
-                data['current_author'] = tup[2]
-                data['current_score'] = int(tup[3])
-                data['highest_score'] = int(tup[4])
+                    d['current_word'] = tup[1]
+                d['current_author'] = tup[2]
+                d['current_score'] = int(tup[3])
+                d['highest_score'] = int(tup[4])
+
+                data.append(d)
+
+
+
+
                 # fields = ['channel_id', 'current_word', 'current_author', 'current_score', 'highest_score']
                 # for position, field in enumerate(fields):
                 #   data['field'] = tup[position]
@@ -175,6 +196,7 @@ class db:
             # for table: 'news' and table: 'subreddit'
             c.execute("SELECT * FROM '%s'" % self.table_name)
             data = {}
+            # Note:
             # tup[0] -> channe_id
             # tup[1] -> country
             # tup[2] -> how_many
@@ -269,8 +291,8 @@ class db:
 
     def add_one_chain_word(self, channel_id, current_word, current_author, current_score, highest_score):
         '''
-          Adds one ioe_notification: to channel : {channel_id}
-          overrides other add_one function of news/reddit if 'channel_id' argument is provided
+          Adds one add_one_chain_word: to channel : {channel_id}, current_word: {current_word}, current_author:{current_author}, current_score:{current_score}, highest_score:{current_score}
+          
         '''
         conn = sqlite3.connect(('database.db'))
         c = conn.cursor()   # create a cursor
@@ -285,16 +307,16 @@ class db:
                 str(channel_id)), current_word, current_author, current_score, highest_score))
         else:
             # updating existing data
-            message = f'updating word_chain: channel_id:{channel_id}, how_many:{how_many}'
-            c.execute("""UPDATE '%s' SET gener = (?), how_many=(?) WHERE channel_id = (?)""" %
-                      self.table_name, (gener, str(how_many), channel_id,))
+            message = f'updating word_chain: channel_id:{channel_id}, current_author:{current_author}'
+            c.execute("""UPDATE '%s' SET current_author = (?), current_word=(?), current_score=(?), highest_score = (?) WHERE channel_id = (?)""" %
+                      self.table_name, (current_author, current_word, current_score, highest_score, channel_id))
         conn.commit()  # commit our command
         conn.close()  # close our connection
         return message
 
     def remove_one_chain_word(self, channel_id):
         '''
-          Removes one ioe_notification: from channel : {channel_id}
+          Removes one channel from game channels i.e. from databases : 'count' and 'chain_word':
           overrides other remove_one function of news/reddit if only 'channel_id' argument is provided
 
         '''
