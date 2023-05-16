@@ -83,5 +83,6 @@ sharing global variables across models
 time=35 # replit.py basics
 
 # Done
+- [X] Game: Count
 - [X] Debug unleash reddit
-- [X] vent: echo message attachments
+- [X] .vent: echo message attachments

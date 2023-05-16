@@ -209,15 +209,6 @@ async def unleash_ioe_notifications():
   print('\n Done unleashing ioe_notices\n')
   return(1)
 
-# @tasks.loop(seconds=3)
-# async def print_hi():
-#   print('\n\n _________-hi================== \n\n')
-# @tasks.loop(seconds=3)
-# async def print_hi2():
-#   print('\n\n _________-hi2================== \n\n')
-
-
-
 # The code in this event is executed when the bot is ready
 @bot.event
 async def on_ready():
@@ -230,12 +221,10 @@ async def on_ready():
   print(f"Python version: {platform.python_version()}")
   print(f"Running on: {platform.system()} {platform.release()} ({os.name})")
   print("-------------------")
-  # unleashing.start() # reddit posts
-  # unleash_ioe_notifications.start()
-  # unleash_news.start()  # news
+  unleashing.start() # reddit posts
+  unleash_ioe_notifications.start()
+  unleash_news.start()  # news
   
-  # print_hi.start()
-  # print_hi2.start()
 
 # Setup the game status task of the bot
 async def status_task():
