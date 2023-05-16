@@ -47,7 +47,7 @@ async def proceed_count(message, count_db):
         new_count = int(message.content)
         count_data = count_db.get_one(channel_id)   # dict of data
 
-        previous_counter = count_data['last_counter']
+        previous_counter = count_data['current_author']
         previous_count = int(count_data['current_count'])
         new_counter = str(message.author)
         # current_score = previous_count
