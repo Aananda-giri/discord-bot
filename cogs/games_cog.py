@@ -51,11 +51,9 @@ class Games(commands.Cog, name="games"):
         elif what == 'stop' or (count_channel_exists_in_db and what==''):
             print("\nCount stopping\n");
             if count_channel_exists_in_db:#db.get('count_ids'):
-                print(f"trying to remove counts: {context.channel.id} {count_data['current_count']} {count_data['current_author']}")
-                #channel_id_index = db.get('count_ids').index(str(context.channel.id))
+                # print(f"trying to remove counts: {context.channel.id} {count_data['current_count']} {count_data['current_author']}")
                 
-                msg = count_db.remove_one_chain_word(str(context.channel.id))
-                
+                count_db.remove_one_chain_word(str(context.channel.id))
                 
                 title = 'count Stopped'
                 description = f"description: \n channel_id: {context.channel.id} \n current_count: {count_data['current_count']} \n current_author: {count_data['current_author']} \n current_score: {count_data['current_score']} \n highest_score: {count_data['highest_score']}"
