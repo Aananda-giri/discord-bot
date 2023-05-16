@@ -40,6 +40,7 @@ class db:
             return 'added one subreddit'
         else:
             print(f'\n table_name: \'{self.table_name}\' not found\n')
+    
     def remove_one(self, channel_id, gener=None):
         if self.table_name == 'ioe_notifications' or self.table_name == 'vent':
             self.remove_one_ioe_notificaiton(channel_id)
@@ -47,6 +48,7 @@ class db:
             self.remove_one_subscription(channel_id, gener)
         elif self.table_name == 'vent':
             self.remove_one_vent_channel(channel_id)
+        return
 
     def remove_many(self, channel_id, gener=None):
         if self.table_name == 'news':
@@ -177,7 +179,7 @@ class db:
             data = []
             for tup in c.fetchall():
                 
-                print(f'tup is :{tup[:]}') 
+                # print(f'tup is :{tup[:]}') 
                 # tuple: (12, '12', '12', 12, 12)  --> (channel_id, current_word, current_author, current_score, highest_score)
                 
                 # data[str(tup[0])] = tup[1:]
