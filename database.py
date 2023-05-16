@@ -128,6 +128,13 @@ class db:
                 data['current_author'] = tup[2]
                 data['current_score'] = int(tup[3])
                 data['highest_score'] = int(tup[4])
+        elif self.table_name == 'ioe_notifications' or self.table_name == 'vent':
+            # print('inside_vent_db')
+            c.execute("SELECT * from '%s' WHERE channel_id = (?)" %
+                      self.table_name, (channe_id,))
+            data = [tup[0] for tup in c.fetchall()]
+            # print(data)
+
         elif self.table_name == 'news' or self.table_name == 'subreddit':
             # for table: 'news' and table: 'subreddit'
             c.execute("SELECT * FROM '%s' WHERE channel_id = (?)" %
@@ -141,7 +148,7 @@ class db:
         return data
     
     def exists(self, channel_id):
-        if self.get_one(channel_id) == {}:
+        if self.get_one(channel_id) == {} or self.get_one(channel_id) == []:
             return False
         else:
             return True
@@ -161,8 +168,10 @@ class db:
         conn = sqlite3.connect('database.db')
         c = conn.cursor()   # create a cursor
         if self.table_name == 'ioe_notifications' or self.table_name == 'vent':
+            # print('inside_vent_db')
             c.execute("SELECT channel_id FROM '%s'" % self.table_name)
             data = [tup[0] for tup in c.fetchall()]
+            # print(data)
         elif self.table_name == 'count' or self.table_name == 'chain_word':
             c.execute("SELECT * FROM '%s'" % self.table_name)
             data = []
