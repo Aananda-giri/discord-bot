@@ -57,7 +57,7 @@ class Games(commands.Cog, name="games"):
                 
                 title = 'count Stopped'
                 description = f'description: \n channel_id: {context.channel.id} \n current_count: {count_data["current_count"]} \n last_counter: {count_data["last_counter"]} \n current_score: {count_data["current_score"]} \n highest_score: {count_data["highest_score"]}'
-                embed = get_embeded_message(context, title, description, author=True)
+                embed = get_embeded_message(context, title, description)
                 
                 await context.send(embed = embed)
             else:
