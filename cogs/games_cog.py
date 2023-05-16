@@ -33,7 +33,7 @@ class Games(commands.Cog, name="games"):
         if what == 'score' or what=='scores':
             # get count/chain status of a channel
             channel_id_index = config.count_ids.index(str(context.channel.id))
-            embed = get_embeded_message(context, 'count_logs', f'current_count: {count_data["current_count"]}, current_counter: {count_data["current_counter"]}', author=True)
+            embed = get_embeded_message(context, 'count_logs', f'current_count: {count_data["current_count"]}, current_author: {count_data["current_author"]}', author=True)
             await context.send(embed = embed)
             
         if what == 'start' or (not count_channel_exists_in_db and what==''):
@@ -51,14 +51,14 @@ class Games(commands.Cog, name="games"):
         elif what == 'stop' or (count_channel_exists_in_db and what==''):
             print("\nCount stopping\n");
             if count_channel_exists_in_db:#db.get('count_ids'):
-                print(f"trying to remove counts: {context.channel.id} {count_data['current_count']} {count_data['current_counter']}")
+                print(f"trying to remove counts: {context.channel.id} {count_data['current_count']} {count_data['current_author']}")
                 #channel_id_index = db.get('count_ids').index(str(context.channel.id))
                 
                 msg = count_db.remove_one_chain_word(str(context.channel.id))
                 
                 
                 title = 'count Stopped'
-                description = f"description: \n channel_id: {context.channel.id} \n current_count: {count_data['current_count']} \n current_counter: {count_data['current_counter']} \n current_score: {count_data['current_score']} \n highest_score: {count_data['highest_score']}"
+                description = f"description: \n channel_id: {context.channel.id} \n current_count: {count_data['current_count']} \n current_author: {count_data['current_author']} \n current_score: {count_data['current_score']} \n highest_score: {count_data['highest_score']}"
                 embed = get_embeded_message(context, title, description, author=True)
                 print(embed)
                 await context.send(embed = embed)
