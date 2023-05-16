@@ -40,20 +40,18 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-async def proceed_count(message, new_count):
+async def proceed_count(message, count_db):
         print("\n Try processing count \n")
         
-        count_db = db('count')
-        channel_id = str(context.channel.id)
-        
-        # dictionary of data
-        count_db_data = count_db.get_one(channel_id)
+        channel_id = str(message.channel.id)
+        new_count = int(message.content)
+        count_data = count_db.get_one(channel_id)   # dict of data
 
-        previous_counter = count_db_data['last_counter']
-        previous_count = int(count_db_data['current_count'])
+        previous_counter = count_data['last_counter']
+        previous_count = int(count_data['current_count'])
         new_counter = str(message.author)
         # current_score = previous_count
-        highest_score = int(count_db_data['highest_score'])
+        highest_score = int(count_data['highest_score'])
         
         if new_count == (previous_count + 1):
             if not new_counter == previous_counter:
@@ -69,9 +67,9 @@ async def proceed_count(message, new_count):
                 
                 await message.add_reaction('❌')
 
-                await message.channel.send("{} RUINED IT AT **{}**!! Next number is: **1 You can't count two numbers in a row. **".format(message.author.mention, current_count))
+                await message.channel.send(f"**!!Same person can't count two numbers in a row.** {message.author.mention} RESTARTING COUNT \n highest_score: **{highest_score}** \n !! Next number is: **1**")
                 embed = discord.Embed(color=0x9b59b6)
-                embed.description = "Vote [here](https://top.gg/bot/862191340355715093/vote) to earn saves so you can continue counting next time. See .help games"
+                # embed.description = "Vote [here](https://top.gg/bot/862191340355715093/vote) to earn saves so you can continue counting next time. See .help games"
                 await message.channel.send(embed=embed)
         elif type(new_count)==int:    
             # new_count != previous_count + 1 and it is integer
@@ -79,9 +77,10 @@ async def proceed_count(message, new_count):
             
             await message.add_reaction('❌')
 
-            await message.channel.send("{} RUINED IT AT **{}**!! Next number is: **1 Wrong number**.".format(message.author.mention, current_count))
+            # await message.channel.send("{} RUINED IT AT **{}**!! Next number is: **1 Wrong number**.".format(message.author.mention, current_count))
+            await message.channel.send(f"**!!Wrong Number** \n {message.author.mention} RESTARTING COUNT \n highest_score: **{highest_score}** \n !! Next number is: **1** \n")
             embed = discord.Embed(color=0x9b59b6)
-            embed.description = "Vote [here](https://top.gg/bot/862191340355715093/vote) to earn saves so you can continue counting next time. See .help games"
+            # embed.description = "Vote [here](https://top.gg/bot/862191340355715093/vote) to earn saves so you can continue counting next time. See .help games"
             await message.channel.send(embed=embed)
 
 async def proceed_chain(message):

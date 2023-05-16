@@ -6,7 +6,7 @@
 # from discord import FFmpegPCMAudio
 #from cogs.music import get_stream, 
 # from cogs.functions import YTDLSource, download_from_youtube, 
-from cogs.functions import get_embed
+from cogs.functions import get_embed, proceed_count
 import discord, asyncio, os, platform, sys, requests, json, threading
 from discord.ext import commands
 from discord.ext.commands import Bot
@@ -308,18 +308,44 @@ def is_word(string):
     else:
         return False
     
-async def process_message(message):
-    if str(message.channel.id) in config.count_ids and is_int(message.content):
-              print('\nproceed count\n')
-              await proceed_count(message, int(message.content))
-    elif str(message.channel.id) in config.chain_ids and is_word(message.content):
-              print('\nproceed_chain\n')
-              await proceed_chain(message)
+async def process_vent_and_games(message):
+    # checking and implementing vent_channel
+    vent_db = db('vent')
+    # vent_channels = vent_db.get_all()
+    
+    count_db = db('count')
+    vent_db = db('vent')
+    if vent_db.exists(message.channel.id) and message.clean_content != '.vent':
+      print(f'\n\n proceed vent channel:{message.channel.id} in \'vent\' exists_in_vent_db:{True} clean_content:{message.clean_content}\n\n')
+      
+      message_channel = message.channel
+      print(f'content_types:{[a.content_type for a in message.attachments]}')
+      
+      # Check if the message has an image attachment
+      if len(message.attachments) == 0:
+        # await ctx.send("This message doesn't contain an image attachment.")
+        message_text = message.content
+        await message.delete()  # deleting message
+        
+        await message_channel.send(message_text)  # sending message
+      
+      else:
+          # Create a list of file objects from the attachments
+          files = [await attachment.to_file() for attachment in message.attachments]
+
+          await message.delete()  # deleting message
+
+          # Send the files along with the message text
+          await message_channel.send(message.content, files=files)
+      return True
+    
+    elif count_db.exists(message.channel.id) and message.clean_content != '.count':
+       print('\nproceed count\n')
+       proceed_count(message, count_db)
+
     else:
       print(f"\n{message.author}: {message.content}\n")
       await bot.process_commands(message)
-
-
 # The code in this event is executed every time someone sends a message, with or without the prefix
 @bot.event
 async def on_message(message):
@@ -329,36 +355,10 @@ async def on_message(message):
         return
     elif message.author.id not in config.BLACKLIST:
         # Process the command if the user is not blacklisted
-        
-        # checking and implementing vent_channel
-        vent_db = db('vent')
-        vent_channels = vent_db.get_all()
         print('\n\n author not black_listed \n\n')
-        if int(message.channel.id) in vent_channels and message.clean_content != '.vent':
-          print(f'\n\n channel{message.channel.id} in \'vent\' table:{vent_channels} clean_content:{message.clean_content}\n\n')
-          
-          message_channel = message.channel
-          print(f'content_types:{[a.content_type for a in message.attachments]}')
-          
-          # Check if the message has an image attachment
-          if len(message.attachments) == 0:
-            # await ctx.send("This message doesn't contain an image attachment.")
-            message_text = message.content
-            await message.delete()  # deleting message
-            
-            await message_channel.send(message_text)  # sending message
-          
-          else:
-              # Create a list of file objects from the attachments
-              files = [await attachment.to_file() for attachment in message.attachments]
+        await process_vent_and_games(message)
 
-              await message.delete()  # deleting message
-
-              # Send the files along with the message text
-              await message_channel.send(message.content, files=files)
-          return
-
-        processing_games = await process_message(message)
+        # await process_message(message)
     else:
       # Send a message to let the user know he's blacklisted
       context = await bot.get_context(message)
