@@ -27,17 +27,18 @@ class Games(commands.Cog, name="games"):
         print("\n Count Invoked \n")
         what = ' '.join(args)
         
-        channel_exists_in_db = count_db.exists(str(context.channel.id))
+        count_channel_exists_in_db = count_db.exists(str(context.channel.id))
         count_data = count_db.get_one(str(context.channel.id))
-        if what == '' and channel_exists_in_db:
+        
+        if what == 'score' or what=='scores':
             # get count/chain status of a channel
             channel_id_index = config.count_ids.index(str(context.channel.id))
-            embed = get_embeded_message(context, 'count_logs', f'current_count: {count_data["current_count"]}, last_counter: {count_data["last_counter"]}')
+            embed = get_embeded_message(context, 'count_logs', f'current_count: {count_data["current_count"]}, last_counter: {count_data["last_counter"]}', author=True)
             await context.send(embed = embed)
             
-        elif what == 'start' or what == '':
+        if what == 'start' or (not count_channel_exists_in_db and what==''):
             print("\nCount Starting\n");
-            if channel_exists_in_db:#db.get('count_ids'):
+            if count_channel_exists_in_db:#db.get('count_ids'):
                 embed = get_embeded_message(context, 'count started', f'current_count: {count_data["current_count"]}')
                 await context.send(embed = embed)
             else:
@@ -47,9 +48,9 @@ class Games(commands.Cog, name="games"):
                 embed = get_embeded_message(context, 'count started', 'starting with: 1')
                 await context.send(embed = embed)
         
-        elif what == 'stop':
+        elif what == 'stop' or (count_channel_exists_in_db and what==''):
             print("\nCount stopping\n");
-            if channel_exists_in_db:#db.get('count_ids'):
+            if count_channel_exists_in_db:#db.get('count_ids'):
                 print("trying to remove counts")
                 #channel_id_index = db.get('count_ids').index(str(context.channel.id))
                 count_db.remove_one_chain_word(str(context.channel.id))
