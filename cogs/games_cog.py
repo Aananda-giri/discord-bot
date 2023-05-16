@@ -53,6 +53,7 @@ class Games(commands.Cog, name="games"):
             if count_channel_exists_in_db:#db.get('count_ids'):
                 print(f"trying to remove counts: {context.channel.id}")
                 #channel_id_index = db.get('count_ids').index(str(context.channel.id))
+                embed = get_embeded_message(context, 'count started', 'starting with: 1')
                 msg = count_db.remove_one_chain_word(str(context.channel.id))
                 
                 title = 'count Stopped'
