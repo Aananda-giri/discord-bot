@@ -54,6 +54,8 @@ class Games(commands.Cog, name="games"):
                 print(f"trying to remove counts: {context.channel.id}")
                 #channel_id_index = db.get('count_ids').index(str(context.channel.id))
                 embed = get_embeded_message(context, 'count started', 'starting with: 1')
+                print(embed)
+                await context.send(embed = embed)
                 msg = count_db.remove_one_chain_word(str(context.channel.id))
                 
                 title = 'count Stopped'
