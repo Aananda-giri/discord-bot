@@ -55,7 +55,9 @@ class Games(commands.Cog, name="games"):
                 #channel_id_index = db.get('count_ids').index(str(context.channel.id))
                 count_db.remove_one_chain_word(str(context.channel.id))
                 
-                embed = get_embeded_message(context, 'count Stopped', f'description: \n channel_id: {context.channel.id} \n current_count: {count_data["current_count"]} \n last_counter: {count_data["last_counter"]} \n current_score: {count_data["current_score"]} \n highest_score: {count_data["highest_score"]}')
+                title = 'count Stopped'
+                description = f'description: \n channel_id: {context.channel.id} \n current_count: {count_data["current_count"]} \n last_counter: {count_data["last_counter"]} \n current_score: {count_data["current_score"]} \n highest_score: {count_data["highest_score"]}'
+                embed = get_embeded_message(context, title, description, author=True)
                 
                 await context.send(embed = embed)
             else:
