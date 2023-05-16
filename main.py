@@ -341,7 +341,7 @@ async def process_vent_and_games(message):
     
     elif count_db.exists(message.channel.id) and message.clean_content != '.count':
        print('\nproceed count\n')
-       proceed_count(message, count_db)
+       await proceed_count(message, count_db)
 
     else:
       print(f"\n{message.author}: {message.content}\n")
