@@ -1,7 +1,7 @@
 # from sqlitedict import SqliteDict
 #db = SqliteDict('./environ_vars.sqlite', autocommit=True)
 
-# from discord.ext import commands
+from discord.ext import commands
 from cogs.functions import get_embeded_message, db
 import config
 
