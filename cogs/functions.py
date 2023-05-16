@@ -67,10 +67,12 @@ async def proceed_count(message, count_db):
                 
                 await message.add_reaction('❌')
 
-                await message.channel.send(f"**!!Same person can't count two numbers in a row.** {message.author.mention} RESTARTING COUNT \n highest_score: **{highest_score}** \n !! Next number is: **1**")
-                embed = discord.Embed(color=0x9b59b6)
-                # embed.description = "Vote [here](https://top.gg/bot/862191340355715093/vote) to earn saves so you can continue counting next time. See .help games"
+                title = "**!!Same person can't count two numbers in a row.**"
+                description = f"**{message.author.mention} RESTARTING COUNT** \n highest_score: **{highest_score}** \n !! Next number is: **1**"
+                embed = discord.Embed(title=title, description=description, color=0x9b59b6)
+                
                 await message.channel.send(embed=embed)
+                # embed.description = "Vote [here](https://top.gg/bot/862191340355715093/vote) to earn saves so you can continue counting next time. See .help games"
         elif type(new_count)==int:    
             # new_count != previous_count + 1 and it is integer
             count_db.add_one_chain_word(channel_id, current_word = 0, current_author = '', current_score = 0, highest_score = highest_score)
