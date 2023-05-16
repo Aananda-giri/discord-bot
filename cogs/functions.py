@@ -43,6 +43,9 @@ load_dotenv()
 async def proceed_count(message, count_db):
         print("\n Try processing count \n")
         
+        if not message.content.isdigit():
+            return
+
         channel_id = str(message.channel.id)
         new_count = int(message.content)
         count_data = count_db.get_one(channel_id)   # dict of data
@@ -70,7 +73,7 @@ async def proceed_count(message, count_db):
                 title = "**!!Same person can't count two numbers in a row.**"
                 description = f"**{message.author.mention} RESTARTING COUNT** \n highest_score: **{highest_score}** \n !! Next number is: **1**"
                 embed = discord.Embed(title=title, description=description, color=0x9b59b6)
-                
+
                 await message.channel.send(embed=embed)
                 # embed.description = "Vote [here](https://top.gg/bot/862191340355715093/vote) to earn saves so you can continue counting next time. See .help games"
         elif type(new_count)==int:    
