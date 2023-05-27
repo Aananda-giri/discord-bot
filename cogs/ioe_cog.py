@@ -4,7 +4,7 @@ from cogs.functions import get_embeded_message
 # from replit import db
 from database import db
 
-class IoeCommands(commands.Cog, name="reddit_commands"):
+class IoeCommands(commands.Cog, name="ioe_commands"):
     def __init__(self, bot):
         self.bot = bot    
 
