@@ -234,10 +234,10 @@ class general(commands.Cog, name="general"):
             movie_url = "https://www.2embed.ru/embed/tmdb/movie?id={}".format(result['results'][0]['id'])
             await context.send(movie_url)
     
-    @commands.HybridCommand()
+    @commands.HybridCommand(name="hybrid")
     async def hybrid(ctx):
         await ctx.send("This is a hybrid command!")
-    @commands.hybrid_command()
+    @commands.hybrid_command(name="hybrid2")
     async def hybrid(ctx):
         await ctx.send("This is a hybrid command!")
 
