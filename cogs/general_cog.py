@@ -42,7 +42,7 @@ class general(commands.Cog, name="general"):
         )
         await context.send(embed=embed)
 
-    @commands.hybrid_command(name="serverinfo")
+    @commands.command(name="serverinfo")
     async def serverinfo(self, context):
         server = context.message.guild
         roles = [x.name for x in server.roles]
@@ -90,7 +90,7 @@ class general(commands.Cog, name="general"):
         await context.send(embed=embed)
 
 
-    @commands.command(name="ping", brief=" short_help: to test if bot responding  ",
+    @commands.hybrid_command(name="ping", brief=" short_help: to test if bot responding  ",
              help='long_help: e.g. .ping', aliases=[])
     async def ping(self, context):
         print('\n Invoked ping \n')
