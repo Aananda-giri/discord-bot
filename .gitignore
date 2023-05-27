@@ -3,3 +3,4 @@ config.py
 git_help.py
 test.py
 test.ipynb
+tests/config.py
