@@ -71,7 +71,7 @@ https://discordpy.readthedocs.io/en/latest/intents.html#privileged-intents
 
 bot = Bot(command_prefix=config.BOT_PREFIX, help_command=None, intents=intents)
 @bot.hybrid_command()
-    async def hybrid(ctx):
+async def hybrid(ctx):
         await ctx.send("This is a hybrid command!")
 # Removes the default help command of discord.py to be able to create our custom help command.
 #bot.remove_command("help")
