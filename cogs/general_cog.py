@@ -42,7 +42,7 @@ class general(commands.Cog, name="general"):
         )
         await context.send(embed=embed)
 
-    @commands.command(name="serverinfo")
+    @commands.hybrid_command(name="serverinfo")
     async def serverinfo(self, context):
         server = context.message.guild
         roles = [x.name for x in server.roles]
