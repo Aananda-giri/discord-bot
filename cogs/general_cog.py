@@ -7,6 +7,9 @@ if not os.path.isfile("config.py"):
 else:
     import config
 
+async def hybrid(ctx):
+        await ctx.send("This is a hybrid command!")
+
 class general(commands.Cog, name="general"):
     def __init__(self, bot):
         self.bot = bot
@@ -234,13 +237,14 @@ class general(commands.Cog, name="general"):
             movie_url = "https://www.2embed.ru/embed/tmdb/movie?id={}".format(result['results'][0]['id'])
             await context.send(movie_url)
     
+
     @commands.HybridCommand(name="hybrid", func=hybrid)
     async def hybrid(ctx):
         await ctx.send("This is a hybrid command!")
 
-    @commands.hybrid_command(name="hybrid2")
-    async def hybrid(ctx):
-        await ctx.send("This is a hybrid command!")
+    # @commands.hybrid_command(name="hybrid2")
+    # async def hybrid(ctx):
+    #     await ctx.send("This is a hybrid command!")
 
 async def setup(bot):
     await bot.add_cog(general(bot))
