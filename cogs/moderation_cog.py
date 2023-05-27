@@ -6,7 +6,7 @@ class moderation(commands.Cog, name="moderation"):
         self.bot = bot
 
     @commands.hybrid_command(name='kick', pass_context=True)
-    async def kick(self, context, member: discord.Member, *args):
+    async def kick(self, context, member: discord.Member, reason):
         if context.message.author.guild_permissions.kick_members:
             if member.guild_permissions.administrator:
                 embed = discord.Embed(
@@ -17,7 +17,6 @@ class moderation(commands.Cog, name="moderation"):
                 await context.send(embed=embed)
             else:
                 try:
-                    reason = " ".join(args)
                     embed = discord.Embed(
                         title="User Kicked!",
                         description=f"**{member}** was kicked by **{context.message.author}**!",
@@ -50,7 +49,7 @@ class moderation(commands.Cog, name="moderation"):
             await context.send(embed=embed)
 
     @commands.hybrid_command(name="nick")
-    async def nick(self, context, member: discord.Member, *, name: str):
+    async def nick(self, context, member: discord.Member, name: str):
         if context.message.author.guild_permissions.administrator:
             try:
                 if name.lower() == "!reset":
@@ -80,7 +79,7 @@ class moderation(commands.Cog, name="moderation"):
             await context.send(embed=embed)
 
     @commands.hybrid_command(name="ban")
-    async def ban(self, context, member: discord.Member, *args):
+    async def ban(self, context, member: discord.Member, reason):
         if context.message.author.guild_permissions.administrator:
             try:
                 if member.guild_permissions.administrator:
@@ -91,7 +90,6 @@ class moderation(commands.Cog, name="moderation"):
                     )
                     await context.send(embed=embed)
                 else:
-                    reason = " ".join(args)
                     embed = discord.Embed(
                         title="User Banned!",
                         description=f"**{member}** was banned by **{context.message.author}**!",
@@ -122,9 +120,8 @@ class moderation(commands.Cog, name="moderation"):
             await context.send(embed=embed)
 
     @commands.hybrid_command(name="warn")
-    async def warn(self, context, member: discord.Member, *args):
+    async def warn(self, context, member: discord.Member, reason):
         if context.message.author.guild_permissions.administrator:
-            reason = " ".join(args)
             embed = discord.Embed(
                 title="User Warned!",
                 description=f"**{member}** was warned by **{context.message.author}**!",

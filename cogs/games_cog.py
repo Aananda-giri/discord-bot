@@ -23,9 +23,8 @@ class Games(commands.Cog, name="games"):
     @commands.hybrid_command(name='count',
                  brief='`.count start` to start counting in a channel',
                  help='Plesae enter `.help` for help', aliases=[''])
-    async def count(self, context, *args):
+    async def count(self, context, what):
         print("\n Count Invoked \n")
-        what = ' '.join(args)
         
         count_channel_exists_in_db = count_db.exists(str(context.channel.id))
         count_data = count_db.get_one(str(context.channel.id))
@@ -69,9 +68,8 @@ class Games(commands.Cog, name="games"):
     @commands.hybrid_command(name='chain',
                  brief='`.chain start` to start word chain in a channel',
                  help='Plesae enter `.help` for help', aliases=['word_chain'])
-    async def chain(self, context, *args):
+    async def chain(self, context, what):
         print("\n Chain Invoked \n")
-        what = ' '.join(args)
         
         if what == '':
             channel_id_index = config.chain_ids.index(str(context.channel.id))
@@ -134,7 +132,7 @@ class Games(commands.Cog, name="games"):
     @commands.hybrid_command(name='logs',
                  brief='`.logs` to see game logs',
                  help='Plesae enter `.help` for help', aliases=['game_logs'])
-    async def logs(self, context, *args):
+    async def logs(self, context):
         print('\n logs activated \n')
         chain_length = list(config.chain_length)  #db.get('chain_length')
         chain_ids = list(config.chain_ids)    #db.get('chain_ids')
@@ -145,7 +143,7 @@ class Games(commands.Cog, name="games"):
     @commands.hybrid_command(name='score',
                  brief='`.scores` to see game logs',
                  help='Plesae enter `.help` for help', aliases=['scores'])
-    async def score(self, context, *args):
+    async def score(self, context):
         print("\nscores activated\n");
         channel_id_index = config.count_ids.index(str(context.channel.id))
         

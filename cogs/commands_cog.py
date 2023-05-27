@@ -14,12 +14,12 @@ class Commands(commands.Cog, name="general_commands"):
         self.bot = bot
 
     @commands.hybrid_command(name='ready', aliases=['is_reddit_up', 'red'], brief='unleahes the subreddit to the channel', help='e.g.To unleash r/jokes `.unleash jokes`')
-    async def ready(self, context, *args):
+    async def ready(self, context):
         embed = get_embeded_message(context, "Yes Boss, I am ready!")
         await context.send(embed=embed)
 
     @commands.hybrid_command(name='unleashed', aliases=['list_unleashed'], brief='list of unleashed channels', help='e.g.To unleash r/jokes `.unleash jokes`')
-    async def unleashed(self, context, *args):
+    async def unleashed(self, context):
         print('backtrack list unleashed')
         channel_id = str(context.channel.id)
         print(channel_id)
@@ -42,7 +42,7 @@ class Commands(commands.Cog, name="general_commands"):
     @commands.hybrid_command(name='anon',
                       brief='to send message anonymously',
                       help='e.g. `.anon Guess who!`')
-    async def anon(self, context, *, message='please provide a message'):
+    async def anon(self, context, message):
         msg = str(message)
         # print(msg)
         await context.message.delete()
@@ -56,7 +56,7 @@ class Commands(commands.Cog, name="general_commands"):
         # await schedule_message(author='', message=msg, id=id)
 
     @commands.hybrid_command(name='vent', aliases=[], brief='make a vent channel (anynomus messenging channel)', help='vent_channels make every message anonymous by deleting and re-posting user\'s messages \n e.g. `.vent` To to make or unmake a vent channel')
-    async def vent(self, context, *args):
+    async def vent(self, context):
 
         print('\n\n vent invoked \n\n')
         vent_db = db('vent')

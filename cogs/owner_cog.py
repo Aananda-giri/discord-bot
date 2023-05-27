@@ -28,7 +28,7 @@ class owner(commands.Cog, name="owner"):
             await context.send(embed=embed)
 
     @commands.hybrid_command(name="say", aliases=["echo"])
-    async def say(self, context, *, args):
+    async def say(self, context, args):
         if context.message.author.id in config.OWNERS:
             await context.send(args)
         else:

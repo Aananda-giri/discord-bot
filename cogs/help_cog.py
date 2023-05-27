@@ -11,8 +11,7 @@ class Help(commands.Cog, name="help"):
     @commands.hybrid_command(name='help',
                  brief='`.help` for help',
                  help='Plesae enter `.help` for help', aliases=['h'])
-    async def help(self, context, *args):
-        args = ' '.join(args).strip()
+    async def help(self, context, args):
         print('Normal help invoked: ',args)
         if args=='':
            args=None
@@ -136,8 +135,7 @@ class AnimeHelp(commands.Cog, name="anime_help"):
     @commands.hybrid_command(name='anime_help',
                  brief='`.help` for help',
                  help='Plesae enter `.help` for help', aliases=[])
-    async def help(self, context, *args):
-        args = ' '.join(args).strip()
+    async def help(self, context, args):
         print('Anime help invoked: ',args)
         if args=='':
            args=None

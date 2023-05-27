@@ -141,8 +141,7 @@ class general(commands.Cog, name="general"):
         #await context.author.send("به سرور ما بپیوندید: https://discord.gg/n4YPW6jeS7")
 
     @commands.hybrid_command(name="poll")
-    async def poll(self, context, *args):
-        poll_title = " ".join(args)
+    async def poll(self, context, poll_title):
         embed = discord.Embed(
             title = "A new poll has been created!",
             #title="!یک نظر سنجی جدید ایجاد شد!",
@@ -158,7 +157,7 @@ class general(commands.Cog, name="general"):
         await embed_message.add_reaction("🤷")
 
     @commands.hybrid_command(name="8ball")
-    async def eight_ball(self, context, *args):
+    async def eight_ball(self, context):
         answers = ['It is certain.', 'It is decidedly so.', 'You may rely on it.', 'Without a doubt.',
                    'Yes - definitely.', 'As I see, yes.', 'Most likely.', 'Outlook good.', 'Yes.',
                    'Signs point to yes.', 'Reply hazy, try again.', 'Ask again later.', 'Better not tell you now.',
@@ -191,8 +190,7 @@ class general(commands.Cog, name="general"):
 
 
     @commands.hybrid_command(name="notifi")
-    async def notifi(self, context, *args):
-        notifi_title = " ".join(args)
+    async def notifi(self, context, notifi_title):
         embed = discord.Embed(
             title="New announcement was made, please send it if confirmed!",
             #title="!اطلاعیه جدید ایجاد شد در صورت تایید ارسال فرمایید!",
@@ -219,7 +217,7 @@ class general(commands.Cog, name="general"):
     @commands.hybrid_command(name='movie',
              brief='To get movie url. e.g .movie harry potter',
              help='e.g .movie harry potter')
-    async def movie(self, context, *args):
+    async def movie(self, context, movie_name):
           movie_name = " ".join(args)
           print("movie: \"{}\"".format(movie_name))
           if movie_name == '':

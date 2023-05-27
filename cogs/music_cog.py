@@ -97,7 +97,7 @@ class Audio(commands.Cog, name="audio"):
                  brief='To play song note: Please enter: `.join` first',
                  help="example: `.play gangnam style`",
                  aliases="play")
-    async def play(self, context, *, url):
+    async def play(self, context, url):
         
         config.playing = url
         
@@ -173,7 +173,7 @@ class Audio(commands.Cog, name="audio"):
     @commands.hybrid_command(name='d',
                  brief='To download song note: Please enter: `.d song name` ',
                  help="example: `.d gangnam style`")
-    async def d(self, context, *, url:str):
+    async def d(self, context, url:str):
         if not 'downloads' in os.listdir():
           os.mkdir('downloads')
         print('Try download')
