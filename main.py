@@ -7,7 +7,7 @@
 #from cogs.music import get_stream, 
 # from cogs.functions import YTDLSource, download_from_youtube, 
 from cogs.functions import get_embed, proceed_count
-import discord, asyncio, os, platform, sys, requests, json, threading
+import random, discord, asyncio, os, platform, sys, requests, json, threading
 from discord.ext import commands
 from discord.ext.commands import Bot
 from urllib.parse import unquote, quote
@@ -221,9 +221,9 @@ async def on_ready():
   print(f"Python version: {platform.python_version()}")
   print(f"Running on: {platform.system()} {platform.release()} ({os.name})")
   print("-------------------")
-  unleashing.start() # reddit posts
-  unleash_ioe_notifications.start()
-  unleash_news.start()  # news
+  # unleashing.start() # reddit posts
+  # unleash_ioe_notifications.start()
+  # unleash_news.start()  # news
   
 
 # Setup the game status task of the bot
