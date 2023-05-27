@@ -33,7 +33,7 @@ class IoeCommands(commands.Cog, name="reddit_commands"):
                 
                 embed = get_embeded_message(context, f'stopped ioe_notifications: {message}')
             else:
-                embed = get_embeded_message(context, 'ioe_notifications not started to {}'.format(context.channel))
+                embed = get_embeded_message(context, 'ioe_notifications not started to {}'.format(context))
             await context.channel.send(embed=embed,empheral=True)
             
 async def setup(bot):
