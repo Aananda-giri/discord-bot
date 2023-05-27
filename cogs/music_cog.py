@@ -306,5 +306,5 @@ class Audio(commands.Cog, name="audio"):
     
     
     
-def setup(bot):
-    bot.add_cog(Audio(bot))
+async def setup(bot):
+    await bot.add_cog(Audio(bot))
