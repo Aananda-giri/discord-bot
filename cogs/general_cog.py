@@ -90,7 +90,7 @@ class general(commands.Cog, name="general"):
         await context.send(embed=embed)
 
 
-    @commands.hybrid_command(name="ping", brief=" short_help: to test if bot responding  ",
+    @commands.command(name="ping", brief=" short_help: to test if bot responding  ",
              help='long_help: e.g. .ping', aliases=[])
     async def ping(self, context):
         print('\n Invoked ping \n')
@@ -233,7 +233,10 @@ class general(commands.Cog, name="general"):
 
             movie_url = "https://www.2embed.ru/embed/tmdb/movie?id={}".format(result['results'][0]['id'])
             await context.send(movie_url)
-
+    
+    @bot.hybrid_command()
+    async def test(ctx):
+        await ctx.send("This is a hybrid command!")
 
 async def setup(bot):
     await bot.add_cog(general(bot))
