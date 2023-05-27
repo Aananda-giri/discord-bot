@@ -77,6 +77,9 @@ sharing global variables across models
 * https://docs.python.org/3/faq/programming.html#how-do-i-share-global-variables-across-modules
 
 ## todo
+- [ ] Music: queue, play, pause, resume, stop, skip, loop, shuffle, volume
+- [ ] FM
+- [ ] News
 - [ ] update reddit help
 - unleash redit -> enable/disable   -> via abstraction
 - replit.py: store to db/backup
