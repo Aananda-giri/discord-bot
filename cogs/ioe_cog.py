@@ -3,7 +3,7 @@ from discord.ext import commands
 from cogs.functions import get_embeded_message
 # from replit import db
 from database import db
-/io
+
 class IoeCommands(commands.Cog, name="reddit_commands"):
     def __init__(self, bot):
         self.bot = bot    
