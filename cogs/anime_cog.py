@@ -350,13 +350,12 @@ class anime(commands.Cog):
     
 
     @commands.hybrid_command(aliases=['rate', 'waifu'])
-    async def ratewaifu(self, ctx, waifuName: str):
+    async def ratewaifu(self, ctx, waifu):
         '''Rate my waifu
         Beispiel:
         -----------
         :ratewaifu Sagiri
         '''
-        waifu = waifuName.lower()
         bestWaifus = ['kobeni', 'emilia', 'shinobu', 'karen', 'shouko', 'shoko',
                       'minori', 'chidori', 'sagiri', 'mashiro', 'last order',
                       'saki', 'makoto', 'yui', 'nep', 'nepgear', 'taiga']
