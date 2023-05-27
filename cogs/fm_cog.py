@@ -1,7 +1,7 @@
 # -----------------------------------------------------
 # ##################### FM Player #####################
 # -----------------------------------------------------
-'''
+
 import os, sys, discord, platform, random, aiohttp, json, youtube_dl
 from discord.ext import commands
 from multiprocessing import context
@@ -129,5 +129,5 @@ class FmRadio(commands.Cog, name="fmaradio"):
     async def stopfm(ctx):
         player.stop()
     
-def setup(bot):
-    bot.add_cog(FmRadio(bot))'''
+async def setup(bot):
+    await bot.add_cog(FmRadio(bot))
