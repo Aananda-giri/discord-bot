@@ -235,7 +235,7 @@ class general(commands.Cog, name="general"):
             await context.send(movie_url)
     
     @bot.hybrid_command()
-    async def test(ctx):
+    async def hybrid(ctx):
         await ctx.send("This is a hybrid command!")
 
 async def setup(bot):
