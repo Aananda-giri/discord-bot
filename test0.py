@@ -1,7 +1,7 @@
 # discord.py hybrid commands
 import interactions
 import config
-bot = interactions.Client(token=config.TEST_BOT_TOKEN, application_id=config.TEST_BOT_ID)
+bot = interactions.Client(token=config.DISCORD_TEST_BOT_TOKEN, application_id=config.TEST_BOT_ID)
 
 # @bot.command(
 @interactions.slash_command(
