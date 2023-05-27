@@ -220,7 +220,7 @@ class RedditCommands(commands.Cog, name="reddit_commands"):
                  brief='unleahes the subreddit to the channel',
                  help='e.g.To unleash r/jokes `.unleash jokes`',
                  fallback="start")
-    async def ioe_notice(self, context, subreddit, how_many=8):
+    async def ioe_notice(self, context):
         print('\n\n ------------- IOE-Notice initiated ------------- \n\n')
         ioe_db = db('ioe_notifications')
         message = ioe_db.add_one(str(context.channel.id))
@@ -230,7 +230,7 @@ class RedditCommands(commands.Cog, name="reddit_commands"):
     @ioe_notice.command(name='stop_ioe_notice',
                  brief='to contain/stop unleashed  subreddit message',
                  help='e.g. `.contain jokes`')
-    async def stop(self, context, subreddit):
+    async def stop(self, context):
             # stop ioe notification from channel
             ioe_db = db('ioe_notifications')
             if int(context.channel.id) in ioe_db.get_all():
