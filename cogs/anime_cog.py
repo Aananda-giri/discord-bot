@@ -27,7 +27,7 @@ class anime(commands.Cog):
                 ok = True
         return ok
 
-    '''@commands.command()
+    '''@commands.hybrid_command()
     async def kawaii(self, ctx):
         ''Gibt ein zufälliges kawaii Bild aus''
         if loadconfig.__kawaiichannel__:
@@ -39,7 +39,7 @@ class anime(commands.Cog):
         else:
             await ctx.send('**:no_entry:** Es wurde kein Channel für den Bot eingestellt! Wende dich bitte an den Bot Admin')
 
-    @commands.command(pass_context=True, hidden=True)
+    @commands.hybrid_command(pass_context=True, hidden=True)
     async def nsfw(self, ctx):
         ''Vergibt die Rolle um auf die NSFW Channel zugreifen zu können''
         if ctx.guild.id == loadconfig.__botserverid__:
@@ -65,7 +65,7 @@ class anime(commands.Cog):
         await tmp.delete()
         await ctx.message.delete()
   
-@commands.command(aliases=['headpat'])
+@commands.hybrid_command(aliases=['headpat'])
     async def pat(self, ctx, member: discord.Member = None):
         \'''/r/headpats Pat Pat Pat :3
         Beispiel:
@@ -103,7 +103,7 @@ class anime(commands.Cog):
             msg = f'{ctx.author.mention} pats you {member.mention} :3 \n{random.choice(gifs)}'
             #msg = f'{ctx.author.mention} tätschelt dich {member.mention} :3 \n{random.choice(gifs)}'
             await ctx.send(msg)
-  @commands.command(aliases=['anilist'])
+  @commands.hybrid_command(aliases=['anilist'])
     async def anime(self, ctx, *, animeName: str):
         \'''Searches for an anime on AniList.co and returns the basic information
         example
@@ -220,7 +220,7 @@ class anime(commands.Cog):
                 else:
                     await ctx.send(':x: Konnte keinen passenden Anime finden!')
 
-    @commands.command()
+    @commands.hybrid_command()
     async def manga(self, ctx, *, mangaName: str):
         \'''Sucht auf AniList.co nach einem Manga und gibt die Basis-Informationen zurück
         Beispiel:
@@ -306,7 +306,7 @@ class anime(commands.Cog):
 
   '''
 
-    @commands.command(aliases=['wave', 'hi', 'ohaiyo'])
+    @commands.hybrid_command(aliases=['wave', 'hi', 'ohaiyo'])
     async def hello(self, ctx):
         '''Nonsense gifs zum Hallo sagen => Nonsense gifs to say hello'''
         gifs = ['https://cdn.discordapp.com/attachments/102817255661772800/219512763607678976/large_1.gif',
@@ -320,7 +320,7 @@ class anime(commands.Cog):
         msg = f':wave: {random.choice(gifs)}'
         await ctx.send(msg)
 
-    @commands.command(aliases=['nepu', 'topnep'])
+    @commands.hybrid_command(aliases=['nepu', 'topnep'])
     async def nep(self, ctx):
         '''Can't stop the Nep'''
         neps = ['https://cdn.discordapp.com/attachments/102817255661772800/219530759881359360/community_image_1421846157.gif',
@@ -349,7 +349,7 @@ class anime(commands.Cog):
 
     
 
-    @commands.command(aliases=['rate', 'waifu'])
+    @commands.hybrid_command(aliases=['rate', 'waifu'])
     async def ratewaifu(self, ctx, *, waifuName: str):
         '''Rate my waifu
         Beispiel:
@@ -400,7 +400,7 @@ class anime(commands.Cog):
         await ctx.send(msg)
 
     
-    @commands.command(aliases=['sauce', 'iqdb'])
+    @commands.hybrid_command(aliases=['sauce', 'iqdb'])
     async def saucenao(self, ctx, url: str = None):
         '''Versucht die Quelle eines Anime Bildes zu finden
         Beispiel:
@@ -468,12 +468,12 @@ class anime(commands.Cog):
         else:
             await tmp.edit(content=':x: Konnte nichts finden!')
 
-    # @commands.command(pass_context=True, hidden=True)
+    # @commands.hybrid_command(pass_context=True, hidden=True)
     # async def imgur(self, ctx, amount: int = None):
     #     '''Lädt eine bestimmte Anzahl der letzten hochgeladenen Bilder im Channel bei Imgur hoch'''
     #     await ctx.send(':new: Befehl in Arbeit!')
     #
-    # @commands.command(pass_context=True, alias=['ani'], hidden=True)
+    # @commands.hybrid_command(pass_context=True, alias=['ani'], hidden=True)
     # async def anisearch(self, ctx, url: str = None):
     #     '''Gibt Informationen über einen AniSearch.de User zurück'''
     #     async with aiohttp.get(url) as r:
@@ -485,7 +485,7 @@ class anime(commands.Cog):
     #         else:
     #             await ctx.send(':x: Konnte den Benutzer nicht finden (falsche URL?)')
     
-    @commands.command(aliases=['search'])
+    @commands.hybrid_command(aliases=['search'])
     async def anime(self, ctx, *query):
         query = ' '.join(query)
         try:
@@ -504,7 +504,7 @@ class anime(commands.Cog):
         await ctx.send(embed = embed)
 
     
-    @commands.command(aliases=['char', 'animecharacter'])
+    @commands.hybrid_command(aliases=['char', 'animecharacter'])
     async def image(self, ctx, *query):
         query = ' '.join(query)
         try:
@@ -517,7 +517,7 @@ class anime(commands.Cog):
         embed.set_footer(text=", ".join(list(char.references.keys())[:2]))
         await ctx.send(embed=embed)
 
-    @commands.command(aliases=['animenews'])
+    @commands.hybrid_command(aliases=['animenews'])
     async def aninews(self, ctx, amount:int=3):
         news = animec.Aninews(amount)
         links = news.links

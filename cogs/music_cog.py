@@ -2,11 +2,9 @@ import os, discord, json, config
 from discord.ext import commands
 import datetime, config, nacl
 
-
 from cogs.functions import *
 
 global player, playing
-
 
 #To get current, next, previous streams
 def get_stream(which=None, current=None):
@@ -70,7 +68,7 @@ class Audio(commands.Cog, name="audio"):
     # _______________________________________________________________________
     
     
-    @commands.command(
+    @commands.hybrid_command(
         name='join',
         help='Tells the bot to join the voice channel before playing music ')
     async def join(self, context):
@@ -86,7 +84,7 @@ class Audio(commands.Cog, name="audio"):
 
     
     
-    @commands.command(name='leave', help='To make the bot leave the voice channel')
+    @commands.hybrid_command(name='leave', help='To make the bot leave the voice channel')
     async def leave(self, context):
         voice_client = context.message.guild.voice_client
         if voice_client.is_connected():
@@ -95,9 +93,10 @@ class Audio(commands.Cog, name="audio"):
             await context.send("The bot is not connected to a voice channel.")
     
     
-    @commands.command(name='p',
+    @commands.hybrid_command(name='p',
                  brief='To play song note: Please enter: `.join` first',
-                 help="example: `.play gangnam style`")
+                 help="example: `.play gangnam style`",
+                 aliases="play")
     async def play(self, context, *, url):
         
         config.playing = url
@@ -171,7 +170,7 @@ class Audio(commands.Cog, name="audio"):
     
     
     
-    @commands.command(name='d',
+    @commands.hybrid_command(name='d',
                  brief='To download song note: Please enter: `.d song name` ',
                  help="example: `.d gangnam style`")
     async def d(self, context, *, url:str):
@@ -192,7 +191,7 @@ class Audio(commands.Cog, name="audio"):
               print(' downloaded!!! ')
     
     
-    @commands.command(name='pause',brief='To To pause the song currently beieng played: `.p`, To play: `.p song_name` ', help='This command pauses the song. e.g. while song is being played, press: `.p` ')
+    @commands.hybrid_command(name='pause',brief='To To pause the song currently beieng played: `.p`, To play: `.p song_name` ', help='This command pauses the song. e.g. while song is being played, press: `.p` ')
     async def pause(self, context):
         voice_client = context.message.guild.voice_client
         if voice_client.is_playing():
@@ -201,7 +200,7 @@ class Audio(commands.Cog, name="audio"):
             await context.send("The bot is not playing anything at the moment.")
     
     
-    @commands.command(name='resume', help='Resumes the song')
+    @commands.hybrid_command(name='resume', help='Resumes the song')
     async def resume(self, context):
         voice_client = context.message.guild.voice_client
         if voice_client.is_paused():
@@ -212,7 +211,7 @@ class Audio(commands.Cog, name="audio"):
             )
     
     
-    @commands.command(name='stop', help='Stops the song')
+    @commands.hybrid_command(name='stop', help='Stops the song')
     async def stop(self, context):
         await context.message.add_reaction('🛑')
         voice_client = context.message.guild.voice_client
@@ -248,7 +247,7 @@ class Audio(commands.Cog, name="audio"):
                 config.streams = json.load(F)
     
     
-    @commands.command(aliases=['fm', 'radio'])
+    @commands.hybrid_command(aliases=['fm', 'radio'])
     async def playfm(self, context, url: str = 'https://radionepal.news/live/audio/mp3'):
 
         config.playing = "fm"
@@ -298,7 +297,7 @@ class Audio(commands.Cog, name="audio"):
         for emoji in emos:
             await currently_playing_message.add_reaction(emoji)
             
-    @commands.command(aliases=['s', 'sto'])
+    @commands.hybrid_command(aliases=['s', 'sto'])
     async def stopfm(self, context):
         config.player.stop()
     

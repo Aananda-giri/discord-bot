@@ -11,7 +11,7 @@ class general(commands.Cog, name="general"):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name="info", aliases=["botinfo"])
+    @commands.hybrid_command(name="info", aliases=["botinfo"])
     async def info(self, context):
         embed = discord.Embed(
             #description="Created by Persian | EsfahanArmy",
@@ -42,7 +42,7 @@ class general(commands.Cog, name="general"):
         )
         await context.send(embed=embed)
 
-    @commands.command(name="serverinfo")
+    @commands.hybrid_command(name="serverinfo")
     async def serverinfo(self, context):
         server = context.message.guild
         roles = [x.name for x in server.roles]
@@ -107,7 +107,7 @@ class general(commands.Cog, name="general"):
         )
         await context.send(embed=embed)
 
-    @commands.command(name='invite',aliases=['share'], brief='`.invite` to get bot invite link',
+    @commands.hybrid_command(name='invite',aliases=['share'], brief='`.invite` to get bot invite link',
              help='Plesae enter `.invite` or `.share` to invite me in another servers')
     async def invite(self, ctx, args=None):
         #await ctx.send("! I gave you a PM, go and see !")
@@ -133,14 +133,14 @@ class general(commands.Cog, name="general"):
         
     
     
-    @commands.command(name="server")
+    @commands.hybrid_command(name="server")
     async def server(self, context):
         await context.send("! I gave you a PM, go and see !")
         await context.author.send("Join our server: https://discord.gg/n4YPW6jeS7")
         #await context.send("! بهت یک پی ام دادم برو ببین !")
         #await context.author.send("به سرور ما بپیوندید: https://discord.gg/n4YPW6jeS7")
 
-    @commands.command(name="poll")
+    @commands.hybrid_command(name="poll")
     async def poll(self, context, *args):
         poll_title = " ".join(args)
         embed = discord.Embed(
@@ -157,7 +157,7 @@ class general(commands.Cog, name="general"):
         await embed_message.add_reaction("👎")
         await embed_message.add_reaction("🤷")
 
-    @commands.command(name="8ball")
+    @commands.hybrid_command(name="8ball")
     async def eight_ball(self, context, *args):
         answers = ['It is certain.', 'It is decidedly so.', 'You may rely on it.', 'Without a doubt.',
                    'Yes - definitely.', 'As I see, yes.', 'Most likely.', 'Outlook good.', 'Yes.',
@@ -174,7 +174,7 @@ class general(commands.Cog, name="general"):
         )
         await context.send(embed=embed)
 
-    @commands.command(name="bitcoin")
+    @commands.hybrid_command(name="bitcoin")
     async def bitcoin(self, context):
         url = "https://api.coindesk.com/v1/bpi/currentprice/BTC.json"
         # Async HTTP request
@@ -190,7 +190,7 @@ class general(commands.Cog, name="general"):
             await context.send(embed=embed)
 
 
-    @commands.command(name="notifi")
+    @commands.hybrid_command(name="notifi")
     async def notifi(self, context, *args):
         notifi_title = " ".join(args)
         embed = discord.Embed(
@@ -216,7 +216,7 @@ class general(commands.Cog, name="general"):
     
     
     
-    @commands.command(name='movie',
+    @commands.hybrid_command(name='movie',
              brief='To get movie url. e.g .movie harry potter',
              help='e.g .movie harry potter')
     async def movie(self, context, *args):

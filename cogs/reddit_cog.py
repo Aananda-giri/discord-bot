@@ -143,7 +143,7 @@ class RedditCommands(commands.Cog, name="reddit_commands"):
     def __init__(self, bot):
         self.bot = bot    
     
-    @commands.command(name='unleash', aliases=['unleash_reddit', 'nuke'],
+    @commands.hybrid_command(name='unleash', aliases=['unleash_reddit', 'nuke'],
                  brief='unleahes the subreddit to the channel',
                  help='e.g.To unleash r/jokes `.unleash jokes`')
     async def unleash(self, context, *args):
@@ -190,7 +190,7 @@ class RedditCommands(commands.Cog, name="reddit_commands"):
                 
     
     
-    @commands.command(name='contain',
+    @commands.hybrid_command(name='contain',
                  brief='to contain/stop unleashed  subreddit message',
                  help='e.g. `.contain jokes`')
     async def contain(self, context, *args):

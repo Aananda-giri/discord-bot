@@ -6,7 +6,7 @@ class avatar(commands.Cog):
         self.bot = bot
 
 
-    @commands.command(name='avatar',
+    @commands.hybrid_command(name='avatar',
                  brief='To see avatar of specific member in the group',
                  help='e.g. `.avatar @Encouragement Bot`')
     #async def avatar(self, context, *, member: discord.Member = None):

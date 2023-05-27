@@ -50,7 +50,7 @@ async def send_news(channel, country="", how_many = 10, language='en', last_coun
 class News(commands.Cog, name="news_commands"):
   def __init(self, bot):
     self.bot=bot
-  @commands.command(name='subscribe', aliases=[],  brief='subscribe to news', help='e.g. `.subscribe news us 3` To subscribe to \'us\' daily news 3 at a time')
+  @commands.hybrid_command(name='subscribe', aliases=[],  brief='subscribe to news', help='e.g. `.subscribe news us 3` To subscribe to \'us\' daily news 3 at a time')
   async def subscribe(self, context, *what):
     country='world'
     how_many=10
@@ -81,7 +81,7 @@ class News(commands.Cog, name="news_commands"):
       await send_news(context.channel, country=country)
     await context.send(embed=embed)
 
-  @commands.command(name='unsubscribe', aliases=[],  brief='unsubscribe news from a channel', help='e.g. `.unsubscribe news us gb` To unsubscribe to \'us\' and \'gb\' daily news from a channel')
+  @commands.hybrid_command(name='unsubscribe', aliases=[],  brief='unsubscribe news from a channel', help='e.g. `.unsubscribe news us gb` To unsubscribe to \'us\' and \'gb\' daily news from a channel')
   async def unsubscribe(self, context, *what):
     '''
       To unsubscribe one/list of countries from news in a channel
@@ -106,7 +106,7 @@ class News(commands.Cog, name="news_commands"):
       embed = get_embeded_message(context, message)
       await context.send(embed=embed)
   
-  @commands.command(name='subscription', aliases=['subscriptions', 'subscribed'],  brief='unleahes the subreddit to the channel', help='e.g.To unleash r/jokes `.unleash jokes`')
+  @commands.hybrid_command(name='subscription', aliases=['subscriptions', 'subscribed'],  brief='unleahes the subreddit to the channel', help='e.g.To unleash r/jokes `.unleash jokes`')
   async def subscription(self, context, *what):
     # get metadata of subscribed news
     news_db = db('news')

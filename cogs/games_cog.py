@@ -20,7 +20,7 @@ class Games(commands.Cog, name="games"):
     def __init__(self, bot):
         self.bot = bot
     
-    @commands.command(name='count',
+    @commands.hybrid_command(name='count',
                  brief='`.count start` to start counting in a channel',
                  help='Plesae enter `.help` for help', aliases=[''])
     async def count(self, context, *args):
@@ -66,7 +66,7 @@ class Games(commands.Cog, name="games"):
                 embed = get_embeded_message(context, 'count Stoppted', 'It was never started')
                 await context.send(embed = embed)
     
-    @commands.command(name='chain',
+    @commands.hybrid_command(name='chain',
                  brief='`.chain start` to start word chain in a channel',
                  help='Plesae enter `.help` for help', aliases=['word_chain'])
     async def chain(self, context, *args):
@@ -131,7 +131,7 @@ class Games(commands.Cog, name="games"):
                 index_of_channel_id = config.chain_ids.index(str(context.channel.id))
                 config.last_chain_word[index_of_channel_id] = what.lower().strip()
                 
-    @commands.command(name='logs',
+    @commands.hybrid_command(name='logs',
                  brief='`.logs` to see game logs',
                  help='Plesae enter `.help` for help', aliases=['game_logs'])
     async def logs(self, context, *args):
@@ -142,7 +142,7 @@ class Games(commands.Cog, name="games"):
         last_chain_word = list(config.last_chain_word)    #db.get('last_chain_word')
         await context.send(f"chain_length{chain_length}, chain_ids: {chain_ids}, last_chain_author:{last_chain_author}, last_chain_word:{last_chain_word}")
     
-    @commands.command(name='score',
+    @commands.hybrid_command(name='score',
                  brief='`.scores` to see game logs',
                  help='Plesae enter `.help` for help', aliases=['scores'])
     async def score(self, context, *args):

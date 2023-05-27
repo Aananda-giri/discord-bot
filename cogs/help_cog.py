@@ -8,7 +8,7 @@ else:
 class Help(commands.Cog, name="help"):
     def __init__(self, bot):
         self.bot = bot
-    @commands.command(name='help',
+    @commands.hybrid_command(name='help',
                  brief='`.help` for help',
                  help='Plesae enter `.help` for help', aliases=['h'])
     async def help(self, context, *args):
@@ -133,7 +133,7 @@ class Help(commands.Cog, name="help"):
 class AnimeHelp(commands.Cog, name="anime_help"):
     def __init__(self, bot):
         self.bot = bot
-    @commands.command(name='anime_help',
+    @commands.hybrid_command(name='anime_help',
                  brief='`.help` for help',
                  help='Plesae enter `.help` for help', aliases=[])
     async def help(self, context, *args):

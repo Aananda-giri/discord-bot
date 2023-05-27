@@ -13,10 +13,10 @@ class AdminCog(commands.Cog, name="admin"):
         self.bot = bot
         
     @commands.is_owner()
-    @commands.command(name="die", aliases=["logout"])
+    @commands.hybrid_command(name="die", aliases=["logout"])
     async def die(self, context):
         await context.send("Beep boop boop beep!! logging out!!..")
-        await ctx.bot.logout()
+        await context.bot.logout()
         
 
 async def setup(bot):

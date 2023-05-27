@@ -13,12 +13,12 @@ class Commands(commands.Cog, name="general_commands"):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='ready', aliases=['is_reddit_up', 'red'], brief='unleahes the subreddit to the channel', help='e.g.To unleash r/jokes `.unleash jokes`')
+    @commands.hybrid_command(name='ready', aliases=['is_reddit_up', 'red'], brief='unleahes the subreddit to the channel', help='e.g.To unleash r/jokes `.unleash jokes`')
     async def ready(self, context, *args):
         embed = get_embeded_message(context, "Yes Boss, I am ready!")
         await context.send(embed=embed)
 
-    @commands.command(name='unleashed', aliases=['list_unleashed'], brief='list of unleashed channels', help='e.g.To unleash r/jokes `.unleash jokes`')
+    @commands.hybrid_command(name='unleashed', aliases=['list_unleashed'], brief='list of unleashed channels', help='e.g.To unleash r/jokes `.unleash jokes`')
     async def unleashed(self, context, *args):
         print('backtrack list unleashed')
         channel_id = str(context.channel.id)
@@ -39,7 +39,7 @@ class Commands(commands.Cog, name="general_commands"):
             embed = get_embeded_message(context, "Unleashed", subreddits_list)
         await context.send(embed=embed)
 
-    @commands.command(name='anon',
+    @commands.hybrid_command(name='anon',
                       brief='to send message anonymously',
                       help='e.g. `.anon Guess who!`')
     async def anon(self, context, *, message='please provide a message'):
@@ -55,7 +55,7 @@ class Commands(commands.Cog, name="general_commands"):
         # print(msg, id)
         # await schedule_message(author='', message=msg, id=id)
 
-    @commands.command(name='vent', aliases=[], brief='make a vent channel (anynomus messenging channel)', help='vent_channels make every message anonymous by deleting and re-posting user\'s messages \n e.g. `.vent` To to make or unmake a vent channel')
+    @commands.hybrid_command(name='vent', aliases=[], brief='make a vent channel (anynomus messenging channel)', help='vent_channels make every message anonymous by deleting and re-posting user\'s messages \n e.g. `.vent` To to make or unmake a vent channel')
     async def vent(self, context, *args):
 
         print('\n\n vent invoked \n\n')
@@ -83,7 +83,7 @@ class Commands(commands.Cog, name="general_commands"):
         await context.send(response_message)
 
 
-    @commands.command(name="whois")
+    @commands.hybrid_command(name="whois")
     async def whois(self, ctx, member:discord.Member =  None):
 
         if member is None:
