@@ -1,0 +1,310 @@
+import os, discord, json, config
+from discord.ext import commands
+import datetime, config, nacl
+
+
+from cogs.functions import *
+
+global player, playing
+
+
+#To get current, next, previous streams
+def get_stream(which=None, current=None):
+        
+        try:
+            config.streams[0]
+            print('Streams already defined')
+        except:
+            global streams
+            with open('fm_list.json','r') as F:    
+                config.streams = json.load(F)
+            config.streams = config.streams['stream_links']
+            print('stream: {}'.format(config.streams[0]))
+            
+            #global streams_url
+            
+            #streams=streams['stream_links']
+            #streams_url = [i['url'] for i in streams]
+            
+        finally:
+            if current==None:
+                current={
+                    "name": "Radio Nepal",
+                    "city" : "kathmandu",
+                    "url": "https://radionepal.news/live/audio/mp3",
+                    "image": "https://radionepal.gov.np/wp-content/themes/rdnp/images/logo-en.png",
+                    "desc": "am/sw/fm radio",
+                    "longDesc": "Radio Nepal, oldest radio of nepal."
+                }
+            if which=='next':
+                nxt = config.streams.index(current) + 1
+                
+                # Triggred to get next station at the end of stations list 
+                if nxt >= len(config.streams):
+                    nxt -= len(config.streams)
+                
+                current = config.streams[nxt]
+                print(nxt)
+            
+            elif which=='prev':
+                prev = config.streams.index(current) - 1
+                print(prev)
+                
+                # Triggred to get previous station at the beginning of stations list
+                if prev < 0:
+                    prev += len(config.streams)
+                
+                
+                print('current:{}, prev:{}'.format(config.streams.index(current),prev))
+                
+                current = config.streams[prev]
+                
+            return(current)
+
+class Audio(commands.Cog, name="audio"):
+    def __init__(self, bot):
+        self.bot = bot
+        queue = {}
+    # _______________________________________________________________________
+    # ---------------------------- For Music Bot : https://medium.com/pythonland/build-a-discord-bot-in-python-that-plays-music-and-send-gifs-856385e605a1
+    # _______________________________________________________________________
+    
+    
+    @commands.command(
+        name='join',
+        help='Tells the bot to join the voice channel before playing music ')
+    async def join(self, context):
+        if not context.message.author.voice:
+            await context.send("{} is not connected to a voice channel".format(
+                context.message.author.name))
+            return
+        else:
+            channel = context.message.author.voice.channel
+            print('\nchannel:',channel)
+            await channel.connect()
+            await context.send("joined")
+
+    
+    
+    @commands.command(name='leave', help='To make the bot leave the voice channel')
+    async def leave(self, context):
+        voice_client = context.message.guild.voice_client
+        if voice_client.is_connected():
+            await voice_client.disconnect()
+        else:
+            await context.send("The bot is not connected to a voice channel.")
+    
+    
+    @commands.command(name='p',
+                 brief='To play song note: Please enter: `.join` first',
+                 help="example: `.play gangnam style`")
+    async def play(self, context, *, url):
+        
+        config.playing = url
+        
+        config.queue_by_user.put(config.playing) #put to queue
+        
+        if not context.message.author.voice.channel:
+            await context.send("{} is not connected to a voice channel".format(
+                context.message.author.name))
+            return
+            
+        else:
+            channel = context.message.author.voice.channel
+        try:
+          #####################################################
+          ############################################################# improve with if not connected
+          #####################################################
+          config.player = await channel.connect()
+        except:
+            pass  
+        # joined the channel
+        try:
+            server = context.message.guild
+    
+            voice_channel = server.voice_client
+            #print('voice_channel : ' + str(voice_channel))
+    
+            async with context.typing():
+                ytdl_data = await YTDLSource.from_url(url, loop=context.bot.loop)
+                
+                config.player.stop() #to stop playing if already playing another
+                if len(self.queue)==0:
+                    URL, thumbnails, title, vid_url = ytdl_data
+                    
+                    #####################################################
+                    ##################################################### config.player?
+                    #####################################################
+                    config.player.play(discord.FFmpegPCMAudio(URL))
+                else:
+                    self.queue[len(self.queue)] = player
+                    await ctx.send(f':mag_right: **Searching for** ``' + url + '``\n<:youtube:763374159567781890> **Added to queue:** ``{}'.format(player.title) + "``")
+                
+                
+            print('vid_url:{}, thumbnails:{}, title:{}, URL:{},url:{}'.format(vid_url, thumbnails, title, URL, url))
+            embed=discord.Embed(title=title,
+            #description=stream['longDesc'],
+            color=0x00FFFF,
+            url=vid_url)
+            embed.set_author(name=context.message.author)
+            embed.set_thumbnail(url=thumbnails[0]['url'])
+            embed.timestamp = datetime.datetime.utcnow()
+            embed.set_footer(text=f'Added by {context.author}',icon_url=context.author.avatar_url)#, url = context.message.author.avatar_url)
+            
+            
+            message = await context.send(embed=embed)
+            emos=['⏮️', '⏸️', '⏹️', '⏭️', '⬇️']
+            for emoji in emos:
+              await message.add_reaction(emoji)
+        except Exception as ex:
+            error_message = "error while playing song: {}".format(ex)
+            print(error_message)
+            db['errors'].append(ex)
+            await context.send(error_message)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    @commands.command(name='d',
+                 brief='To download song note: Please enter: `.d song name` ',
+                 help="example: `.d gangnam style`")
+    async def d(self, context, *, url:str):
+        if not 'downloads' in os.listdir():
+          os.mkdir('downloads')
+        print('Try download')
+        
+        async with context.typing():
+              URL, thumbnails, title, vid_url = await YTDLSource.from_url(url, loop=context.bot.loop, download=True)
+                    
+              full_downloaded_file_name = title + '.mp3'
+              
+              try:
+                await context.send(file=discord.File(full_downloaded_file_name))
+              except Exception as e:
+                context.send('Sorry! According to discord policy File size too large')
+              #os.remove(full_downloaded_file_name)
+              print(' downloaded!!! ')
+    
+    
+    @commands.command(name='pause',brief='To To pause the song currently beieng played: `.p`, To play: `.p song_name` ', help='This command pauses the song. e.g. while song is being played, press: `.p` ')
+    async def pause(self, context):
+        voice_client = context.message.guild.voice_client
+        if voice_client.is_playing():
+            await voice_client.pause()
+        else:
+            await context.send("The bot is not playing anything at the moment.")
+    
+    
+    @commands.command(name='resume', help='Resumes the song')
+    async def resume(self, context):
+        voice_client = context.message.guild.voice_client
+        if voice_client.is_paused():
+            await voice_client.resume()
+        else:
+            await context.send(
+                "The bot was not playing anything before this. Use play_song command"
+            )
+    
+    
+    @commands.command(name='stop', help='Stops the song')
+    async def stop(self, context):
+        await context.message.add_reaction('🛑')
+        voice_client = context.message.guild.voice_client
+        if voice_client.is_playing():
+            await voice_client.stop()
+            voice_client
+        #os.remove(
+        else:
+            await context.send("The bot is not playing anything at the moment.")
+    
+    #_______________________________________________________________________
+    # ----------------------------- ---------------------------------------
+    # _______________________________________________________________________
+    # ----------------------------- FM Player -----------------------------
+    
+    
+    
+    from discord import FFmpegPCMAudio
+    from discord.ext.commands import Bot
+    from dotenv import load_dotenv
+    
+    load_dotenv()
+    
+    #To be implemented
+    global streams
+    config.streams = None
+    def start_load_streams():
+        global streams
+        try:
+            config.streams[0]
+        except:
+            with open('test_fm_list.json','r') as F:    
+                config.streams = json.load(F)
+    
+    
+    @commands.command(aliases=['fm', 'radio'])
+    async def playfm(self, context, url: str = 'https://radionepal.news/live/audio/mp3'):
+
+        config.playing = "fm"
+        
+        config.stream = get_stream()
+        #url = "https://radio-streaming-serv-1.hamropatro.com/radio/8050/radio.mp3"
+        #url = 'https://radionepal.news/live/audio/mp3'
+        #global channel
+        if not context.message.author.voice:
+            await context.send("{} is not connected to a voice channel".format(
+                context.message.author.name))
+            return
+            
+        else:
+            channel = context.message.author.voice.channel
+    
+            try:
+              config.player = await channel.connect()
+            except Exception as ex:
+              await context.send("Exception (music.py_playfm): {}".format(ex))
+              
+            #joined the channel
+        print('\n Playing: {}\n'.format(config.stream['url']))
+        config.player.play(discord.FFmpegPCMAudio(config.stream['url']))
+        #config.player.play(FFmpegPCMAudio(config.stream['url']))
+        #global message
+        
+        embed=discord.Embed(title=config.stream['name'],
+        description=config.stream['longDesc'],
+        color=0x00FFFF,
+        url=config.stream['url'])
+        embed.set_author(
+            name=context.message.author,
+            icon_url=context.message.author.avatar_url
+            )
+            #icon_url=context.message.author.avatar_url)
+        embed.set_thumbnail(url=config.stream['image'])
+        
+        #embed.pfp = author.avatar_url
+        embed.timestamp = datetime.datetime.utcnow()
+        embed.set_footer(text=f'Added by {context.author}', icon_url=context.author.avatar_url)
+        
+    
+        currently_playing_message = await context.send(embed=embed)
+        #emojis = [':track_previous:', ':pause_button:', ':stop_button:', ':track_next:', ':record_button:', ':arrow_down:']
+        emos=['⏮️', '⏸️', '⏹️', '⏭️']#, '⏺️', '⬇️']
+        for emoji in emos:
+            await currently_playing_message.add_reaction(emoji)
+            
+    @commands.command(aliases=['s', 'sto'])
+    async def stopfm(self, context):
+        config.player.stop()
+    
+   
+    
+    
+    
+def setup(bot):
+    bot.add_cog(Audio(bot))
