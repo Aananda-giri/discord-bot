@@ -213,6 +213,7 @@ async def unleash_ioe_notifications():
 async def on_ready():
   bot.loop.create_task(status_task())
   # await bot.loop.create_task(unleashing_tasks())
+  await bot.tree.sync() # sync CommandTree in order for slash commands to appear : https://discordpy.readthedocs.io/en/v2.2.2/ext/commands/commands.html#hybrid-commands
   
 
   print(f"Logged in as {bot.user.name}")
