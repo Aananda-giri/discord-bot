@@ -50,21 +50,9 @@ async def send_news(channel, country="", how_many = 10, language='en', last_coun
 class News(commands.Cog, name="news_commands"):
   def __init(self, bot):
     self.bot=bot
-  @commands.hybrid_command(name='subscribe', aliases=[],  brief='subscribe to news', help='e.g. `.subscribe news us 3` To subscribe to \'us\' daily news 3 at a time')
-  async def subscribe(self, context, *what):
-    country='world'
-    how_many=10
-    print(type(what))
-    what = ' '.join(what)
-    # print(f'what: {what}')
-    what = what.strip().split(' ')
-    # print(f'what: {what}')
-    
-    if what[0].lower().strip()=='news':
-      if len(what) > 1:
-        country = what[1].lower().strip()
-        if len(what) > 2:
-          how_many = int(what[2].lower().strip())
+  
+  @commands.hybrid_group(name='subscribe', aliases=[],  brief='subscribe to news', help='e.g. `.subscribe news us 3` To subscribe to \'us\' daily news 3 at a time', fallback="subscribe")
+  async def news(self, context, country='world', how_many=7):
       
       channel_id = str(context.channel.id)
       # print('country:{}'.format(country))
@@ -78,36 +66,31 @@ class News(commands.Cog, name="news_commands"):
       message = f'\n\nsubscribed:country: {country}, how_many:{how_many}, channel_id:{channel_id}'
       
       embed = get_embeded_message(context, message)
-      await send_news(context.channel, country=country)
-    await context.send(embed=embed)
+      await context.send(embed=embed) # send confirmation message
+      await send_news(context.channel, country=country) # send news
 
-  @commands.hybrid_command(name='unsubscribe', aliases=[],  brief='unsubscribe news from a channel', help='e.g. `.unsubscribe news us gb` To unsubscribe to \'us\' and \'gb\' daily news from a channel')
-  async def unsubscribe(self, context, *what):
+  @news.command(name='unsubscribe', aliases=[],  brief='unsubscribe news from a channel', help='e.g. `.unsubscribe news us gb` To unsubscribe to \'us\' and \'gb\' daily news from a channel')
+  async def unsubscribe(self, context, countries='all'):
     '''
       To unsubscribe one/list of countries from news in a channel
     
     '''
-    what = ' '.join(what)
-    what = what.strip().split(' ')
-    countries=[]
-    if what[0].lower().strip()=='news':
-      if len(what) > 1:
-        countries = what[1:]  # to remove specific country
-      what='news'
-      print(f'\n unsubscribe: country: {countries}')
-      # countries==[] or countries=='all' : remove all, else: remove specified
-      # country not in news_db: message: 'Removed: news was never subscribed'  
-      # f'removed daily news from channel: {context.channel.name}'
-      news_db = db('news')
-      channel_id = str(context.channel.id)
-      message = news_db.remove_many(channel_id, countries)
-            
-            
-      embed = get_embeded_message(context, message)
-      await context.send(embed=embed)
+    # --------------
+    # pseudocode
+    # --------------
+    news_db = db('news')
+    if countries=='all':
+      countries = news_db.get_all_countries(channel_id)
+    countries=[countries]
+    
+    channel_id = str(context.channel.id)
+    message = news_db.remove_many(channel_id, countries)
+                        
+    embed = get_embeded_message(context, message + str(countries))
+    await context.send(embed=embed)
   
-  @commands.hybrid_command(name='subscription', aliases=['subscriptions', 'subscribed'],  brief='unleahes the subreddit to the channel', help='e.g.To unleash r/jokes `.unleash jokes`')
-  async def subscription(self, context, *what):
+  @news.command(name='subscription', aliases=['subscriptions', 'subscribed'],  brief='unleahes the subreddit to the channel', help='e.g.To unleash r/jokes `.unleash jokes`')
+  async def subscription(self, context):
     # get metadata of subscribed news
     news_db = db('news')
     channel_id = str(context.channel.id)
