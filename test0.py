@@ -12,4 +12,3 @@ async def my_first_command(ctx: interactions.SlashContext):
     await ctx.send("Hi there!")
 
 bot.start()
-# bot.run("ODY0NDA2NTQ3MTA2MjM0Mzc4.GuvmJe.RHrGHqEuGrAVeR1Ub7kdnYXiFiHoKflNxCQYsg")
