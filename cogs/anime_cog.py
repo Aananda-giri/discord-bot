@@ -350,7 +350,7 @@ class anime(commands.Cog):
     
 
     @commands.hybrid_command(aliases=['rate', 'waifu'])
-    async def ratewaifu(self, ctx, *, waifuName: str):
+    async def ratewaifu(self, ctx, waifuName: str):
         '''Rate my waifu
         Beispiel:
         -----------
@@ -486,8 +486,7 @@ class anime(commands.Cog):
     #             await ctx.send(':x: Konnte den Benutzer nicht finden (falsche URL?)')
     
     @commands.hybrid_command(aliases=['search'])
-    async def anime(self, ctx, *query):
-        query = ' '.join(query)
+    async def anime(self, ctx, query):
         try:
             anime = animec.Anime(query)
         except Exception as ex:
@@ -505,8 +504,7 @@ class anime(commands.Cog):
 
     
     @commands.hybrid_command(aliases=['char', 'animecharacter'])
-    async def image(self, ctx, *query):
-        query = ' '.join(query)
+    async def image(self, ctx, query):
         try:
             char=animec.Charsearch(query)
         except Exception as ex:
