@@ -143,20 +143,14 @@ class RedditCommands(commands.Cog, name="reddit_commands"):
     def __init__(self, bot):
         self.bot = bot    
     
-    @commands.hybrid_command(name='unleash', aliases=['unleash_reddit', 'nuke'],
+    @commands.hybrid_group(name='unleash', aliases=['unleash_reddit', 'nuke'],
                  brief='unleahes the subreddit to the channel',
-                 help='e.g.To unleash r/jokes `.unleash jokes`')
-    async def unleash(self, context, *args):
-        
-        what = ' '.join(args)
-        subreddit = what.strip().split(' ')[0]
-        print('\n\nreddit.unleash: subreddit:{subreddit}, args:{args}\n\n')
-        try:
-            how_many = int(subreddit[-1])
-        except:
-            how_many = 8
-        print('\n Unleash initiated\n subreddit:{} \n'.format(subreddit))
-        if subreddit == '':
+                 help='e.g.To unleash r/jokes `.unleash jokes`',
+                 fallback="start")
+    async def unleash(self, context, subreddit, how_many=8):
+        print('\n\nUnleash initiated: subreddit:{subreddit}, how_many:{how_many}\n\n')
+
+        if subreddit==None or subreddit == '':
             embed = get_embeded_message(context, 'Please enter the subreddit to be unleashed')
         elif subreddit == 'ioe_noti' or subreddit == 'ioe_notification' or subreddit == 'ioe_notifications' or subreddit == 'ioenoti' or subreddit == 'ioenotification' or subreddit == 'ioenotifications':
             ioe_db = db('ioe_notifications')
@@ -190,12 +184,12 @@ class RedditCommands(commands.Cog, name="reddit_commands"):
                 
     
     
-    @commands.hybrid_command(name='contain',
+    @unleash.command(name='contain',
                  brief='to contain/stop unleashed  subreddit message',
                  help='e.g. `.contain jokes`')
-    async def contain(self, context, *args):
-        subreddit = ' '.join(args)
-        if subreddit == '':
+    async def contain(self, context, subreddit):
+        
+        if subreddit == None or subreddit == '':
             embed = get_embeded_message(context, 'Please enter the subreddit to be unleashed')
         elif subreddit == 'ioe_noti' or subreddit == 'ioe_notification' or subreddit == 'ioe_notifications' or subreddit == 'ioenoti' or subreddit == 'ioenotification' or subreddit == 'ioenotifications':
             # contain ioe notification from channel
