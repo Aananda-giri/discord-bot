@@ -7,9 +7,6 @@ if not os.path.isfile("config.py"):
 else:
     import config
 
-async def hybrid(ctx):
-        await ctx.send("This is a hybrid command!")
-
 class general(commands.Cog, name="general"):
     def __init__(self, bot):
         self.bot = bot
