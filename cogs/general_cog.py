@@ -239,7 +239,7 @@ class general(commands.Cog, name="general"):
     
 
     @commands.hybrid_command(name="hybrid", func=hybrid)
-    async def hybrid(ctx):
+    async def hybrid(self, ctx):
         await ctx.send("This is a hybrid command!")
 
 async def setup(bot):
