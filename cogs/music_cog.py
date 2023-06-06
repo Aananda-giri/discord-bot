@@ -170,7 +170,7 @@ def get_stream(which=None, current=None):
 
 class Audio(commands.Cog, name="audio"):
     queue = {}
-    
+
     def __init__(self, bot):
         self.bot = bot
         
@@ -248,7 +248,7 @@ class Audio(commands.Cog, name="audio"):
                     config.player.play(discord.FFmpegPCMAudio(URL))
                 else:
                     self.queue[len(self.queue)] = player
-                    await ctx.send(f':mag_right: **Searching for** ``' + url + '``\n<:youtube:763374159567781890> **Added to queue:** ``{}'.format(player.title) + "``")
+                    await context.send(f':mag_right: **Searching for** ``' + url + '``\n<:youtube:763374159567781890> **Added to queue:** ``{}'.format(player.title) + "``")
                 
                 
             print('vid_url:{}, thumbnails:{}, title:{}, URL:{},url:{}'.format(vid_url, thumbnails, title, URL, url))
