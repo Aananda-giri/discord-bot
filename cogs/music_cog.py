@@ -1,10 +1,119 @@
 import os, discord, json, config
 from discord.ext import commands
 import datetime, config, nacl
-
 from cogs.functions import *
-
 global player, playing
+
+
+import yt_dlp as youtube_dl
+class YTDLSource(discord.PCMVolumeTransformer):
+    def __init__(self, source, *, data, volume=0.5):
+        super().__init__(source, volume)
+        self.data = data
+        self.title = data.get('title')
+        self.url = ""
+
+    @classmethod
+    async def from_url(cls, url, *, loop=None, stream=False, download=False):
+        SAVE_PATH = os.path.join(os.getcwd(), 'downloads')
+        ydl_opts = {
+              'format': 'bestaudio/best',
+              'audio-format': 'mp3', 
+              'restrictfilenames': True,
+              'noplaylist': True,
+              'nocheckcertificate': True,
+              'ignoreerrors': False,
+              'logtostderr': False,
+              'quiet': True,
+              'no_warnings': True,
+              'default_search': 'auto',
+              'source_address':
+              '0.0.0.0',  # bind to ipv4 since ipv6 addresses  cause issues sometimes
+              
+              'preferredcodec': [{
+                  'key': 'FFmpegExtractAudio',
+                  'preferredcodec': 'webm',
+                  'preferredquality': '192',
+              }],
+              
+              'outtmpl':SAVE_PATH + '/%(title)s.%(ext)s',
+        }
+        #results = YoutubeSearch(url, max_results=3).to_dict()
+        #vid_url = 'https://www.youtube.com' +  results[0]['url_suffix']
+        #thumbnails = results[0]['thumbnails']
+        #title = results[0]['title']
+        #print('vid_url:{}, thumbnails:{}, title:{}, download:{},url:{}'.format(vid_url, thumbnails, title, download, url))
+        
+        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+            data = ydl.extract_info(f"ytsearch:{url}", download=download)['entries'][0]
+        
+        URL = data['url']
+        thumbnails = data['thumbnails']
+        title = data['title']
+        vid_url = data['webpage_url']
+        
+        print(URL)
+        #Renaming files if downloaded
+        if download==True:
+            files = os.listdir(os.path.join(os.getcwd(), 'downloads'))
+            for file_name in files:
+                if not file_name.endswith('.part'):
+            
+                    # To download files as .mp3
+                    #mp3_format = os.path.join(os.getcwd(), 'downloads', file_name.replace(file_name.split('.')[-1], 'mp3'))
+                    file_name = os.path.join(os.getcwd(), 'downloads', file_name)
+                    os.rename(file_name, title + '.mp3')
+        return(URL,thumbnails, title, vid_url)
+
+#Downloads videb name/url and returns full filename
+async def download_from_youtube(url):
+    SAVE_PATH = os.path.join(os.getcwd(), 'downloads')
+
+    ydl_opts = {
+        'format': 'bestaudio/best',
+        'preferredcodec': [{
+        'key': 'FFmpegExtractAudio',
+        'preferredcodec': 'webm',
+        'preferredquality': '192',
+        }],'outtmpl':SAVE_PATH + '/%(title)s.%(ext)s',
+    }
+  
+    print(' downloading!!! ')
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        try:
+            ydl.download([url])
+        except:
+            video = ydl.extract_info(f"ytsearch:{url}", download=True)['entries'][0]
+        else:
+            video = ydl.extract_info(url, download=False)
+
+    #return video
+    #print('type_of'+str(type(video)))
+    
+    # Didnot work for filename we extracted did not match with actual file_name
+    '''file_name=str(video['title'] + '-' +video['id'] + '.'  +video['formats'][3]['ext'])
+    file_name = file_name.replace('/','_')
+    '''
+
+    files = os.listdir(os.path.join(os.getcwd(), 'downloads'))
+    for file_name in files:
+        if not file_name.endswith('.part'):
+            # To download files as .mp3
+            mp3_format = os.path.join(os.getcwd(), 'downloads', file_name.replace(file_name.split('.')[-1], 'mp3'))
+            file_name = os.path.join(os.getcwd(), 'downloads', file_name)
+  
+            os.rename(file_name, mp3_format)
+            print('file_name: {}'.format(file_name))
+            print('mp3_format: {}'.format(mp3_format))
+            
+            
+            return(mp3_format)
+
+
+
+
+
+
 
 #To get current, next, previous streams
 def get_stream(which=None, current=None):
