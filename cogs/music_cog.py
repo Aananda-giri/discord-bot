@@ -169,9 +169,11 @@ def get_stream(which=None, current=None):
             return(current)
 
 class Audio(commands.Cog, name="audio"):
+    queue = {}
+    
     def __init__(self, bot):
         self.bot = bot
-        self.queue = {}
+        
     # _______________________________________________________________________
     # ---------------------------- For Music Bot : https://medium.com/pythonland/build-a-discord-bot-in-python-that-plays-music-and-send-gifs-856385e605a1
     # _______________________________________________________________________
