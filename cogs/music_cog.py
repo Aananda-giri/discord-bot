@@ -205,7 +205,7 @@ class Audio(commands.Cog, name="audio"):
     @commands.hybrid_command(name='p',
                  brief='To play song note: Please enter: `.join` first',
                  help="example: `.play gangnam style`",
-                 aliases="play")
+                 aliases=["play"])
     async def play(self, context, url):
         
         config.playing = url
