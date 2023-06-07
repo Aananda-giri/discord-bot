@@ -1,6 +1,8 @@
-./config.py
 config.py
+./config.py
+tests/config.py
+
 git_help.py
 test.py
 test.ipynb
-tests/config.py
+downloads/*
