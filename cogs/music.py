@@ -100,13 +100,14 @@ class AudioYTDLP:
                     # If input is a URL, download the video from the URL
                     video_url = link
             else:
+                    print(f'\n\n --------------- Is TEXT --------------- \n\n')
                     # If input is a song name, search for the song and download the first result
                     search_results = video.extract_info(f"ytsearch:{link}", download=False)
                     video_url = search_results['entries'][0]['webpage_url']
             
             info_dict = video.extract_info(video_url, download = False)
             print(f'\n\n info_dict: {info_dict}')
-        if 'entries' in info_dict.keys():
+        if 'entries' in info_dict:
             print('\n\n entries ')
             for video in info_dict['entries']:
                 
