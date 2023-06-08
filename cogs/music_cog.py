@@ -2,7 +2,7 @@ import os, discord, json, config
 from discord.ext import commands
 import datetime, config, nacl
 from cogs.functions import *
-from music import AudioYTDLP
+from cogs.music import AudioYTDLP
 global player, playing
 import yt_dlp as youtube_dl
 
