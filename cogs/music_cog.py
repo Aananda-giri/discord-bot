@@ -318,6 +318,7 @@ class Audio(commands.Cog, name="audio"):
             print('inside loop')
             async for path in AudioYTDLP.download_playlist(url_or_title):
                 await message.delete()
+                print(f'\n\n path:{path}\n\n')
                 message = await context.channel.send('Creating Download Link...')
                 s3_url = AudioYTDLP.upload_to_s3(path, is_folder=False)
                 await message.delete()
