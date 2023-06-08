@@ -112,7 +112,7 @@ class AudioYTDLP:
                 # info_dict = video.extract_info(video_url, download = False)
                 # video_title = info_dict['title']
                 # print(video_title)
-                fifle = AudioYTDLP.download_one(video_url)[-1]
+                fifle = await AudioYTDLP.download_one(video_url)[-1]
                 yield fifle
         else:
             yield AudioYTDLP.download_one(video_url)[-1]
