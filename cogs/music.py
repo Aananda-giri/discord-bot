@@ -105,6 +105,7 @@ class AudioYTDLP:
                     video_url = search_results['entries'][0]['webpage_url']
             
             info_dict = video.extract_info(video_url, download = False)
+            print(f'\n\n info_dict: {info_dict}')
         if 'entries' in info_dict.keys():
             print('\n\n entries ')
             for video in info_dict['entries']:
