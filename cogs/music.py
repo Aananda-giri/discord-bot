@@ -92,7 +92,7 @@ class AudioYTDLP:
             # normalize because `os.listdir()` gives this character : `｜` in python instead of this character:`|`
             normalized_listdirs = [output_directory + unicodedata.normalize('NFKC', file) for file in os.listdir(output_directory)]
             song_path = output_directory + info_dict['title'] + '.mp3'
-            full_download_path = output_directory+os.listdir(output_directory)[normalized_listdirs.index(song_path)]
+            full_download_path = output_directory +'/' + os.listdir(output_directory)[normalized_listdirs.index(song_path)]
             
             url = info_dict['webpage_url']
             thumbnail = info_dict['thumbnail']
@@ -129,9 +129,11 @@ class AudioYTDLP:
         async def upload_folder_to_s3(folder_path, bucket_name):
             # Upload folder contents to S3
             uploaded_files = []
+            folder_path = '/home/ec2-user/saneora/cogs/downloads'
             for root, dirs, files in os.walk(folder_path):
                 for file_name in files:
                     file_path = os.path.join(root, file_name)
+                    print(file_path)
                     object_key = os.path.relpath(file_path, folder_path)
                     object_url = upload_file_to_s3(file_path, bucket_name, object_key)
                     if object_url:
