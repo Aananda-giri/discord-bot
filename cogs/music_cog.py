@@ -290,7 +290,7 @@ class Audio(commands.Cog, name="audio"):
 
         async with context.typing():
             message = await context.channel.send('Downloading... \n Extracting audio... \n Please wait...')
-            url, thumbnail, title, description, duration, full_download_path = await AudioYTDLP.download_audio(url_or_string, yesplaylist=False)
+            url, thumbnail, title, description, duration, full_download_path = await AudioYTDLP.download_audio(url_or_title, yesplaylist=False)
             await message.delete()
 
             try:
