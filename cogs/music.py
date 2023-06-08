@@ -19,7 +19,7 @@ class AudioYTDLP:
         pass
 
     @staticmethod
-    async def download_one(link, part_of_playlist=False):
+    async def download_one(link, part_of_playlist=False, output_directory = output_directory):
         print(f'\n\n DownloadOne: \n\n')
         with yt_dlp.YoutubeDL({
             'format': 'bestaudio/best',                         # Ensure the best audio format is chosen
@@ -55,6 +55,8 @@ class AudioYTDLP:
             # await loop.run_in_executor(None, video.download, video_url)
             print("Successfully Downloaded")
         
+        song_path = output_directory + info_dict['title'] + '.mp3'
+        normalized_listdirs = [output_directory + unicodedata.normalize('NFKC', file) for file in os.listdir(output_directory)]
         if part_of_playlist:
             print('returning')
             return output_directory +'/' + os.listdir(output_directory)[normalized_listdirs.index(song_path)]
@@ -68,9 +70,9 @@ class AudioYTDLP:
         # -------------------
         # normalize because `os.listdir()` gives this character : `｜` in python instead of this character:`|`
         # print("2")
-        normalized_listdirs = [output_directory + unicodedata.normalize('NFKC', file) for file in os.listdir(output_directory)]
+        
         # print("3")
-        song_path = output_directory + info_dict['title'] + '.mp3'
+        
         # print("4")
         full_download_path = output_directory +'/' + os.listdir(output_directory)[normalized_listdirs.index(song_path)]
         # print("5")
@@ -113,7 +115,7 @@ class AudioYTDLP:
                 # info_dict = video.extract_info(video_url, download = False)
                 # video_titlqqe = info_dict['title']
                 # print(video_title)
-                file = await AudioYTDLP.download_one(video_url, True)
+                file = await AudioYTDLP.download_one(video_url, True, os.path.join(output_directory, playlist_info['title']))
                 print(f'returned : {file}')
                 yield file[-1]
                 print(f'yielding : {file}')
