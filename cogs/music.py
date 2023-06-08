@@ -205,7 +205,8 @@ class AudioYTDLP:
         # S3 bucket details
         bucket_name = 'discord-bot'
         region_name = 'ap-southeast-1'
-        object_name = random_string()
+        # object_name = random_string()
+        object_name = path.split('/')[-1]
         if is_folder:
             url = await upload_folder_to_s3(path, bucket_name)
         else:
