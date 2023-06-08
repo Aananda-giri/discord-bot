@@ -108,12 +108,14 @@ class AudioYTDLP:
             for video in playlist_info['entries']:
                 
                 video_url = video['url']
-                print(f'returned : {video_url}')
+                
                 # info_dict = video.extract_info(video_url, download = False)
-                # video_title = info_dict['title']
+                # video_titlqqe = info_dict['title']
                 # print(video_title)
                 file = await AudioYTDLP.download_one(video_url, True)
+                print(f'returned : {file}')
                 yield file[-1]
+                print(f'yielding : {file}')
         else:
             print('\n\n no entries ')
             file = await AudioYTDLP.download_one(video_url, True)
