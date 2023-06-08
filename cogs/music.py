@@ -15,7 +15,7 @@ class AudioYTDLP:
         pass
 
     @staticmethod
-    async def download_audio(link, yesplaylist=True):
+    async def download_audio(link, yesplaylist=False):
         print(f'\n\n yesplaylist: {yesplaylist}\n\n')
         with yt_dlp.YoutubeDL({
             'format': 'bestaudio/best',                         # Ensure the best audio format is chosen
@@ -49,7 +49,8 @@ class AudioYTDLP:
         # For playlists
         # -------------------
         # move files to folder named after playlist
-        if 'playlist_count' in info_dict:
+        # if 'playlist_count' in info_dict:
+        if yesplaylist:
             
             
             playlist_title = info_dict.get("title", "Unknown Playlist")
