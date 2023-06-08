@@ -117,7 +117,7 @@ class AudioYTDLP:
                 # print(video_title)
                 file = await AudioYTDLP.download_one(video_url, True, os.path.join(output_directory, playlist_info['title']))
                 print(f'returned : {file} exists:{os.path.exists(file)}')
-                yield file[-1]
+                yield file
                 print(f'yielding : {file}')
         else:
             print('\n\n no entries ')
