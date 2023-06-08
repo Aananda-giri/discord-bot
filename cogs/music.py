@@ -111,7 +111,7 @@ class AudioYTDLP:
         
 
         # Function to upload a file to S3 and return the link
-        async def upload_file_to_s3(file_path, bucket_name, object_key):
+        def upload_file_to_s3(file_path, bucket_name, object_key):
             s3_client = boto3.client('s3')
             try:
                 s3_client.upload_file(file_path, bucket_name, object_key)
@@ -126,7 +126,7 @@ class AudioYTDLP:
                 print(f"Error uploading file '{file_path}' to S3: {e}")
                 return None
 
-        async def upload_folder_to_s3(folder_path, bucket_name):
+        def upload_folder_to_s3(folder_path, bucket_name):
             # Upload folder contents to S3
             uploaded_files = []
             for root, dirs, files in os.walk(folder_path):
