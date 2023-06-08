@@ -1,10 +1,14 @@
+import asyncio
 import unicodedata
 import yt_dlp
 import boto3
 import os, random, string
 
 output_directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'downloads')
+loop = asyncio.get_event_loop()
 print(output_directory)
+
+
 class AudioYTDLP:
     def __init__(self) -> None:
         '''
@@ -41,12 +45,15 @@ class AudioYTDLP:
             if not yesplaylist:
                 # remove playlist parameters
                 video_url = video_url.split('&list')[0]
-            info_dict = video.extract_info(video_url, download = True)            
+            # info_dict = video.extract_info(video_url, download = False)
+            info_dict = await loop.run_in_executor(None, video.extract_info, video_url, True)
             print(f'\n\n info_dict: {info_dict}')
             
             video_title = info_dict['title']
             print(video_title)
-            video.download(video_url)
+            # video.download(video_url)
+            # await loop.run_in_executor(None, video.extract_info, video_url, True)
+            await loop.run_in_executor(None, video.download, video_url)
             print("Successfully Downloaded")
 
         # For playlists
