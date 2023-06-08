@@ -5,7 +5,7 @@ import os, random, string
 
 output_directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'downloads')
 print(output_directory)
-class MusicOperations:
+class AudioYTDLP:
     def __init__(self) -> None:
         '''
         import asyncio

@@ -284,8 +284,8 @@ class Audio(commands.Cog, name="audio"):
     @commands.hybrid_command(name='download',
                  brief='To download song note: Please enter: `.d song name` ',
                  help="example: `.d gangnam style`",
-                 aliases=["audio", "download_audio, download_one"])
-    async def d(self, context, url:str):
+                 aliases=["audio", "download_audio, download_one", "d"])
+    async def download(self, context, url:str):
         print('Try download')
 
         async with context.typing():
