@@ -19,7 +19,7 @@ class AudioYTDLP:
         pass
 
     @staticmethod
-    async def download_one(link):
+    async def download_one(link, part_of_playlist=False):
         print(f'\n\n DownloadOne: \n\n')
         with yt_dlp.YoutubeDL({
             'format': 'bestaudio/best',                         # Ensure the best audio format is chosen
@@ -54,6 +54,8 @@ class AudioYTDLP:
             video.download(video_url)
             # await loop.run_in_executor(None, video.download, video_url)
             print("Successfully Downloaded")
+            if part_of_playlist:
+                return output_directory +'/' + os.listdir(output_directory)[normalized_listdirs.index(song_path)]
 
             # For playlists
             # -------------------
@@ -63,16 +65,22 @@ class AudioYTDLP:
         # For single files
         # -------------------
         # normalize because `os.listdir()` gives this character : `｜` in python instead of this character:`|`
+        # print("2")
         normalized_listdirs = [output_directory + unicodedata.normalize('NFKC', file) for file in os.listdir(output_directory)]
+        # print("3")
         song_path = output_directory + info_dict['title'] + '.mp3'
+        # print("4")
         full_download_path = output_directory +'/' + os.listdir(output_directory)[normalized_listdirs.index(song_path)]
-        
+        # print("5")
         url = info_dict['webpage_url']
+        # print("6")
         thumbnail = info_dict['thumbnail']
+        # print("7")
         title = info_dict['title']
+        # print("8")
         description = info_dict['description']
+        # print("9")
         duration = info_dict['duration']
-
         return url, thumbnail, title, description, duration, full_download_path
     
     @staticmethod
@@ -102,11 +110,11 @@ class AudioYTDLP:
                 # info_dict = video.extract_info(video_url, download = False)
                 # video_title = info_dict['title']
                 # print(video_title)
-                fifle = await AudioYTDLP.download_one(video_url)
+                fifle = await AudioYTDLP.download_one(video_url, True)
                 yield fifle[-1]
         else:
             print('\n\n no entries ')
-            file = await AudioYTDLP.download_one(video_url)
+            file = await AudioYTDLP.download_one(video_url, True)
             yield file[-1]
 
             '''
