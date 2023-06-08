@@ -320,9 +320,9 @@ class Audio(commands.Cog, name="audio"):
                 await message.delete()
                 print(f'\n\n yielded path:{path}\n\n')
                 message = await context.channel.send('Creating Download Link...')
-                s3_url = AudioYTDLP.upload_to_s3(path, is_folder=False)
+                s3_url = await AudioYTDLP.upload_to_s3(path, is_folder=False)
                 print(f'\n s3_url:{s3_url}')
-                await message.delete()
+                # await message.delete()
                 await context.channel.send('audio download link: ' + s3_url)
                 
                 os.remove(path)
