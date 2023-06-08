@@ -111,7 +111,7 @@ class AudioYTDLP:
         
 
         # Function to upload a file to S3 and return the link
-        def upload_file_to_s3(file_path, bucket_name, object_key):
+        async def upload_file_to_s3(file_path, bucket_name, object_key):
             s3_client = boto3.client('s3')
             try:
                 s3_client.upload_file(file_path, bucket_name, object_key)
@@ -126,7 +126,7 @@ class AudioYTDLP:
                 print(f"Error uploading file '{file_path}' to S3: {e}")
                 return None
 
-        def upload_folder_to_s3(folder_path, bucket_name):
+        async def upload_folder_to_s3(folder_path, bucket_name):
             # Upload folder contents to S3
             uploaded_files = []
             for root, dirs, files in os.walk(folder_path):
@@ -160,7 +160,7 @@ class AudioYTDLP:
         region_name = 'ap-southeast-1'
         object_name = random_string()
         if is_folder:
-            url = upload_folder_to_s3(path, bucket_name)
+            url = await upload_folder_to_s3(path, bucket_name)
         else:
-            url = upload_file_to_s3(path, bucket_name, object_name)
+            url = await upload_file_to_s3(path, bucket_name, object_name)
         return url
