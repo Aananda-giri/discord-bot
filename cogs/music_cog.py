@@ -323,6 +323,7 @@ class Audio(commands.Cog, name="audio"):
                 s3_url = await AudioYTDLP.upload_to_s3(full_download_path)
                 await message.delete()
                 await context.channel.send('audio download link: ' + s3_url)
+                print('uploaded')
                 # s3_url = await AudioYTDLP.upload_to_s3(path, is_folder=False)
                 # print(f'\n s3_url:{s3_url}')
                 # await message.delete()
