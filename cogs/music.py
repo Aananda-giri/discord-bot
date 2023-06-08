@@ -54,14 +54,15 @@ class AudioYTDLP:
             video.download(video_url)
             # await loop.run_in_executor(None, video.download, video_url)
             print("Successfully Downloaded")
-            if part_of_playlist:
-                print('returning')
-                return output_directory +'/' + os.listdir(output_directory)[normalized_listdirs.index(song_path)]
+        
+        if part_of_playlist:
+            print('returning')
+            return output_directory +'/' + os.listdir(output_directory)[normalized_listdirs.index(song_path)]
 
-            # For playlists
-            # -------------------
-            # move files to folder named after playlist
-            # if 'playlist_count' in info_dict:
+        # For playlists
+        # -------------------
+        # move files to folder named after playlist
+        # if 'playlist_count' in info_dict:
         
         # For single files
         # -------------------
