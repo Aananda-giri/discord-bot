@@ -38,6 +38,9 @@ class AudioYTDLP:
                     # If input is a song name, search for the song and download the first result
                     search_results = video.extract_info(f"ytsearch:{link}", download=False)
                     video_url = search_results['entries'][0]['webpage_url']
+            if not yesplaylist:
+                # remove playlist parameters
+                video_url = video_url.split('&list')[0]
             info_dict = video.extract_info(video_url, download = True)            
             print(f'\n\n info_dict: {info_dict}')
             
