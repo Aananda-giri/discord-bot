@@ -55,36 +55,36 @@ class AudioYTDLP:
             # await loop.run_in_executor(None, video.download, video_url)
             print("Successfully Downloaded")
 
-        # For playlists
-        # -------------------
-        # move files to folder named after playlist
-        # if 'playlist_count' in info_dict:
-        if yesplaylist:
-            print(f'\n\nis playlist: {yesplaylist}\n\n')
-            
-            playlist_title = info_dict.get("title", "Unknown Playlist")
-            playlist_directory = os.path.join(output_directory, playlist_title)
+            # For playlists
+            # -------------------
+            # move files to folder named after playlist
+            # if 'playlist_count' in info_dict:
+            if yesplaylist:
+                print(f'\n\nis playlist: {yesplaylist}\n\n')
+                
+                playlist_title = info_dict.get("title", "Unknown Playlist")
+                playlist_directory = os.path.join(output_directory, playlist_title)
 
-            # create playlist directory if it doesn't exist
-            if not os.path.exists(playlist_directory):
-                os.mkdir(playlist_directory)  
-            # normalize because `os.listdir()` gives this character : `｜` in python instead of this character:`|`
-            normalized_listdirs = [output_directory + unicodedata.normalize('NFKC', file) for file in os.listdir(output_directory)]
-            for song in info_dict['entries']:
-                # print(song[q'title'])
-                song_path = output_directory + song['title'] + '.mp3'
-                full_song_path = output_directory+os.listdir(output_directory)[normalized_listdirs.index(song_path)]
-                if song_path in normalized_listdirs:
-                    # move file to playlist directory
-                    os.rename(full_song_path, output_directory + playlist_title +'/' +song['title'] + '.mp3')
-                else:
-                    print(song_path)
-            
-            full_download_path = output_directory + playlist_title 
-            url = info_dict['webpage_url']
-            title = info_dict['title']
-            description = info_dict['description']
-            return url, title, description, full_download_path
+                # create playlist directory if it doesn't exist
+                if not os.path.exists(playlist_directory):
+                    os.mkdir(playlist_directory)  
+                # normalize because `os.listdir()` gives this character : `｜` in python instead of this character:`|`
+                normalized_listdirs = [output_directory + unicodedata.normalize('NFKC', file) for file in os.listdir(output_directory)]
+                for song in info_dict['entries']:
+                    # print(song[q'title'])
+                    song_path = output_directory + song['title'] + '.mp3'
+                    full_song_path = output_directory+os.listdir(output_directory)[normalized_listdirs.index(song_path)]
+                    if song_path in normalized_listdirs:
+                        # move file to playlist directory
+                        os.rename(full_song_path, output_directory + playlist_title +'/' +song['title'] + '.mp3')
+                    else:
+                        print(song_path)
+                
+                full_download_path = output_directory + playlist_title 
+                url = info_dict['webpage_url']
+                title = info_dict['title']
+                description = info_dict['description']
+                return url, title, description, full_download_path
         
         else:
             # For single files
