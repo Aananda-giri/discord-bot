@@ -310,12 +310,14 @@ class Audio(commands.Cog, name="audio"):
                  help="example: `.dall gangnam style`",
                  aliases=["audio_playlist", "download_audio_playlist", "d_all"])
     async def download_playlist(self, context, url_or_title:str):
-        print('Try download')
+        print('Try download Playlist')
         
         async with context.typing():
             message = await context.channel.send('Downloading... \n Extracting audio... \n Please wait...')
             # url, thumbnail, title, description, duration, full_download_path = await AudioYTDLP.download_audio(url_or_title, yesplaylist=True)
+            print('inside loop')
             async for path in await AudioYTDLP.download_playlist(url_or_title):
+                
                 await message.delete()
                 message = await context.channel.send('Creating Download Link...')
                 s3_url = AudioYTDLP.upload_to_s3(path, is_folder=False)
