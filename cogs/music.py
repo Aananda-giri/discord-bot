@@ -20,7 +20,7 @@ class AudioYTDLP:
 
     @staticmethod
     async def download_one(link):
-        # print(f'\n\n yesplaylist: {yesplaylist}\n\n')
+        print(f'\n\n DownloadOne: \n\n')
         with yt_dlp.YoutubeDL({
             'format': 'bestaudio/best',                         # Ensure the best audio format is chosen
             'ignoreerrors':True,                                # Ignore errors
