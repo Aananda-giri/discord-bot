@@ -19,15 +19,15 @@ class AudioYTDLP:
         pass
 
     @staticmethod
-    async def download_audio(link, yesplaylist=False):
-        print(f'\n\n yesplaylist: {yesplaylist}\n\n')
+    async def download_one(link):
+        # print(f'\n\n yesplaylist: {yesplaylist}\n\n')
         with yt_dlp.YoutubeDL({
             'format': 'bestaudio/best',                         # Ensure the best audio format is chosen
             'ignoreerrors':True,                                # Ignore errors
             'extract_audio': True,                              # Only keep the audio
             # 'outtmpl': output_directory + '/%(title)s.mp3'
             'outtmpl': output_directory + '/%(title)s.%(ext)s', # download location
-            'yesplaylist': yesplaylist,                         # True/False: download from playlist
+            'yesplaylist': False,                         # True/False: download from playlist
             'verbose': False,                # print more info
             'postprocessors': [{
                 'key': 'FFmpegVideoConvertor',
@@ -42,9 +42,9 @@ class AudioYTDLP:
                     # If input is a song name, search for the song and download the first result
                     search_results = video.extract_info(f"ytsearch:{link}", download=False)
                     video_url = search_results['entries'][0]['webpage_url']
-            if not yesplaylist:
-                # remove playlist parameters
-                video_url = video_url.split('&list')[0]
+            # if not yesplaylist:
+            # remove playlist parameters
+            video_url = video_url.split('&list')[0]
             info_dict = video.extract_info(video_url, download = True)
             # info_dict = await loop.run_in_executor(None, video.extract_info, video_url, True)
             # print(f'\n\n info_dict: {info_dict}')
@@ -59,49 +59,91 @@ class AudioYTDLP:
             # -------------------
             # move files to folder named after playlist
             # if 'playlist_count' in info_dict:
-            if yesplaylist:
-                print(f'\n\nis playlist: {yesplaylist}\n\n')
-                
-                playlist_title = info_dict.get("title", "Unknown Playlist")
-                playlist_directory = os.path.join(output_directory, playlist_title)
-
-                # create playlist directory if it doesn't exist
-                if not os.path.exists(playlist_directory):
-                    os.mkdir(playlist_directory)  
-                # normalize because `os.listdir()` gives this character : `｜` in python instead of this character:`|`
-                normalized_listdirs = [output_directory + unicodedata.normalize('NFKC', file) for file in os.listdir(output_directory)]
-                for song in info_dict['entries']:
-                    # print(song[q'title'])
-                    song_path = output_directory + song['title'] + '.mp3'
-                    full_song_path = output_directory+os.listdir(output_directory)[normalized_listdirs.index(song_path)]
-                    if song_path in normalized_listdirs:
-                        # move file to playlist directory
-                        os.rename(full_song_path, output_directory + playlist_title +'/' +song['title'] + '.mp3')
-                    else:
-                        print(song_path)
-                
-                full_download_path = output_directory + playlist_title 
-                url = info_dict['webpage_url']
-                title = info_dict['title']
-                description = info_dict['description']
-                return url, title, description, full_download_path
         
-            else:
-                # For single files
-                # -------------------
-                # normalize because `os.listdir()` gives this character : `｜` in python instead of this character:`|`
-                normalized_listdirs = [output_directory + unicodedata.normalize('NFKC', file) for file in os.listdir(output_directory)]
-                song_path = output_directory + info_dict['title'] + '.mp3'
-                full_download_path = output_directory +'/' + os.listdir(output_directory)[normalized_listdirs.index(song_path)]
-                
-                url = info_dict['webpage_url']
-                thumbnail = info_dict['thumbnail']
-                title = info_dict['title']
-                description = info_dict['description']
-                duration = info_dict['duration']
+        # For single files
+        # -------------------
+        # normalize because `os.listdir()` gives this character : `｜` in python instead of this character:`|`
+        normalized_listdirs = [output_directory + unicodedata.normalize('NFKC', file) for file in os.listdir(output_directory)]
+        song_path = output_directory + info_dict['title'] + '.mp3'
+        full_download_path = output_directory +'/' + os.listdir(output_directory)[normalized_listdirs.index(song_path)]
+        
+        url = info_dict['webpage_url']
+        thumbnail = info_dict['thumbnail']
+        title = info_dict['title']
+        description = info_dict['description']
+        duration = info_dict['duration']
 
-                return url, thumbnail, title, description, duration, full_download_path
+        return url, thumbnail, title, description, duration, full_download_path
     
+    @staticmethod
+    async def download_playlist(link):
+        # For playlists
+        # -------------------
+        print(f'\n\n --------------- Download Playlist --------------- \n\n')
+        options = {
+            'format': 'bestaudio/best',                         # Ensure the best audio format is chosen
+            'ignoreerrors':True,                                # Ignore errors
+            'extract_audio': True,                              # Only keep the audio
+            # 'outtmpl': output_directory + '/%(title)s.mp3'
+            'outtmpl': output_directory + '/%(title)s.%(ext)s', # download location
+            'yesplaylist': True,                         # True/False: download from playlist
+            'verbose': False,                # print more info
+            'postprocessors': [{
+                'key': 'FFmpegVideoConvertor',
+                'preferedformat': 'mp3',
+                #  'preferredquality': '192',
+            }]
+        }
+        
+        with yt_dlp.YoutubeDL(options) as video:
+            if link.startswith("http"):
+                    # If input is a URL, download the video from the URL
+                    video_url = link
+            else:
+                    # If input is a song name, search for the song and download the first result
+                    search_results = video.extract_info(f"ytsearch:{link}", download=False)
+                    video_url = search_results['entries'][0]['webpage_url']
+            
+            info_dict = video.extract_info(video_url, download = False)
+        if 'entries' in info_dict.keys():
+            for video in info_dict['entries']:
+                
+                video_url = video['url']
+                # info_dict = video.extract_info(video_url, download = False)
+                # video_title = info_dict['title']
+                # print(video_title)
+                fifle = AudioYTDLP.download_one(video_url)[-1]
+                yield fifle
+        else:
+            yield AudioYTDLP.download_one(video_url)[-1]
+
+            '''
+            playlist_title = info_dict.get("title", "Unknown Playlist")
+            playlist_directory = os.path.join(output_directory, playlist_title)
+
+            # create playlist directory if it doesn't exist
+            if not os.path.exists(playlist_directory):
+                os.mkdir(playlist_directory)  
+            # normalize because `os.listdir()` gives this character : `｜` in python instead of this character:`|`
+            normalized_listdirs = [output_directory + unicodedata.normalize('NFKC', file) for file in os.listdir(output_directory)]
+            for song in info_dict['entries']:
+                # print(song[q'title'])
+                song_path = output_directory + song['title'] + '.mp3'
+                full_song_path = output_directory+os.listdir(output_directory)[normalized_listdirs.index(song_path)]
+                if song_path in normalized_listdirs:
+                    # move file to playlist directory
+                    os.rename(full_song_path, output_directory + playlist_title +'/' +song['title'] + '.mp3')
+                else:
+                    print(song_path)
+            
+            full_download_path = output_directory + playlist_title 
+            url = info_dict['webpage_url']
+            title = info_dict['title']
+            description = info_dict['description']
+            return url, title, description, full_download_path
+            '''
+    
+
     @staticmethod
     async def upload_to_s3(path, is_folder=False):
         def random_string(string_length=6):

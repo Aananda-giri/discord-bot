@@ -313,16 +313,16 @@ class Audio(commands.Cog, name="audio"):
         
         async with context.typing():
             message = await context.channel.send('Downloading... \n Extracting audio... \n Please wait...')
-            url, thumbnail, title, description, duration, full_download_path = await AudioYTDLP.download_audio(url_or_title, yesplaylist=True)
-            
-            await message.delete()
-            message = await context.channel.send('Creating Download Link...')
-            s3_url = AudioYTDLP.upload_to_s3(full_download_path, is_folder=True)
-            await message.delete()
-            context.send('Playlist download link: ' + s3_url)
-            
-            os.remove(full_download_path)
-            print(' downloaded!!! ')
+            # url, thumbnail, title, description, duration, full_download_path = await AudioYTDLP.download_audio(url_or_title, yesplaylist=True)
+            async for path in await AudioYTDLP.download_playlist(url_or_title):
+                await message.delete()
+                message = await context.channel.send('Creating Download Link...')
+                s3_url = AudioYTDLP.upload_to_s3(path, is_folder=False)
+                await message.delete()
+                context.send('Playlist download link: ' + s3_url)
+                
+                os.remove(path)
+                # print(' downloaded!!! ')
     
     @commands.hybrid_command(name='pause',brief='To To pause the song currently beieng played: `.p`, To play: `.p song_name` ', help='This command pauses the song. e.g. while song is being played, press: `.p` ')
     async def pause(self, context):
