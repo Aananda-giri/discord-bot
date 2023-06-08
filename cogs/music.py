@@ -55,6 +55,7 @@ class AudioYTDLP:
             # await loop.run_in_executor(None, video.download, video_url)
             print("Successfully Downloaded")
             if part_of_playlist:
+                print('returning')
                 return output_directory +'/' + os.listdir(output_directory)[normalized_listdirs.index(song_path)]
 
             # For playlists
@@ -107,11 +108,12 @@ class AudioYTDLP:
             for video in playlist_info['entries']:
                 
                 video_url = video['url']
+                print(f'returned : {video_url}')
                 # info_dict = video.extract_info(video_url, download = False)
                 # video_title = info_dict['title']
                 # print(video_title)
-                fifle = await AudioYTDLP.download_one(video_url, True)
-                yield fifle[-1]
+                file = await AudioYTDLP.download_one(video_url, True)
+                yield file[-1]
         else:
             print('\n\n no entries ')
             file = await AudioYTDLP.download_one(video_url, True)
