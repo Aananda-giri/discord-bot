@@ -80,6 +80,20 @@ class AudioYTDLP:
         # For playlists
         # -------------------
         print(f'\n\n --------------- Download Playlist --------------- \n\n')
+        def get_playlist_info(playlist_url):
+            ydl_opts = {
+                'ignoreerrors': True,  # Ignore any download errors
+                'extract_flat': True,  # Extract only playlist entries, not individual videos
+            }
+
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                playlist_info = ydl.extract_info(playlist_url, download=False)
+
+            return playlist_info
+
+        # playlist_url = "https://www.youtube.com/playlist?list=PLg2ADfnejD6H4weUDZWPyfXLVbBZIgBpf"
+        playlist_info = get_playlist_info(link)
+        '''
         options = {
             'format': 'bestaudio/best',                         # Ensure the best audio format is chosen
             'ignoreerrors':True,                                # Ignore errors
@@ -107,9 +121,10 @@ class AudioYTDLP:
             
             info_dict = video.extract_info(video_url, download = False)
             print(f'\n\n info_dict: {info_dict}')
-        if 'entries' in info_dict:
+        '''
+        if 'entries' in playlist_info:
             print('\n\n entries ')
-            for video in info_dict['entries']:
+            for video in playlist_info['entries']:
                 
                 video_url = video['url']
                 # info_dict = video.extract_info(video_url, download = False)
