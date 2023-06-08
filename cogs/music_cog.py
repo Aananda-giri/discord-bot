@@ -285,12 +285,12 @@ class Audio(commands.Cog, name="audio"):
                  brief='To download song note: Please enter: `.d song name` ',
                  help="example: `.d gangnam style`",
                  aliases=["audio", "download_audio, download_one", "d"])
-    async def download(self, context, url:str):
+    async def download(self, context, url_or_title:str):
         print('Try download')
 
         async with context.typing():
             message = await context.channel.send('Downloading... \n Extracting audio... \n Please wait...')
-            url, thumbnail, title, description, duration, full_download_path = await AudioYTDLP.download_audio(url, yesplaylist=False)
+            url, thumbnail, title, description, duration, full_download_path = await AudioYTDLP.download_audio(url_or_string, yesplaylist=False)
             await message.delete()
 
             try:
@@ -304,16 +304,16 @@ class Audio(commands.Cog, name="audio"):
             os.remove(full_download_path)
             print(' downloaded!!! ')
     
-    @commands.hybrid_command(name='dall',
+    @commands.hybrid_command(name='download_playlist',
                  brief='To download song note: Please enter: `.d song name` ',
                  help="example: `.dall gangnam style`",
-                 aliases=["audio_playlist", "download_audio_playlist, download_playlist"])
-    async def dall(self, context, url:str):
+                 aliases=["audio_playlist", "download_audio_playlist", "d_all"])
+    async def download_playlist(self, context, url_or_title:str):
         print('Try download')
         
         async with context.typing():
             message = await context.channel.send('Downloading... \n Extracting audio... \n Please wait...')
-            url, thumbnail, title, description, duration, full_download_path = await AudioYTDLP.download_audio(url, yesplaylist=True)
+            url, thumbnail, title, description, duration, full_download_path = await AudioYTDLP.download_audio(url_or_title, yesplaylist=True)
             
             await message.delete()
             message = await context.channel.send('Creating Download Link...')
