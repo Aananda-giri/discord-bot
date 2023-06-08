@@ -341,9 +341,10 @@ class Audio(commands.Cog, name="audio"):
                     
                     os.remove(path)
                     # print(' downloaded!!! ')
+            await run_download(url_or_title)
             # Create and run the asynchronous task in a separate thread
-            task = asyncio.create_task(download_from_youtube(url_or_title))
-            await task
+            # task = asyncio.create_task(download_from_youtube(url_or_title))
+            # await task
             # loop = asyncio.get_event_loop()
             # loop.run_until_complete(download_playlist(url_or_title))
     
