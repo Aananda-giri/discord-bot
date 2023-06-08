@@ -316,14 +316,7 @@ class Audio(commands.Cog, name="audio"):
             message = await context.channel.send('Downloading... \n Extracting audio... \n Please wait...')
             # url, thumbnail, title, description, duration, full_download_path = await AudioYTDLP.download_audio(url_or_title, yesplaylist=True)
             print('inside loop')
-            import functools
-            async def run_download(url_or_title):
-                func = functools.partial(download_playlist, url_or_title) # `run_in_executor` doesn't support kwargs, `functools.partial` does
-                # return await client.loop.run_in_executor(None, func)
-                # return await bot.loop.run_in_executor(None, download_playlist, url_or_title)
-                return await bot.loop.run_in_executor(None, func)
-            
-            async def download_playlist(url_or_title):
+            async def download_it(url_or_title):
                 async for path in AudioYTDLP.download_playlist(url_or_title):
                     await message.delete()
                     print(f'\n\n yielded path:{path}\n\n')
@@ -341,10 +334,9 @@ class Audio(commands.Cog, name="audio"):
                     
                     os.remove(path)
                     # print(' downloaded!!! ')
-            await run_download(url_or_title)
             # Create and run the asynchronous task in a separate thread
-            # task = asyncio.create_task(download_from_youtube(url_or_title))
-            # await task
+            task = asyncio.create_task(download_it(url_or_title))
+            await task
             # loop = asyncio.get_event_loop()
             # loop.run_until_complete(download_playlist(url_or_title))
     
