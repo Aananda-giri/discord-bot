@@ -2,10 +2,10 @@ import os, discord, json, config
 from discord.ext import commands
 import datetime, config, nacl
 from cogs.functions import *
+from music import AudioYTDLP
 global player, playing
-
-
 import yt_dlp as youtube_dl
+
 class YTDLSource(discord.PCMVolumeTransformer):
     def __init__(self, source, *, data, volume=0.5):
         super().__init__(source, volume)
@@ -281,26 +281,47 @@ class Audio(commands.Cog, name="audio"):
     
     
     
-    @commands.hybrid_command(name='d',
+    @commands.hybrid_command(name='download',
                  brief='To download song note: Please enter: `.d song name` ',
-                 help="example: `.d gangnam style`")
+                 help="example: `.d gangnam style`",
+                 aliases=["audio", "download_audio, download_one"])
     async def d(self, context, url:str):
-        if not 'downloads' in os.listdir():
-          os.mkdir('downloads')
+        print('Try download')
+
+        async with context.typing():
+            message = await context.channel.send('Downloading... \n Extracting audio... \n Please wait...')
+            url, thumbnail, title, description, duration, full_download_path = await AudioYTDLP.download_audio(url, yesplaylist=False)
+            await message.delete()
+
+            try:
+                await context.send(file=discord.File(full_download_path))
+            except Exception as e:
+                message = await context.channel.send('File size too large for server! \n Creating Download Link ...')
+                s3_url = AudioYTDLP.upload_to_s3(full_download_path)
+                await message.delete()
+                context.send('audio download link: ' + s3_url)
+            os.remove(full_download_path)
+            print(' downloaded!!! ')
+    
+    @commands.hybrid_command(name='dall',
+                 brief='To download song note: Please enter: `.d song name` ',
+                 help="example: `.dall gangnam style`",
+                 aliases=["audio_playlist", "download_audio_playlist, download_playlist"])
+    async def dall(self, context, url:str):
         print('Try download')
         
         async with context.typing():
-              URL, thumbnails, title, vid_url = await YTDLSource.from_url(url, loop=context.bot.loop, download=True)
-                    
-              full_downloaded_file_name = title + '.mp3'
-              
-              try:
-                await context.send(file=discord.File(full_downloaded_file_name))
-              except Exception as e:
-                context.send('Sorry! According to discord policy File size too large')
-              #os.remove(full_downloaded_file_name)
-              print(' downloaded!!! ')
-    
+            message = await context.channel.send('Downloading... \n Extracting audio... \n Please wait...')
+            url, thumbnail, title, description, duration, full_download_path = await AudioYTDLP.download_audio(url, yesplaylist=True)
+            
+            await message.delete()
+            message = await context.channel.send('Creating Download Link...')
+            s3_url = AudioYTDLP.upload_to_s3(full_download_path, is_folder=True)
+            await message.delete()
+            context.send('Playlist download link: ' + s3_url)
+            
+            os.remove(full_download_path)
+            print(' downloaded!!! ')
     
     @commands.hybrid_command(name='pause',brief='To To pause the song currently beieng played: `.p`, To play: `.p song_name` ', help='This command pauses the song. e.g. while song is being played, press: `.p` ')
     async def pause(self, context):
