@@ -318,6 +318,7 @@ class Audio(commands.Cog, name="audio"):
             print('inside loop')
             async def download_it(url_or_title):
                 async for path in AudioYTDLP.download_playlist(url_or_title):
+                    print('yielded sth')
                     await message.delete()
                     print(f'\n\n yielded path:{path}\n\n')
                     message = await context.channel.send('Creating Download Link...')
