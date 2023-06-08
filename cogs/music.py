@@ -117,8 +117,8 @@ class AudioYTDLP:
                 yield fifle
         else:
             print('\n\n no entries ')
-            file = await AudioYTDLP.download_one(video_url)[-1]
-            yield file
+            file = await AudioYTDLP.download_one(video_url)
+            yield file[-1]
 
             '''
             playlist_title = info_dict.get("title", "Unknown Playlist")
