@@ -93,35 +93,7 @@ class AudioYTDLP:
 
         # playlist_url = "https://www.youtube.com/playlist?list=PLg2ADfnejD6H4weUDZWPyfXLVbBZIgBpf"
         playlist_info = get_playlist_info(link)
-        '''
-        options = {
-            'format': 'bestaudio/best',                         # Ensure the best audio format is chosen
-            'ignoreerrors':True,                                # Ignore errors
-            'extract_audio': True,                              # Only keep the audio
-            # 'outtmpl': output_directory + '/%(title)s.mp3'
-            'outtmpl': output_directory + '/%(title)s.%(ext)s', # download location
-            'yesplaylist': False,                         # True/False: download from playlist
-            'verbose': False,                # print more info
-            'postprocessors': [{
-                'key': 'FFmpegVideoConvertor',
-                'preferedformat': 'mp3',
-                #  'preferredquality': '192',
-            }]
-        }
         
-        with yt_dlp.YoutubeDL(options) as video:
-            if link.startswith("http"):
-                    # If input is a URL, download the video from the URL
-                    video_url = link
-            else:
-                    print(f'\n\n --------------- Is TEXT --------------- \n\n')
-                    # If input is a song name, search for the song and download the first result
-                    search_results = video.extract_info(f"ytsearch:{link}", download=False)
-                    video_url = search_results['entries'][0]['webpage_url']
-            
-            info_dict = video.extract_info(video_url, download = False)
-            print(f'\n\n info_dict: {info_dict}')
-        '''
         if 'entries' in playlist_info:
             print('\n\n entries ')
             for video in playlist_info['entries']:
@@ -130,8 +102,8 @@ class AudioYTDLP:
                 # info_dict = video.extract_info(video_url, download = False)
                 # video_title = info_dict['title']
                 # print(video_title)
-                fifle = await AudioYTDLP.download_one(video_url)[-1]
-                yield fifle
+                fifle = await AudioYTDLP.download_one(video_url)
+                yield fifle[-1]
         else:
             print('\n\n no entries ')
             file = await AudioYTDLP.download_one(video_url)
