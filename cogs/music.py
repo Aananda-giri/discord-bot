@@ -106,6 +106,7 @@ class AudioYTDLP:
             
             info_dict = video.extract_info(video_url, download = False)
         if 'entries' in info_dict.keys():
+            print('\n\n entries ')
             for video in info_dict['entries']:
                 
                 video_url = video['url']
@@ -115,7 +116,8 @@ class AudioYTDLP:
                 fifle = await AudioYTDLP.download_one(video_url)[-1]
                 yield fifle
         else:
-            yield AudioYTDLP.download_one(video_url)[-1]
+            print('\n\n no entries ')
+            yield await AudioYTDLP.download_one(video_url)[-1]
 
             '''
             playlist_title = info_dict.get("title", "Unknown Playlist")
