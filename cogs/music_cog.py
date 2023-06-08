@@ -334,8 +334,11 @@ class Audio(commands.Cog, name="audio"):
                     
                     os.remove(path)
                     # print(' downloaded!!! ')
-            loop = asyncio.get_event_loop()
-            loop.run_until_complete(download_playlist(url_or_title))
+            # Create and run the asynchronous task in a separate thread
+            task = asyncio.create_task(download_from_youtube(url_or_title))
+            await task
+            # loop = asyncio.get_event_loop()
+            # loop.run_until_complete(download_playlist(url_or_title))
     
     @commands.hybrid_command(name='pause',brief='To To pause the song currently beieng played: `.p`, To play: `.p song_name` ', help='This command pauses the song. e.g. while song is being played, press: `.p` ')
     async def pause(self, context):
