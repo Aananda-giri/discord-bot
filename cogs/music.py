@@ -47,7 +47,7 @@ class AudioYTDLP:
                 video_url = video_url.split('&list')[0]
             info_dict = video.extract_info(video_url, download = True)
             # info_dict = await loop.run_in_executor(None, video.extract_info, video_url, True)
-            print(f'\n\n info_dict: {info_dict}')
+            # print(f'\n\n info_dict: {info_dict}')
             
             video_title = info_dict['title']
             print(video_title)
