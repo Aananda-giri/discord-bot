@@ -1,4 +1,4 @@
-import os, discord, json, config
+import os, discord, json, config, asyncio
 from discord.ext import commands
 import datetime, config, nacl
 from cogs.functions import *
@@ -316,23 +316,25 @@ class Audio(commands.Cog, name="audio"):
             message = await context.channel.send('Downloading... \n Extracting audio... \n Please wait...')
             # url, thumbnail, title, description, duration, full_download_path = await AudioYTDLP.download_audio(url_or_title, yesplaylist=True)
             print('inside loop')
-            async for path in AudioYTDLP.download_playlist(url_or_title):
-                await message.delete()
-                print(f'\n\n yielded path:{path}\n\n')
-                message = await context.channel.send('Creating Download Link...')
-                s3_url = await AudioYTDLP.upload_to_s3(path)
-                await message.delete()
-                
-                print('uploaded-1')
-                await context.channel.send('audio download link: ' + s3_url)
-                print('uploaded')
-                # s3_url = await AudioYTDLP.upload_to_s3(path, is_folder=False)
-                # print(f'\n s3_url:{s3_url}')
-                # await message.delete()
-                # await context.channel.send('audio download link: ' + s3_url)
-                
-                os.remove(path)
-                # print(' downloaded!!! ')
+            async def download_playlist(url_or_title):
+                async for path in AudioYTDLP.download_playlist(url_or_title):
+                    await message.delete()
+                    print(f'\n\n yielded path:{path}\n\n')
+                    message = await context.channel.send('Creating Download Link...')
+                    s3_url = await AudioYTDLP.upload_to_s3(path)
+                    await message.delete()
+                    
+                    print('uploaded-1')
+                    await context.channel.send('audio download link: ' + s3_url)
+                    print('uploaded')
+                    # s3_url = await AudioYTDLP.upload_to_s3(path, is_folder=False)
+                    # print(f'\n s3_url:{s3_url}')
+                    # await message.delete()
+                    # await context.channel.send('audio download link: ' + s3_url)
+                    
+                    os.remove(path)
+                    # print(' downloaded!!! ')
+            asyncio.run(download_playlist(url_or_title))
     
     @commands.hybrid_command(name='pause',brief='To To pause the song currently beieng played: `.p`, To play: `.p song_name` ', help='This command pauses the song. e.g. while song is being played, press: `.p` ')
     async def pause(self, context):
