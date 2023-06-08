@@ -60,7 +60,7 @@ class AudioYTDLP:
         # move files to folder named after playlist
         # if 'playlist_count' in info_dict:
         if yesplaylist:
-            
+            print(f'\n\nis playlist: {yesplaylist}\n\n')
             
             playlist_title = info_dict.get("title", "Unknown Playlist")
             playlist_directory = os.path.join(output_directory, playlist_title)
