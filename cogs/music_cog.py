@@ -297,7 +297,7 @@ class Audio(commands.Cog, name="audio"):
                 await context.send(file=discord.File(full_download_path))
             except Exception as e:
                 message = await context.channel.send('File size too large for server! \n Creating Download Link ...')
-                s3_url = AudioYTDLP.upload_to_s3(full_download_path)
+                s3_url = await AudioYTDLP.upload_to_s3(full_download_path)
                 await message.delete()
                 context.send('audio download link: ' + s3_url)
             os.remove(full_download_path)
