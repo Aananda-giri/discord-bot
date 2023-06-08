@@ -86,21 +86,21 @@ class AudioYTDLP:
                 description = info_dict['description']
                 return url, title, description, full_download_path
         
-        else:
-            # For single files
-            # -------------------
-            # normalize because `os.listdir()` gives this character : `｜` in python instead of this character:`|`
-            normalized_listdirs = [output_directory + unicodedata.normalize('NFKC', file) for file in os.listdir(output_directory)]
-            song_path = output_directory + info_dict['title'] + '.mp3'
-            full_download_path = output_directory +'/' + os.listdir(output_directory)[normalized_listdirs.index(song_path)]
-            
-            url = info_dict['webpage_url']
-            thumbnail = info_dict['thumbnail']
-            title = info_dict['title']
-            description = info_dict['description']
-            duration = info_dict['duration']
+            else:
+                # For single files
+                # -------------------
+                # normalize because `os.listdir()` gives this character : `｜` in python instead of this character:`|`
+                normalized_listdirs = [output_directory + unicodedata.normalize('NFKC', file) for file in os.listdir(output_directory)]
+                song_path = output_directory + info_dict['title'] + '.mp3'
+                full_download_path = output_directory +'/' + os.listdir(output_directory)[normalized_listdirs.index(song_path)]
+                
+                url = info_dict['webpage_url']
+                thumbnail = info_dict['thumbnail']
+                title = info_dict['title']
+                description = info_dict['description']
+                duration = info_dict['duration']
 
-            return url, thumbnail, title, description, duration, full_download_path
+                return url, thumbnail, title, description, duration, full_download_path
     
     @staticmethod
     async def upload_to_s3(path, is_folder=False):
