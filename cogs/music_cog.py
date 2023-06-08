@@ -316,6 +316,13 @@ class Audio(commands.Cog, name="audio"):
             message = await context.channel.send('Downloading... \n Extracting audio... \n Please wait...')
             # url, thumbnail, title, description, duration, full_download_path = await AudioYTDLP.download_audio(url_or_title, yesplaylist=True)
             print('inside loop')
+            import functools
+            async def run_download(url_or_title):
+                func = functools.partial(download_playlist, url_or_title) # `run_in_executor` doesn't support kwargs, `functools.partial` does
+                # return await client.loop.run_in_executor(None, func)
+                # return await bot.loop.run_in_executor(None, download_playlist, url_or_title)
+                return await bot.loop.run_in_executor(None, func)
+            
             async def download_playlist(url_or_title):
                 async for path in AudioYTDLP.download_playlist(url_or_title):
                     await message.delete()
