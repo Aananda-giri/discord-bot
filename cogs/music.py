@@ -86,7 +86,7 @@ class AudioYTDLP:
             'extract_audio': True,                              # Only keep the audio
             # 'outtmpl': output_directory + '/%(title)s.mp3'
             'outtmpl': output_directory + '/%(title)s.%(ext)s', # download location
-            'yesplaylist': True,                         # True/False: download from playlist
+            'yesplaylist': False,                         # True/False: download from playlist
             'verbose': False,                # print more info
             'postprocessors': [{
                 'key': 'FFmpegVideoConvertor',
