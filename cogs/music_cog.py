@@ -320,11 +320,11 @@ class Audio(commands.Cog, name="audio"):
                 if not url.startswith('http'):
                     await context.channel.send('Invalid URL')
                     
-                async for path in AudioYTDLP.download_playlist(url_or_title):
+                async for (name, path) in AudioYTDLP.download_playlist(url_or_title):
                     print('yielded sth')
                     # await message.delete()
                     print(f'\n\n yielded path:{path}\n\n')
-                    message = await context.channel.send('Creating Download Link...')
+                    message = await context.channel.send(f'Audio: {name}')
                     s3_url = await AudioYTDLP.upload_to_s3(path)
                     # await message.delete()
                     

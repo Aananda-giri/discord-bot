@@ -59,7 +59,7 @@ class AudioYTDLP:
         normalized_listdirs = [output_directory + unicodedata.normalize('NFKC', file) for file in os.listdir(output_directory)]
         if part_of_playlist:
             print('returning')
-            return output_directory +'/' + os.listdir(output_directory)[normalized_listdirs.index(song_path)]
+            return (info_dict['title'] + '.mp3', output_directory +'/' + os.listdir(output_directory)[normalized_listdirs.index(song_path)])
 
         # For playlists
         # -------------------
@@ -115,9 +115,9 @@ class AudioYTDLP:
                 # info_dict = video.extract_info(video_url, download = False)
                 # video_titlqqe = info_dict['title']
                 # print(video_title)
-                file = await AudioYTDLP.download_one(video_url, True, os.path.join(output_directory, playlist_info['title']))
+                name, file = await AudioYTDLP.download_one(video_url, True, os.path.join(output_directory, playlist_info['title']))
                 print(f'returned : {file} exists:{os.path.exists(file)}')
-                yield file
+                yield name, file
                 # print(f'yielding : {file}')
         else:
             print('\n\n no entries ')
