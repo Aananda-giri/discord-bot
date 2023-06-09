@@ -316,7 +316,10 @@ class Audio(commands.Cog, name="audio"):
             message = await context.channel.send('Downloading... \n Extracting audio... \n Please wait...')
             # url, thumbnail, title, description, duration, full_download_path = await AudioYTDLP.download_audio(url_or_title, yesplaylist=True)
             print('inside loop')
-            async def download_it(url_or_title):
+            async def download_it(url):
+                if not url.startswith('http'):
+                    await context.channel.send('Invalid URL')
+                    
                 async for path in AudioYTDLP.download_playlist(url_or_title):
                     print('yielded sth')
                     # await message.delete()
