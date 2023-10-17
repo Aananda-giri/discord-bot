@@ -703,7 +703,7 @@
         {
             "861131196779331624": {
                 "uesrname": "Nathan.9449",
-                "times_excuted": 34
+                "times_excuted": 35
             }
         }
     ],
@@ -1212,6 +1212,14 @@
             "792049677733462056": {
                 "uesrname": "aurora_borealis19920",
                 "times_excuted": 1
+            }
+        }
+    ],
+    "quiz": [
+        {
+            "861131196779331624": {
+                "uesrname": "anon.sepian0",
+                "times_excuted": 37
             }
         }
     ]

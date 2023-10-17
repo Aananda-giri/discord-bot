@@ -173,6 +173,47 @@ def get_embeded_message(context, title, description='', author=True):
       embed.set_footer(text=f'{context.author}',icon_url=context.author.avatar)
     return(embed)
 
+def get_question_embed(context, question, options):
+    # print(type(options))
+    embed = discord.Embed(
+        title=f"{question}",
+        color=discord.Color.green()
+    )
+    numbers = [':one:', ':two:', ':three:', ':four:', ':five:', ':six:', ':seven:', ':eight:', ':nine:', ':keycap_ten:']
+    
+    for index, option in enumerate(list(options)):
+        embed.add_field(
+            name=f"{numbers[index]} {option}",
+            value=f"",
+            inline=False
+        )
+    return embed
+
+
+def create_stylish_leaderboard_embed(leaderboard_data):
+    # Create a new Discord embed
+    embed = discord.Embed(
+        title="Top 10 Leaderboard",
+        color=discord.Color.green()
+    )
+
+    # Create the leaderboard text
+    leaderboard_text = ""
+    for rank, data in enumerate(leaderboard_data):
+        username = data[0]
+        score = data[1]['score']
+        leaderboard_text += f"`{str(rank+1).rjust(4)}`      `{username.center(10)}`      `{str(score).center(5)}`\n\n"
+
+        # print(leaderboard_text)
+    # Add a field to the embed with the leaderboard text
+    embed.add_field(
+        name='Rank          User            Score',
+        value=leaderboard_text,
+        inline=True
+    )
+    return embed
+
+
 # Good subreddit unleashing
 async def get_meme(ctx, how_many, breaks = False):
   subreddit = 'memes'

@@ -221,9 +221,9 @@ async def on_ready():
   print(f"Python version: {platform.python_version()}")
   print(f"Running on: {platform.system()} {platform.release()} ({os.name})")
   print("-------------------")
-  unleashing.start() # reddit posts
-  unleash_ioe_notifications.start()
-  unleash_news.start()  # news
+  # unleashing.start() # reddit posts
+  # unleash_ioe_notifications.start()
+  # unleash_news.start()  # news
   
 
 # Setup the game status task of the bot
@@ -358,6 +358,10 @@ async def on_message(message):
       )
       await context.send(embed=embed)
 
+from quiz_db.quiz_questions import QuizQuestions
+from quiz_db.quiz_scores import QuizScores
+from cogs.quiz_functions import update_scores, create_stylish_leaderboard_embed
+
 global player
 @bot.event
 async def on_reaction_add(reaction, user,a=''):
@@ -366,12 +370,21 @@ async def on_reaction_add(reaction, user,a=''):
     #print('hii')
     #await reaction.message.add_reaction('♥️')
     if not user.bot:
-        
+        # check quiz question
+        quiz_question = QuizQuestions.get_question(reaction.message.id)
+        if quiz_question:
+          print('quiz_question')
+          leaderboard_data = update_scores(quiz_question, reaction, user)
+          leaderboard_message = await reaction.message.channel.fetch_message(quiz_question['leaderboard_message_id'])
+          
+          await leaderboard_message.edit(embed=create_stylish_leaderboard_embed(leaderboard_data))
+           
+          #  pass
         #global player
         #player = ctx.bot.get_cog('Music')
         #player = author.voice.channel
         # stop emoji
-        if str(reaction.emoji) == "⏹️":
+        elif str(reaction.emoji) == "⏹️":
             config.player.stop()
         
         # pause emoji
@@ -564,6 +577,7 @@ async def on_command_completion(ctx):
 # The code in this event is executed every time a valid commands catches an error
 @bot.event
 async def on_command_error(context, error):
+  print(error)
   if isinstance(error, commands.CommandOnCooldown):
     embed = discord.Embed(
       title="Error!",

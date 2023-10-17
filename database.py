@@ -341,8 +341,37 @@ class db:
         conn.commit()  # commit our command
         conn.close()  # close our connection
         return message
-
-
+    
+    @staticmethod
+    def create_score_table(table_name='quiz_scores'):
+        '''
+            - Columns:
+            - server_id | user_id | score |
+        '''
+        
+        conn = sqlite3.connect('database.db')
+        c = conn.cursor()   # create a cursor
+        
+        c.execute("""CREATE TABLE '%s' (
+            server_id int NOT NULL,
+            user_id int NOT NULL
+            score int NOT NULL
+  		)""" % table_name)
+        
+        conn.commit()  # commit our command
+        conn.close()  # close our connection
+    
+    def get_score(server_id):
+        # return server scores
+        pass
+    
+    def exists(server_id, user_id, search_server_only=False):
+        # does user exist in server
+        # does server exists
+        pass
+    
+    def update_scores(server_id, scores):
+        pass
 '''
 def get_one():
   pass
