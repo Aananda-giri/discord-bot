@@ -1219,7 +1219,15 @@
         {
             "861131196779331624": {
                 "uesrname": "anon.sepian0",
-                "times_excuted": 37
+                "times_excuted": 38
+            }
+        }
+    ],
+    "quiz_channel": [
+        {
+            "861131196779331624": {
+                "uesrname": "anon.sepian0",
+                "times_excuted": 1
             }
         }
     ]

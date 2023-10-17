@@ -63,17 +63,18 @@ class QuizScores:
             return None
     @staticmethod
     def get_top_ten(server_id):
-        conn = sqlite3.connect(os.path.join(parent_dir,'quiz_sqlite_db.db'))
-        c = conn.cursor()
-        c.execute("SELECT * FROM quiz_scores WHERE server_id = ? ORDER BY score DESC LIMIT 10", (server_id,))
-        result = c.fetchall()
+            conn = sqlite3.connect(os.path.join(parent_dir,'quiz_sqlite_db.db'))
+            c = conn.cursor()
+            c.execute("SELECT * FROM quiz_scores WHERE server_id = ? ORDER BY score DESC LIMIT 10", (server_id,))
+            result = c.fetchall()
 
-        conn.close()
+            conn.close()
 
-        if result:
-            return result
-        else:
-            return None
+            if result:
+                return result
+            else:
+                QuizScores.add_score(server_id=server_id,user_name='anon', score=0)
+                return []
 
     @staticmethod
     def exists(server_id, user_name, check_server_only=False):
@@ -108,6 +109,7 @@ class QuizScores:
         conn.commit()
         conn.close()
         print(new_score)
+    
 
 if __name__ == "__main__":
     # Usage example

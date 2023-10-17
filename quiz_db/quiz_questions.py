@@ -35,70 +35,71 @@ class QuizQuestions:
 
     @staticmethod
     def add_question(server_id, channel_id, question_id, question, options, answer_index, leaderboard_message_id, created_datetime, expire_date_time, users_reacted, correctly_answered_users, active):
-        print('adding question')
-        conn = sqlite3.connect(os.path.join(parent_dir,'quiz_sqlite_db.db'))
-        c = conn.cursor()
+        
+            print('adding question')
+            conn = sqlite3.connect(os.path.join(parent_dir,'quiz_sqlite_db.db'))
+            c = conn.cursor()
 
-        # Convert the datetime to a string in ISO 8601 format
-        created_datetime = created_datetime.strftime('%Y-%m-%dT%H:%M:%S')
-        expire_date_time = expire_date_time.strftime('%Y-%m-%dT%H:%M:%S')
+            # Convert the datetime to a string in ISO 8601 format
+            created_datetime = created_datetime.strftime('%Y-%m-%dT%H:%M:%S')
+            expire_date_time = expire_date_time.strftime('%Y-%m-%dT%H:%M:%S')
 
-        # Serialize the lists to JSON strings
-        options = json.dumps(options)
-        users_reacted = json.dumps(users_reacted)
-        correctly_answered_users = json.dumps(correctly_answered_users)
+            # Serialize the lists to JSON strings
+            options = json.dumps(options)
+            users_reacted = json.dumps(users_reacted)
+            correctly_answered_users = json.dumps(correctly_answered_users)
 
-        c.execute(f"""INSERT INTO quiz_questions (
-            server_id, channel_id, question_id, question, options, answer_index, leaderboard_message_id,
-            created_datetime, expire_date_time, users_reacted, correctly_answered_users, active
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", (
-            server_id, channel_id, question_id, question, options, answer_index,
-            leaderboard_message_id, created_datetime, expire_date_time,
-            users_reacted, correctly_answered_users, active
-        ))
+            c.execute(f"""INSERT INTO quiz_questions (
+                server_id, channel_id, question_id, question, options, answer_index, leaderboard_message_id,
+                created_datetime, expire_date_time, users_reacted, correctly_answered_users, active
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", (
+                server_id, channel_id, question_id, question, options, answer_index,
+                leaderboard_message_id, created_datetime, expire_date_time,
+                users_reacted, correctly_answered_users, active
+            ))
 
-        conn.commit()
-        conn.close()
+            conn.commit()
+            conn.close()
 
-        print(QuizQuestions.get_question(question_id))
+            print(QuizQuestions.get_question(question_id))
 
     @staticmethod
     def get_question(question_id=None):
-        conn = sqlite3.connect(os.path.join(parent_dir,'quiz_sqlite_db.db'))
-        c = conn.cursor()
+            conn = sqlite3.connect(os.path.join(parent_dir,'quiz_sqlite_db.db'))
+            c = conn.cursor()
 
-        if question_id:
-            c.execute("SELECT * FROM quiz_questions WHERE question_id = ?", (question_id,))
+            if question_id:
+                c.execute("SELECT * FROM quiz_questions WHERE question_id = ?", (question_id,))
+            
+                result = c.fetchone()
+
+                conn.close()
+                # print(result[8])
+                if result:
+                    # result = list(result)
+                    keys = ['server_id', 'channel_id', 'question_id', 'question', 'options', 'answer_index', 'leaderboard_message_id', 'created_datetime', 'expire_date_time', 'users_reacted', 'correctly_answered_users', 'active']
+                    result = dict(zip(keys, result))
+                    print(result)
+                    # Convert the string back to a datetime object
+                    print(f"\n\ndate{result['created_datetime']}\n\n")
+                    result['created_datetime'] = datetime.strptime(result['created_datetime'], '%Y-%m-%dT%H:%M:%S')
+                    result['expire_date_time'] = datetime.strptime(result['expire_date_time'], '%Y-%m-%dT%H:%M:%S')
+                    
+                    # Convert JSON strings back to lists
+                    result['options'] = json.loads(result['options'])
+                    result['users_reacted'] = json.loads(result['users_reacted'])
+                    result['correctly_answered_users'] = json.loads(result['correctly_answered_users'])
+                    
+                    # result[5] = json.loads(result[4])  # options
+                    # result[8] = json.loads(result[9])  # users_reacted
+                    # result[9] = json.loads(result[10])  # correctly_answered_users
+                    return result
+            else:
+                c.execute("SELECT * FROM quiz_questions")
+                results = c.fetchall()
+                conn.close()
+                return results
         
-            result = c.fetchone()
-
-            conn.close()
-            # print(result[8])
-            if result:
-                # result = list(result)
-                keys = ['server_id', 'channel_id', 'question_id', 'question', 'options', 'answer_index', 'leaderboard_message_id', 'created_datetime', 'expire_date_time', 'users_reacted', 'correctly_answered_users', 'active']
-                result = dict(zip(keys, result))
-                print(result)
-                # Convert the string back to a datetime object
-                print(f"\n\ndate{result['created_datetime']}\n\n")
-                result['created_datetime'] = datetime.strptime(result['created_datetime'], '%Y-%m-%dT%H:%M:%S')
-                result['expire_date_time'] = datetime.strptime(result['expire_date_time'], '%Y-%m-%dT%H:%M:%S')
-                
-                # Convert JSON strings back to lists
-                result['options'] = json.loads(result['options'])
-                result['users_reacted'] = json.loads(result['users_reacted'])
-                result['correctly_answered_users'] = json.loads(result['correctly_answered_users'])
-                
-                # result[5] = json.loads(result[4])  # options
-                # result[8] = json.loads(result[9])  # users_reacted
-                # result[9] = json.loads(result[10])  # correctly_answered_users
-                return result
-        else:
-            c.execute("SELECT * FROM quiz_questions")
-            results = c.fetchall()
-            conn.close()
-            return results
-
     @staticmethod
     def update_question(question_id, correctly_answered_users, users_reacted):
         conn = sqlite3.connect(os.path.join(parent_dir,'quiz_sqlite_db.db'))
