@@ -68,7 +68,7 @@ def update_scores(question, reaction, user):
                 elif len(question['correctly_answered_users']) == 2:
                     new_score = old_score + 5
                 else:
-                    new_score = old_score
+                    new_score = old_score + 2   # give 2 points for every correct answer after the first 3
                 
                 
                 print(f'\nscore:{new_score}')
