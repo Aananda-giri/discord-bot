@@ -50,25 +50,28 @@ def update_scores(question, reaction, user):
         if reaction_time < question['expire_date_time']:
             print('\n\nvalid reaction time')
             print(question['answer_index'])
+            
+            # add user to reacted users
+            question['users_reacted'].append(username)
+            old_score = QuizScores.get_score(server_id = question['server_id'], user_name=username)
+            if old_score == None:
+                old_score = 0
+
             if emoji == number_emojis[question['answer_index']]:
+                # correct answer
                 print('\n\ncorrect answer')    
                 
-                # add user to reacted users
-                question['users_reacted'].append(username)
-                
-                old_score = QuizScores.get_score(server_id = question['server_id'], user_name=username)
-                
-                if old_score == None:
-                    old_score = 0
                 # get scores
-                if len(question['correctly_answered_users']) == 0:
-                    new_score = old_score +  15
+                if len(question['correctly_answered_users']) < 1:
+                    # first correct answer get three points
+                    new_score = old_score +  3
                 elif len(question['correctly_answered_users']) == 1:
-                    new_score = old_score +  10
-                elif len(question['correctly_answered_users']) == 2:
-                    new_score = old_score + 5
-                else:
-                    new_score = old_score + 2   # give 2 points for every correct answer after the first 3
+                    # Everyone else with correct answer gets 2 points
+                    new_score = old_score +  2
+                # elif len(question['correctly_answered_users']) == 2:
+                #     new_score = old_score + 5
+                # else:
+                #     new_score = old_score + 2   # give 2 points for every correct answer after the first 3
                 
                 
                 print(f'\nscore:{new_score}')
@@ -82,14 +85,14 @@ def update_scores(question, reaction, user):
                 
                 # update correctly_answered_users
                 correctly_answered_users += [username]
-
-                # update question in db
-                QuizQuestions.update_question(question['question_id'], correctly_answered_users=correctly_answered_users, users_reacted=users_reacted)
                 
-                # sorted scores
-                # sorted_scores = sorted(scores[server_id].items(), key=lambda x: x[1]['score'], reverse=True)
+            # update question in db
+            QuizQuestions.update_question(question['question_id'], correctly_answered_users=correctly_answered_users, users_reacted=users_reacted)
+            
+            # sorted scores
+            # sorted_scores = sorted(scores[server_id].items(), key=lambda x: x[1]['score'], reverse=True)
 
-                # print(f'\n\n sorted_scores: {sorted_scores} \n\n')
+            # print(f'\n\n sorted_scores: {sorted_scores} \n\n')
         # update reacted users
         
         QuizQuestions.update_question(question['question_id'], correctly_answered_users=correctly_answered_users, users_reacted=users_reacted)
