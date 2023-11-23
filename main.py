@@ -221,9 +221,9 @@ async def on_ready():
   print(f"Python version: {platform.python_version()}")
   print(f"Running on: {platform.system()} {platform.release()} ({os.name})")
   print("-------------------")
-  unleashing.start() # reddit posts
-  unleash_ioe_notifications.start()
-  unleash_news.start()  # news
+  # unleashing.start() # reddit posts
+  # unleash_ioe_notifications.start()
+  # unleash_news.start()  # news
   
 
 # Setup the game status task of the bot
@@ -296,7 +296,8 @@ def is_word(string):
         return True
     else:
         return False
-    
+
+random_emo = RandomEmoji()    
 async def process_vent_and_games(message):
     # checking and implementing vent_channel
     vent_db = db('vent')
