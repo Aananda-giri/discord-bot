@@ -295,7 +295,7 @@ def is_word(string):
         return False
 
 random_emo = RandomEmoji()    
-async def process_vent_and_games(message, start_time):
+async def process_vent_and_games(message):
     # checking and implementing vent_channel
     vent_db = db('vent')
     # vent_channels = vent_db.get_all()
@@ -318,7 +318,7 @@ async def process_vent_and_games(message, start_time):
         
         embed = get_anonymous_message(message_text, message.author.id, random_emo)  # sending message
         await message.channel.send(embed=embed)
-        print(f'\n\n response time: {time.time() - start_time} \n\n ')
+        # print(f'\n\n response time: {time.time() - start_time} \n\n ')
       
       else:
           # Create a list of file objects from the attachments
@@ -340,7 +340,7 @@ async def process_vent_and_games(message, start_time):
 # The code in this event is executed every time someone sends a message, with or without the prefix
 @bot.event
 async def on_message(message):
-    start_time = time.time()
+    # start_time = time.time()
     # Ignores if a command is being executed by a bot or by the bot itself
     if message.author == bot.user or message.author.bot:
         # ignoring messages by bots
@@ -348,7 +348,7 @@ async def on_message(message):
     elif message.author.id not in config.BLACKLIST:
         # Process the command if the user is not blacklisted
         print('\n\n author not black_listed \n\n')
-        await process_vent_and_games(message, start_time)
+        await process_vent_and_games(message)
 
         # await process_message(message)
     else:
