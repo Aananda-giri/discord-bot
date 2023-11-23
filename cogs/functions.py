@@ -385,3 +385,57 @@ class MySchedule:
         await context.send(embed=embed)
         #channel = ctx.bot.get_channel(id=id)
         #await channel.send(embed=embed)
+
+
+def get_anonymous_message(message, author_id, random_emo):
+  # print(f'emoji_assigned:{random_emo.get_emoji(author_id)}')
+  random_emoji, random_username = random_emo.get_emoji(author_id)
+  embed = discord.Embed(
+      title=f" {random_emoji} {random_username}",
+      description=message,
+      color=0x00ff00
+  )
+  # embed.set_author(name="title", icon_url=author_avatar_url)
+  # embed.set_author(name="😄  title")
+  # embed.set_thumbnail(url=author_avatar_url)
+  # embed.set_footer(text=f'🗿',icon_url=author_avatar_url)
+  # embed.set_footer(text=f'\'anon\'',icon_url='\U0001F578')
+  return embed
+
+class RandomEmoji:
+    def __init__(self):
+        # Create a dictionary to store emoji assignments
+        self.emojis_as_avatar = ['📓', ':merman:', ':ninja:', ':scales:', '🎚', ':desert:', ':clapper:', ':fist:', '⚕️', '🧠', '🗨️', '🖨', ':man_detective:', ':scroll:', '📚', ':bar_chart:', ':flag_au:', '🗃', '🧮', '📟', ':dragon:', ':diving_mask:', ':crystal_ball:', '🧲', ':alien:', ':rocket:', '📈', ':alembic:', ':smiling_imp:', '🖲', '⚖', '📖', '🔬', '🧪', '🗂', ':construction_site:', ':brain:', ':lizard:', ':man_artist:', '📔', ':sleeping:', ':man_mage:', ':tools:', ':pirate_flag:', '�', '🖋', ':spider_web:', ':speaking_head:', ':handshake:', '💡', '🕹', ':man_judge:', ':detective:', '📝', ':eye:', '📗', ':robot:', ':man_technologist:', ':baby:', '📕', '📋', '🤖', ':art:', '📏', '📙', '🧫', '💻', ':exploding_head:', ':computer:', '⌨', '📘', ':compass:', '📜', ':man_walking:', '📁', ':chess_pawn:', '🖥', ':dash:', '🗜', '🧑', '💾', ':musical_keyboard:', '📠', '📡', '🕰', ':woman_detective:', '🧬', '🌐', '🔍', '⚙', '🔎', '📂', '📊', '📒', ':dancer:', ':bulb:', '🖱', ':map:', '��']
+        self.user_names = ['BinaryBaronet', 'LogicLynx', 'NeuralNetNinja', 'RoboticsRenegade', 'BitBaroness', 'ArtificialIntelligenceAstrologer', 'ReinforcementLearningRaider', 'NaturalLanguageProcessingNomadic', 'LearningLion', 'NaturalLanguageProcessingNinja', 'ArtificialIntelligenceAmbassador', 'DigitalDame', 'QuantumQuirk', 'ComputerVisionConnoisseur', 'NaturalLanguageProcessingNomad', 'TechTactician', 'CyberCerebrum', 'ReinforcementLearningRookie', 'DataScienceDiplomat', 'DeepLearningDisciple', 'CodeCraftsman', 'ProgramProdigy', 'AlgorithmAlchemist', 'DataDoyen', 'QuantumQuester', 'QuantumQueen', 'AI_Adventurer', 'RoboticsRevolutionist', 'CyberChampion', 'QuantumQuestioner', 'LogicLord', 'ArtificialIntelligenceAficionado', 'AlgorithmAdept', 'ComputeCatalyst', 'DigitalDeity', 'LearningLegend', 'TechTitan', 'AlgorithmArtisan', 'CyberSavant', 'ModelMaven', 'RoboticsRobotics', 'TechTinker', 'QuantumKing', 'InsightInnovator', 'DataScienceScholar', 'RoboticsRebel', 'ModelMonarch', 'BinaryBelle', 'DeepLearningDeveloper', 'ReinforcementLearningRevolutionist', 'BinaryBrain', 'CodeConnoisseur', 'TechTemplar', 'MachineLearningMythbuster', 'TechTycoon', 'DeepLearningDynamo', 'ModelMatriarch', 'AlgorithmArtist', 'CodeCount', 'ReinforcementLearningRenegade', 'AI_Artisan', 'LogicLady', 'NeuralNetworkNetworker', 'NaturalLanguageProcessingProdigy', 'DataDrivenDev', 'DataDuchess', 'MachineLearningMythologist', 'DataDiva', 'ArtificialIntelligenceArchivist', 'MachineLearningMagician', 'CyberCognoscenti', 'ModelMaestro', 'ByteBoss', 'ComputerVisionCryptozoologist', 'NeuralNetworkNomad', 'DeepLearningDragon', 'NaturalLanguageProcessingNewbie', 'ReinforcementLearningRoadrunner', 'AnalysisArtisan', 'DeepLearningDiver', 'NeuralNetworkNerd', 'AlgorithmAristocrat', 'NeuralNetworkNegotiator', 'CyberCount', 'MachineLearningMastermind', 'AI_Alchemist', 'ReinforcementLearningStrategist', 'ComputerVisionCartographer', 'ArtificialIntelligenceAdventurer', 'SystemStrategist', 'CodeCzar', 'TechTrailblazer', 'CodeCountess', 'DataScienceDetective', 'NeuralNetworkNinja', 'RoboticsReformer', 'MachineMindset', 'DataDuke', 'BinaryBaron', 'DigitalDuke', 'AlgorithmArchitect', 'MachineLearningMaestro', 'BitBard', 'DeepLearningDreamer', 'DigitalDreamer', 'NeuralNavigator', 'ArtificialIntelligenceAnalyst', 'NeuralNetworkNavigator', 'ReinforceRanger', 'MachineMaestro', 'AlgorithmAnimator', 'MachineMind', 'ComputerVisionCryptid', 'InformationIlluminator', 'DataDynamo', 'SyntaxSorcerer', 'CircuitSage', 'DeepLearningDancer', 'NetworkNavigator', 'PatternProphet', 'DataScienceSherlock', 'BitBaron', 'CodeConductor', 'ComputerVisionChameleon', 'LearningLuminary', 'BotBrainiac', 'DigitalDruid', 'AlgorithmAce']
+
+
+    def get_emoji(self,user_id):
+        # Check if the user already has an emoji
+        if user_id in self.emoji_dict:
+            return self.emoji_dict[user_id]
+
+        # If the user does not already have an emoji, assign one to them
+        else:
+            emoji, user_name = self.get_random_emoji()
+            self.emoji_dict[user_id] = [emoji, user_name]
+            return [emoji, user_name]
+
+    # Get a random emoji
+    def get_random_emoji(self):
+        return [random.choice(self.emojis_as_avatar), random.choice(self.user_names)]
+
+def get_embeded_message(context, title, description='', author=True):
+  print(f'\n embed_title: {title} avatar:{context.author.avatar}\n')
+  embed = discord.Embed(title=title, description=description, color=0x00FF00)
+
+  #embed.set_author(name=context.message.author)
+  #embed.set_thumbnail(url=context.author.avatar_url)
+
+  embed.add_field(
+      name="Over!",
+      #value=":ping_pong:",
+      value=":pizza:",
+      inline=True)
+  if author:  #author=False for perodic unleash/subscription
+    embed.set_footer(text=f'{context.author}', icon_url=context.author.avatar)
+  return (embed)

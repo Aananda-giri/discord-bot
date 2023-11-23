@@ -6,7 +6,7 @@
 # from discord import FFmpegPCMAudio
 #from cogs.music import get_stream, 
 # from cogs.functions import YTDLSource, download_from_youtube, 
-from cogs.functions import get_embed, proceed_count
+from cogs.functions import get_embed, proceed_count, RandomEmoji, get_anonymous_message
 import random, discord, asyncio, os, platform, sys, requests, json, threading
 from discord.ext import commands
 from discord.ext.commands import Bot
@@ -316,7 +316,8 @@ async def process_vent_and_games(message):
         message_text = message.content
         await message.delete()  # deleting message
         
-        await message_channel.send(message_text)  # sending message
+        embed = get_anonymous_message(message_text, message.author.id, random_emo)  # sending message
+        await message.channel.send(embed=embed)
       
       else:
           # Create a list of file objects from the attachments
