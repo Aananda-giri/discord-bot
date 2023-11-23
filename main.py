@@ -221,9 +221,9 @@ async def on_ready():
   print(f"Python version: {platform.python_version()}")
   print(f"Running on: {platform.system()} {platform.release()} ({os.name})")
   print("-------------------")
-  # unleashing.start() # reddit posts
-  # unleash_ioe_notifications.start()
-  # unleash_news.start()  # news
+  unleashing.start() # reddit posts
+  unleash_ioe_notifications.start()
+  unleash_news.start()  # news
   
 
 # Setup the game status task of the bot
@@ -605,7 +605,6 @@ async def load_extensions():
                 print(f"Failed to load extension {extension_name}\n{exception}")
             # extension = extension.replace("cogs.", "")
             # await bot.load_extension(extension)
-asyncio.run(load_extensions())
 
 if __name__ == "__main__":
   asyncio.run(load_extensions())
