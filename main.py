@@ -305,7 +305,9 @@ async def process_vent_and_games(message):
     
     count_db = db('count')
     vent_db = db('vent')
-    if vent_db.exists(message.channel.id) and message.clean_content != '.vent':
+    vent_channels = vent_db.get_all()
+    if int(message.channel.id) in vent_channels and message.clean_content != '.vent':
+      # if vent_db.exists(message.channel.id) and message.clean_content != '.vent':
       print(f'\n\n proceed vent channel:{message.channel.id} in \'vent\' exists_in_vent_db:{True} clean_content:{message.clean_content}\n\n')
       
       message_channel = message.channel
