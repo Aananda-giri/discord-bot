@@ -1,6 +1,108 @@
 import sqlite3
 import json
 
+class SocialDb:
+
+  def __init__(self,
+               table_name="instagram",
+               database_name='database.db') -> None:
+    self.table_name = table_name
+    self.database_name = database_name
+
+  def create(self):
+    conn = sqlite3.connect(self.database_name)
+    c = conn.cursor()
+    c.execute(f"""CREATE TABLE IF NOT EXISTS {self.table_name} (
+                      channel_id TEXT NOT NULL,
+                      social_username TEXT NOT NULL,
+                      social_url TEXT NOT NULL,
+                      platform TEXT NOT NULL,
+                      posts TEXT
+                   )""")
+    conn.commit()
+    conn.close()
+
+  def add(self, channel_id, social_username, social_url, platform, posts):
+    # create table if not exists
+
+    if type(posts) == list:
+      posts = json.dumps(posts)
+    if type(channel_id) == int:
+      channel_id = str(channel_id)
+
+    conn = sqlite3.connect(self.database_name)
+    c = conn.cursor()
+    # Check if channel_id already exists
+    c.execute(
+        f"SELECT * FROM {self.table_name} WHERE channel_id = ? AND social_username = ?",
+        (channel_id, social_username))
+
+    result = c.fetchone()
+    if result:
+      # Update posts existing entry
+      c.execute(f"UPDATE {self.table_name} SET posts = ? WHERE channel_id = ?",
+                (posts, channel_id))
+    else:
+      # Insert new entry
+      c.execute(
+          f"INSERT INTO {self.table_name} (channel_id, social_username, social_url, platform, posts) VALUES (?, ?, ?, ?, ?)",
+          (channel_id, social_username, social_url, platform, posts))
+    conn.commit()
+    conn.close()
+
+  def remove_one(self, channel_id, social_username):
+    print(f'removing post: {social_username} from channel: {channel_id}')
+    conn = sqlite3.connect(self.database_name)
+    c = conn.cursor()
+    c.execute(
+        f"DELETE FROM {self.table_name} WHERE channel_id = ? AND social_username = ?",
+        (channel_id, social_username))
+    conn.commit()
+    conn.close()
+
+  def exists(self, channel_id, social_username):
+    self.create()
+
+    conn = sqlite3.connect(self.database_name)
+    c = conn.cursor()
+    # Check if channel_id already exists
+    c.execute(
+        f"SELECT * FROM {self.table_name} WHERE channel_id = ? AND social_username = ?",
+        (channel_id, social_username))
+    result = c.fetchone()
+    return True if result else False
+
+  def get_posts(self, channel_id, social_username):
+    conn = sqlite3.connect(self.database_name)
+    c = conn.cursor()
+    c.execute(
+        f"SELECT posts FROM {self.table_name} WHERE channel_id = ? AND social_username = ?",
+        (channel_id, social_username))
+    posts = c.fetchone()
+    conn.close()
+    return json.loads(posts[0]) if posts else []
+
+  def get_all(self):
+    self.create()
+    conn = sqlite3.connect(self.database_name)
+    c = conn.cursor()
+    c.execute(f"SELECT * FROM {self.table_name}")
+    result = c.fetchall()
+    conn.close()
+
+    result_ordered = []
+    for res in result:
+      result_ordered.append({
+          'channel_id': res[0],
+          'social_username': res[1],
+          'social_url': res[2],
+          'platform': res[3],
+          'posts': json.loads(res[4])
+      })
+    return result_ordered
+
+
+
 
 class db:
     def __init__(self, table_name):

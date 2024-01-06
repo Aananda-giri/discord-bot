@@ -1,4 +1,3 @@
-# import json, random,
 # from discord.ext import commands
 # from discord import Member
 # from discord.ext.commands import has_permissions, MissingPermissions
@@ -7,7 +6,7 @@
 #from cogs.music import get_stream, 
 # from cogs.functions import YTDLSource, download_from_youtube, 
 from cogs.functions import get_embed, proceed_count, RandomEmoji, get_anonymous_message
-import random, discord, asyncio, os, platform, sys, requests, json, threading
+import json, random, discord, asyncio, os, platform, sys, requests, json, threading
 from discord.ext import commands
 from discord.ext.commands import Bot
 from urllib.parse import unquote, quote
@@ -22,6 +21,7 @@ config.init()
 # from os import environ
 # environ["REPLIT_DB_URL"] = "https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NTExNDExMDAsImlhdCI6MTY1MTAyOTUwMCwiZGF0YWJhc2VfaWQiOiIwZDNkZTY3My04ZjM3LTQ4ZjktOGFmNS00OWU2MWUyNTMzMGYifQ.CpVO558CCW0s7b9C3rH6m77hW_ybOqHzVJVFwhf8fcv0sebcg5D26CiAilVybi5pfYVUHh3oLlWSaCCFiThVIA"
 from database import db
+from database import SocialDb
 
 # from keep_alive import keep_alive
 from cogs.ioe_crawler import get_new_notifications
@@ -31,6 +31,13 @@ from discord.ext import tasks
 from cogs.reddit_cog import unleash_reddit
 from cogs.news_cog import send_news
 #import ffmpeg
+
+from datetime import datetime, timedelta
+import pytz
+from cogs.stats_cog import count_messages
+from cogs.quiz_functions import create_stylish_leaderboard_embed
+from cogs.functions import get_embeded_message
+from cogs.social_media_cog import SocialMedia
 
 #from discord import FFmpegPCMAudio
 from dotenv import load_dotenv
@@ -135,6 +142,37 @@ async def unleash_news():
         await send_news(channel, country, how_many, last_country=last_country)
     # await unleash_ioe_notifications.start()
 
+@tasks.loop(hours=3)
+async def unleash_subscription():
+  print('unleash subs.')
+  db = SocialDb(table_name='instagram')
+  subscription_data = db.get_all()
+  for sub in subscription_data:
+    print(sub)
+    if sub['platform'] == 'instagram':
+      print('get_new')
+      new_posts = SocialMedia.get_new_posts(sub['social_username'],
+                                            sub['channel_id'], sub['posts'],
+                                            db)
+      sub_channel = bot.get_channel(int(sub['channel_id']))
+      if new_posts:
+        posts.extend(new_posts)
+        db.add(sub['channel_id'], sub['social_username'], sub['social_url'],
+               sub['platform'], posts)
+        for post in new_posts:
+          await sub_channel.send(
+              embed=get_embeded_message(sub_channel,
+                                        'new-post',
+                                        'Everyone, there is new post from:' +
+                                        str(sub['social_username']) + ' in ' +
+                                        str(sub['platform']) +
+                                        '\n\n Checkout on Page :  ' +
+                                        str(post),
+                                        author=False))
+      else:
+        print(f"no new post on {sub['social_username']}")
+        # await sub_channel.send('hi!')
+
 @tasks.loop(hours=4)
 async def unleash_ioe_notifications():
   # sending ioe_notifications to subscribed channels perodically: '3 hours'
@@ -205,13 +243,279 @@ async def unleash_ioe_notifications():
   print('\n Done unleashing ioe_notices\n')
   return(1)
 
+async def send_most_active():
+  print('getting most active members...')
+  # channel_id = 1098474629766578280  # veg to_read
+  # channel_id = 1132858904582311946  # ai4growth moderator_only
+  # channel_id = 1154660261106552832  # ai4growth test_channel
+  channel_id = 1160197406848192613  # ai4growth leaderboard
+  channel = bot.get_channel(channel_id)
+  # await channel.send('.')
+
+  print(f'guild: {dir(channel)} guild:{channel.guild}'
+        )  #  {channel.guild}') # {channel.message.guild}')
+  # await ctx.send('hie')
+  # Get the start of the current day
+  channels_to_exclude = [
+      1132857202911215759, 1132858472212467712, 1132858133413371915,
+      1132858904582311946, 1154660261106552832
+  ]
+  today = datetime.now()
+  # start_of_day = datetime(today.year, today.month, today.day)
+  start_of_week = today - timedelta(days=today.weekday() + 1)  # start_of_week
+
+  message_dict = {}
+  # Iterate over all text channels in the server
+  for msg_channel in channel.guild.text_channels:
+    # for channel in ctx.guild.get_all_channels():
+    if int(msg_channel.id) in channels_to_exclude:
+      continue
+      await asyncio.sleep(.2)
+    try:
+      # List all the messages sent in the channel today
+      messages = msg_channel.history(after=start_of_week)
+      async for message in messages:
+        await asyncio.sleep(.2)
+
+        def to_ignore(message_author_roles):
+          roles_to_ignore = [
+              'admin', 'admins', 'moderator', 'moderators', 'bots'
+          ]
+          for role in message_author_roles:
+            if role.name.lower() in roles_to_ignore:
+              return True
+          return False
+
+        if not message.author.bot and not to_ignore(message.author.roles):
+          # Dont display messages by bot
+          if message.channel.name not in message_dict:
+            message_dict[message.channel.name] = []
+          message_dict[message.channel.name].append(
+              {
+                  'author': message.author.name,
+                  'content': message.content
+              }
+          )  # 'created_at': message.created_at, 'channel_id': message.channel.id})
+          print(
+              f'{message.author.name} : {message.content} : {message.created_at}'
+          )
+        else:
+          print(f'skip_message: {message.author.name} : {message.content}')
+    except Exception as e:
+      print(f"Couldn't fetch history from {channel.name}, {e}")
+  print(f'\n\n hie2 \n\n')
+  # await channel.send('hie')
+  message_count = count_messages(messages=message_dict, how_many=15)
+  # message_count = [('anon.sepian', 42)]
+  # await channel.send('hie2')
+  print(f'message_count: {message_count}')
+  msg_embed = create_stylish_leaderboard_embed(message_count,
+                                               question_expired=False,
+                                               is_most_active_leaderboard=True)
+  await channel.send(embed=msg_embed)
+
+@tasks.loop(hours=168)
+async def most_active():
+  print('getting most active members...')
+  # channel_id = 1098474629766578280  # veg to_read
+  # channel_id = 1132858904582311946  # ai4growth moderator_only
+  # channel_id = 1154660261106552832  # ai4growth test_channel
+  channel_id = 1160197406848192613  # ai4growth leaderboard
+  channel = bot.get_channel(channel_id)
+  # await channel.send('.')
+
+  print(f'guild: {dir(channel)} guild:{channel.guild}'
+        )  #  {channel.guild}') # {channel.message.guild}')
+  # await ctx.send('hie')
+  # Get the start of the current day
+  channels_to_exclude = [
+      1132857202911215759, 1132858472212467712, 1132858133413371915,
+      1132858904582311946, 1154660261106552832
+  ]
+  today = datetime.now()
+  # start_of_day = datetime(today.year, today.month, today.day)
+  start_of_week = today - timedelta(days=today.weekday() + 1)  # start_of_week
+
+  message_dict = {}
+  # Iterate over all text channels in the server
+  for msg_channel in channel.guild.text_channels:
+    # for channel in ctx.guild.get_all_channels():
+    if int(msg_channel.id) in channels_to_exclude:
+      continue
+      await asyncio.sleep(.2)
+    try:
+      # List all the messages sent in the channel today
+      messages = msg_channel.history(after=start_of_week)
+      async for message in messages:
+        await asyncio.sleep(.2)
+
+        def to_ignore(message_author_roles):
+          roles_to_ignore = [
+              'admin', 'admins', 'moderator', 'moderators', 'bots'
+          ]
+          for role in message_author_roles:
+            if role.name.lower() in roles_to_ignore:
+              return True
+          return False
+
+        if not message.author.bot and not to_ignore(message.author.roles):
+          # Dont display messages by bot
+          if message.channel.name not in message_dict:
+            message_dict[message.channel.name] = []
+          message_dict[message.channel.name].append(
+              {
+                  'author': message.author.name,
+                  'content': message.content
+              }
+          )  # 'created_at': message.created_at, 'channel_id': message.channel.id})
+          print(
+              f'{message.author.name} : {message.content} : {message.created_at}'
+          )
+        else:
+          print(f'skip_message: {message.author.name} : {message.content}')
+    except Exception as e:
+      print(f"Couldn't fetch history from {channel.name}, {e}")
+  print(f'\n\n hie2 \n\n')
+  # await channel.send('hie')
+  message_count = count_messages(messages=message_dict, how_many=15)
+  # message_count = [('anon.sepian', 42)]
+  # await channel.send('hie2')
+  print(f'message_count: {message_count}')
+  msg_embed = create_stylish_leaderboard_embed(message_count,
+                                               question_expired=False,
+                                               is_most_active_leaderboard=True)
+  await channel.send(embed=msg_embed)
+
+
+def get_one_quiz_question(questions_file='questions.json'):
+  # Read questions
+  with open(questions_file, 'r') as file:
+    questions = json.load(file)['questions']
+  # questions
+
+  # print(len(quqestions))
+  # pop first question
+  question = questions.pop(0)
+  # print(len(questions))
+
+  # Save remaining questions
+  with open(questions_file, 'w') as file:
+    json.dump({'questions': questions}, file, indent=4)
+
+  question_args = question
+  question_command = '.quiz \"' + '\", \"'.join(question_args) + '\"'
+
+  return question_args, question_command
+
+@tasks.loop(hours=24)
+async def quiz_loop():
+  # channel_id = 1098474629766578280  # veg
+  # channel_id = 1132858904582311946  # ai4growth moderator_only
+  # channel_id = 1154660261106552832  # ai4growth test_channel
+  channel_id = 1160197406848192613  # ai4growth leaderboard channel
+  channel = bot.get_channel(channel_id)
+  print(f'channel: {channel}')
+  # Get the command object
+  command = bot.get_command('quiz')
+
+  # quiz_args = ["Which of the following best defines Artificial Intelligence (AI)?", "The ability of a machine to mimic human intelligence", "The study of algorithms and statistical models that enable computers to perform tasks without explicit instructions", "A branch of computer science that focuses on creating intelligent machines capable of performing tasks that typically require human intelligence", "All of the above", "4"]
+  # quiz_command = '.quiz "Which of the following best defines Artificial Intelligence (AI)?" "The ability of a machine to mimic human intelligence" "The study of algorithms and statistical models that enable computers to perform tasks without explicit instructions" "A branch of computer science that focuses on creating intelligent machines capable of performing tasks that typically require human intelligence", "All of the above" "4"'
+  quiz_args, quiz_command = get_one_quiz_question()
+  # Get the rest of the arguments
+  command_args = quiz_args
+
+  # Get the command object from the bot
+  # command = bot.get_command(command_name)
+  # msg = await channel.send('hi..')
+  allowed_mentions = discord.AllowedMentions(everyone=True)
+  msg = await channel.send(content=".", allowed_mentions=allowed_mentions)
+  ctx = await bot.get_context(msg)
+  print(f"ctx: {ctx} msg:{msg}")
+  # ctx = await bot.get_context(channel.message)
+  ctx.message.content = quiz_command  # Set the content to the full command string
+  ctx.command = 'quiz'
+  ctx.args = command_args
+  print("invoking")
+  # await bot.invoke(ctx, ["hello there", "how are you", "what is your name","what is your age"])
+  await command(ctx, *command_args)
+
+  # send new articles from rest of world
+  await unleash_rest_of_World()
+
+  now = datetime.now()
+  if now.weekday() == 6:  # 6 is Sunday.
+    print(f'\n\n sending most active leaderboard.')
+    await send_most_active()
+
+
+@quiz_loop.before_loop
+async def before():
+  hour = 20  # 7 PM
+
+  # minute = 20
+  # now = datetime.now()
+  def get_kathmandu_datetime():
+    utc_dt = pytz.utc.localize(datetime.utcnow())
+    target_tz = pytz.timezone('Asia/Kathmandu')
+    return utc_dt.astimezone(target_tz)
+
+  now = get_kathmandu_datetime()
+  # if now.minute >=minute:
+  #     # If it's already past 9 PM, start the task at 9 PM tomorrow
+  #     tomorrow = datetime.now() + timedelta(days=1)
+  #     next_start_time = datetime(tomorrow.year, tomorrow.month, tomorrow.day, hour, minute)
+  # else:
+  #     next_start_time = datetime(now.year, now.month, now.day, now.hour, minute)
+  if now.hour > hour:
+    # If it's already past 9 PM, start the task at 9 PM tomorrow
+    tomorrow = now + timedelta(days=1)
+    next_start_time = datetime(tomorrow.year, tomorrow.month, tomorrow.day,
+                               hour)
+  elif now.hour == hour or now.hour == hour + 1:
+    pass
+  else:
+    # If it's before 9 PM, start the task at 9 PM today
+    next_start_time = datetime(now.year, now.month, now.day, hour)
+
+    sleep_seconds = (
+        next_start_time -
+        datetime(now.year, now.month, now.day, now.hour)).total_seconds()
+    print(
+        f'next_quiz_start_time: {next_start_time}, sleep:{sleep_seconds} sec.')
+    await asyncio.sleep(sleep_seconds)
+
+async def quiz_loop_task():
+  await quiz_loop.start()
+
+
+async def unleash_subscription_task():
+  await unleash_subscription.start()
+
+
+async def most_active_task():
+  await most_active.start()  # display most active users this week
+
+
+
 # The code in this event is executed when the bot is ready
 @bot.event
 async def on_ready():
-  bot.loop.create_task(status_task())
+  # bot.loop.create_task(status_task())
   # await bot.loop.create_task(unleashing_tasks())
+  
+  await asyncio.gather(
+      quiz_loop_task(),
+      unleash_subscription_task(),
+      # most_active_task(),  # merged quiz_loop and most_active task for now.
+  )
   await bot.tree.sync() # sync CommandTree in order for slash commands to appear : https://discordpy.readthedocs.io/en/v2.2.2/ext/commands/commands.html#hybrid-commands
   
+  print("Change bot profile pic")
+  pfp_path = "ai4growthorg_logo.jpeg"
+  fp = open(pfp_path, 'rb')
+  pfp = fp.read()
+  await bot.user.edit(avatar=pfp)
+  fp.close()
 
   print(f"Logged in as {bot.user.name}")
   print(f"Discord.py API version: {discord.__version__}")
@@ -280,19 +584,7 @@ async def process_message(message):
                 await message.channel.send(random.choice(options))
             except:
                 sqlite_dict['encouragements']=[]
-def is_int(word):
-    try:
-        int_word = int(word)
-        return True
-    except:
-        return False
 
-def is_word(string):
-    # checks server_channel in chain games db, starting letter and end letter matches, and message contain single word.
-    if str(string)[0] == str(string)[-1] and str(string)[1:-1].strip() == str(string)[1:-1].strip().replace(' ', ''):
-        return True
-    else:
-        return False
 
 random_emo = RandomEmoji()    
 async def process_vent_and_games(message):
@@ -363,100 +655,132 @@ async def on_message(message):
 
 from quiz_db.quiz_questions import QuizQuestions
 from quiz_db.quiz_scores import QuizScores
-from cogs.quiz_functions import update_scores, create_stylish_leaderboard_embed
+from cogs.quiz_functions import update_scores, create_stylish_leaderboard_embed, get_question_embed
 
 global player
+
 @bot.event
-async def on_reaction_add(reaction, user,a=''):
-    #embed = reaction.embeds[0]
-    #emoji = reaction.emoji
-    #print('hii')
-    #await reaction.message.add_reaction('♥️')
-    if not user.bot:
-        # check quiz question
-        quiz_question = QuizQuestions.get_question(reaction.message.id)
-        if quiz_question:
-          print('quiz_question')
-          leaderboard_data = update_scores(quiz_question, reaction, user)
-          leaderboard_message = await reaction.message.channel.fetch_message(quiz_question['leaderboard_message_id'])
-          
-          await leaderboard_message.edit(embed=create_stylish_leaderboard_embed(leaderboard_data))
-           
-          #  pass
-        #global player
-        #player = ctx.bot.get_cog('Music')
-        #player = author.voice.channel
-        # stop emoji
-        elif str(reaction.emoji) == "⏹️":
-            config.player.stop()
-        
-        # pause emoji
-        elif str(reaction.emoji) == "⏸️":
-            if config.player.is_playing():
-                config.player.pause()
-                print('paused')
-            else:
-                config.player.resume()
-                print('resume')
-        
-        # next emoji
-        elif str(reaction.emoji) == "⏭️":
-            if config.playing=='fm':
-              
-              print('Playing next, current:{}'.format(config.stream))
-              config.stream = get_stream('next',config.stream)
-              config.player.stop()
-              config.player.play(FFmpegPCMAudio(config.stream['url']))
-              
-              embed=get_embed(reaction, user, config.stream)
-              await config.currently_playing_message.edit(embed=embed)
-              
-            #message.send('Hello World')
-            #play_next()
-        
-        # previous emoji
-        elif str(reaction.emoji) == "⏮️":
-            if config.playing=='fm':
-              
-              print('Playing next, current:{}'.format(config.stream))
-              config.stream = get_stream('prev', config.stream)
-              config.player.stop()
-              config.player.play(FFmpegPCMAudio(config.stream['url']))
-              
-              embed=get_embed(reaction, user, config.stream)
-              await config.currently_playing_message.edit(embed=embed)
-            
-            print('Playing next')
+async def on_reaction_add(reaction, user, a=''):
+  #embed = reaction.embeds[0]
+  #emoji = reaction.emoji
+  #print('hii')
+  #await reaction.message.add_reaction('♥️')
+  if not user.bot:
+    return
+    # check quiz question
+    quiz_question = QuizQuestions.get_question(reaction.message.id)
+    if quiz_question and quiz_question['active']:
+      print('quiz_question')
+      response = await update_scores(quiz_question, reaction, user)
+      leaderboard_data = response['leaderboard_data']
+      if response['question_expired']:
+        print('question expired')
+        # edit question and tick the correct answer
+        question_message = await reaction.message.channel.fetch_message(
+            quiz_question['question_id'])
+        # await question_message.edit(embed=get_question_embed('context', question_text=quiz_question['question'], options=list(quiz_question['options']), question_expired=True, answer_index=int(quiz_question['answer_index'])), silent=False)
+        question_message = await question_message.edit(
+            embed=get_question_embed('dummey_context',
+                                     question_text=quiz_question['question'],
+                                     options=list(quiz_question['options']),
+                                     question_expired=True,
+                                     answer_index=int(
+                                         quiz_question['answer_index'])), )
 
-        # download emoji
-        elif str(reaction.emoji) == "⬇️":
-          if config.playing!='fm':  
-            if not 'downloads' in os.listdir():
-                os.mkdir('downloads')
-            print('Try download')
-    
-            async with reaction.message.channel.typing():
-                
-                URL, thumbnails, title, vid_url = await YTDLSource.from_url(config.playing, loop=bot.loop, download=True)
-                
-                full_downloaded_file_name = title + '.mp3'
-                
-                await reaction.message.channel.send(file=discord.File(full_downloaded_file_name))
-                os.remove(full_downloaded_file_name)
-                print(' downloaded!!! ')
-        else:
-          await reaction.message.add_reaction(reaction)
-    #print('hii')
-    #print(reaction)
-    #print(reaction.message)
-    #print(user)
+        await question_message.add_reaction("1️⃣")
+        await question_message.add_reaction('2️⃣')
+        await question_message.add_reaction('3️⃣')
+        await question_message.add_reaction('4️⃣')
 
-    #if user.bot:
-    #    return
-    #else:
-    #  previous_messages = await channel.history(limit=1).flatten()
-    #  prev_message.add_reaction('♥️')
-    '''if emoji == "emoji 1":
+      # update leaderboard message
+      leaderboard_message = await reaction.message.channel.fetch_message(
+          quiz_question['leaderboard_message_id'])
+
+      await leaderboard_message.edit(
+          embed=create_stylish_leaderboard_embed(leaderboard_data))
+
+      print(f'removing user reaction: {user}')
+      await reaction.remove(user)
+    else:
+      # reaction by bot
+      return
+      #  pass
+    #global player
+    #player = ctx.bot.get_cog('Music')
+    #player = author.voice.channel
+    # stop emoji
+    if str(reaction.emoji) == "⏹️":
+      config.player.stop()
+
+    # pause emoji
+    elif str(reaction.emoji) == "⏸️":
+      if config.player.is_playing():
+        config.player.pause()
+        print('paused')
+      else:
+        config.player.resume()
+        print('resume')
+
+    # next emoji
+    elif str(reaction.emoji) == "⏭️":
+      if config.playing == 'fm':
+
+        print('Playing next, current:{}'.format(config.stream))
+        config.stream = get_stream('next', config.stream)
+        config.player.stop()
+        config.player.play(FFmpegPCMAudio(config.stream['url']))
+
+        embed = get_embed(reaction, user, config.stream)
+        await config.currently_playing_message.edit(embed=embed)
+
+      #message.send('Hello World')
+      #play_next()
+
+    # previous emoji
+    elif str(reaction.emoji) == "⏮️":
+      if config.playing == 'fm':
+
+        print('Playing next, current:{}'.format(config.stream))
+        config.stream = get_stream('prev', config.stream)
+        config.player.stop()
+        config.player.play(FFmpegPCMAudio(config.stream['url']))
+
+        embed = get_embed(reaction, user, config.stream)
+        await config.currently_playing_message.edit(embed=embed)
+
+      print('Playing next')
+
+    # download emoji
+    elif str(reaction.emoji) == "⬇️":
+      if config.playing != 'fm':
+        if not 'downloads' in os.listdir():
+          os.mkdir('downloads')
+        print('Try download')
+
+        async with reaction.message.channel.typing():
+
+          URL, thumbnails, title, vid_url = await YTDLSource.from_url(
+              config.playing, loop=bot.loop, download=True)
+
+          full_downloaded_file_name = title + '.mp3'
+
+          await reaction.message.channel.send(
+              file=discord.File(full_downloaded_file_name))
+          os.remove(full_downloaded_file_name)
+          print(' downloaded!!! ')
+    else:
+      await reaction.message.add_reaction(reaction)
+  #print('hii')
+  #print(reaction)
+  #print(reaction.message)
+  #print(user)
+
+  #if user.bot:
+  #    return
+  #else:
+  #  previous_messages = await channel.history(limit=1).flatten()
+  #  prev_message.add_reaction('♥️')
+  '''if emoji == "emoji 1":
         fixed_channel = bot.get_channel(channel_id)
         await fixed_channel.send(embed=embed)
     elif emoji == "emoji 2":
@@ -465,6 +789,55 @@ async def on_reaction_add(reaction, user,a=''):
         #do stuff
     else:
         return'''
+
+@bot.event
+async def on_raw_reaction_add(payload):
+  '''
+  <RawReactionActionEvent message_id=1171890158287732777 user_id=861131196779331624 channel_id=1160197406848192613 guild_id=1132851455028637706 emoji=<PartialEmoji animated=False name='4️⃣' id=None> event_type='REACTION_ADD' member=<Member id=861131196779331624 name='anon.sepian' global_name='anon' bot=False nick=None guild=<Guild id=1132851455028637706 name='AI4GROWTH' shard_id=0 chunked=True member_count=663>>>
+  '''
+  # return
+  print("raw reaction")
+  if not payload.member.bot:
+    print('not bot')
+    # check quiz question
+    quiz_question = QuizQuestions.get_question(payload.message_id)
+    print('got question')
+    print(f'quiz_question:{quiz_question} {payload.message_id}')
+    if quiz_question:
+
+      channel = bot.get_channel(payload.channel_id)
+      print(f'channel:{channel}')
+      message = await channel.fetch_message(payload.message_id)
+      print(f'message:{message}')
+
+      leaderboard_data = await update_scores(question=quiz_question,
+                                             raw_reaction=True,
+                                             message=message,
+                                             payload=payload)
+      print(
+          f'\n\n---------------------- \n got leaderboard data:{leaderboard_data} \n\n'
+      )
+      leaderboard_message = await channel.fetch_message(
+          quiz_question['leaderboard_message_id'])
+
+      await leaderboard_message.edit(embed=create_stylish_leaderboard_embed(
+          leaderboard_data['leaderboard_data']))
+      # remove reaction
+      for reaction in message.reactions:
+        print(f'+reaction:{reaction}')
+        # if not reaction.me:
+        try:
+          await reaction.remove(bot.get_user(payload.user_id))
+          print(
+              f'-reaction:{reaction} \n{payload.member} \n{bot.get_user(payload.user_id)}'
+          )
+        except Exception as Ex:
+          print(Ex)
+
+    else:
+      return
+  # print(payload)
+  print(payload.emoji)
 
 
 
@@ -612,9 +985,21 @@ if __name__ == "__main__":
   bot.run(config.DISCORD_TOKEN)     # run discord bot
 
 
-# keep_alive()
-# Run the bot with the token
-# bot.run(os.environ['TOKEN'])
+# --------------------
+# Running in Replit
+# --------------------
+# async def change_logo():
+#   # create logs.json for storing commands logs
+#   if not os.path.exists('logs.json'):
+#     with open('logs.json', 'w') as file:
+#       file.write('{}')
+
+# if __name__ == "__main__":
+#   asyncio.run(load_extensions())
+#   asyncio.run(change_logo()) # change the logo
+# from keep_alive import keep_alive
+#   keep_alive()
+#   bot.run(config.DISCORD_TOKEN)  # run discord bot
 
 
 

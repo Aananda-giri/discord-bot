@@ -153,15 +153,12 @@ async def proceed_chain(message):
 
 
 def get_embeded_message(context, title, description='', author=True):
-    print(f'\n embed_title: {title} avatar:{context.author.avatar}\n')
+    print(f'\n embed_title: {title}\n')
     embed = discord.Embed(
             title=title,
             description=description,
             color=0x00FF00
         )
-    
-    #embed.set_author(name=context.message.author)
-    #embed.set_thumbnail(url=context.author.avatar_url)
     
     embed.add_field(
             name="Over!",
@@ -170,7 +167,10 @@ def get_embeded_message(context, title, description='', author=True):
             inline=True
         )
     if author: #author=False for perodic unleash/subscription
-      embed.set_footer(text=f'{context.author}',icon_url=context.author.avatar)
+        print(f'avatar:{context.author.avatar}')
+        embed.set_footer(text=f'{context.author}',icon_url=context.author.avatar)
+        #embed.set_author(name=context.message.author)
+        #embed.set_thumbnail(url=context.author.avatar_url)
     return(embed)
 
 def get_question_embed(context, question, options):
@@ -390,11 +390,9 @@ class MySchedule:
 def get_anonymous_message(message, author_id, random_emo):
   # print(f'emoji_assigned:{random_emo.get_emoji(author_id)}')
   random_emoji, random_username = random_emo.get_emoji(author_id)
-  embed = discord.Embed(
-      title=f" {random_emoji} {random_username}",
-      description=message,
-      color=0x00ff00
-  )
+  embed = discord.Embed(title=f" {random_emoji} {random_username}",
+                        description=message,
+                        color=0x00ff00)
   # embed.set_author(name="title", icon_url=author_avatar_url)
   # embed.set_author(name="😄  title")
   # embed.set_thumbnail(url=author_avatar_url)

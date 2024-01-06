@@ -1,0 +1,84 @@
+{
+    "questions": [
+        [
+            "Which type of learning involves learning from experience and making decisions based on that knowledge?",
+            "Supervised learning",
+            "Unsupervised learning",
+            "Reinforcement learning",
+            "Semi-supervised learning",
+            "3"
+        ],
+        [
+            "What is the purpose of the term 'dropout' in neural networks?",
+            "Eliminate outliers in the dataset",
+            "Reduce overfitting by randomly dropping neurons during training",
+            "Increase the number of hidden layers",
+            "Adjust the learning rate dynamically",
+            "2"
+        ],
+        [
+            "Which type of learning is associated with making predictions or classifications without explicit programming?",
+            "Reinforcement learning",
+            "Unsupervised learning",
+            "Supervised learning",
+            "Semi-supervised learning",
+            "3"
+        ],
+        [
+            "What is the primary objective of a neural network's activation function?",
+            "Determine the learning rate",
+            "Introduce non-linearity to the model",
+            "Control the number of layers",
+            "Specify the output format",
+            "2"
+        ],
+        [
+            "Which algorithm is commonly used for solving classification problems with multiple classes?",
+            "Linear Regression",
+            "K-Nearest Neighbors",
+            "Naive Bayes",
+            "Softmax Regression",
+            "4"
+        ],
+        [
+            "What is the purpose of the term 'batch normalization' in deep learning?",
+            "Normalize the input features",
+            "Normalize the output predictions",
+            "Normalize the gradients within a mini-batch",
+            "Normalize the learning rate",
+            "3"
+        ],
+        [
+            "In reinforcement learning, what is an 'environment'?",
+            "The set of input features",
+            "The model architecture",
+            "The set of possible states and actions",
+            "The output predictions",
+            "3"
+        ],
+        [
+            "What is the main difference between bagging and boosting in ensemble methods?",
+            "Bagging focuses on reducing model complexity, while boosting focuses on increasing it",
+            "Bagging combines multiple weak learners to create a strong learner, while boosting adapts the weights of weak learners",
+            "Bagging involves training each learner independently, while boosting trains learners sequentially",
+            "Bagging and boosting are synonymous terms",
+            "2"
+        ],
+        [
+            "What is the role of the learning rate in gradient descent optimization?",
+            "Controls the step size during optimization",
+            "Specifies the number of hidden layers",
+            "Defines the regularization strength",
+            "Determines the threshold for model convergence",
+            "1"
+        ],
+        [
+            "What is the main advantage of using a convolutional neural network (CNN) for image classification?",
+            "Suitable for tabular data",
+            "Performs well with small datasets",
+            "Automatically learns hierarchical features in spatial data",
+            "Efficient for sequence data",
+            "3"
+        ]
+    ]
+}
