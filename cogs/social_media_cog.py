@@ -26,7 +26,7 @@ class SocialMedia:
     #     return username, 'linkedin'
 
   @staticmethod
-  def subscribe(channel_id, user_id, url):
+  def subscribe_social(channel_id, user_id, url):
     print(f'channel_id: {channel_id}, user_id:{user_id}, url:{url}')
     social_username, platform = SocialMedia.get_username(url)
     print(f'social_username: {social_username}, platform:{platform}')
@@ -103,16 +103,16 @@ class Social(commands.Cog, name="social"):
   def __init__(self, bot):
     self.bot = bot
 
-  @commands.hybrid_command(name='subscribe',
+  @commands.hybrid_command(name='subscribe_social',
                           description='subscribe to insta or linkedin user')
-  async def subscribe(self, ctx, url):
+  async def subscribe_social(self, ctx, url):
     # await ctx.send(embed= get_embeded_message(ctx, 'ping-pong', f'this is body, what:{what}', author=False))
     # show typing status
     print(f'\n\nsubscribe: {url}\n\n')
     async with ctx.channel.typing():
 
       
-      response = SocialMedia.subscribe(channel_id=ctx.channel.id,
+      response = SocialMedia.subscribe_social(channel_id=ctx.channel.id,
                                        user_id=ctx.author.id,
                                        url=url)
       print(str(response))
@@ -127,11 +127,11 @@ class Social(commands.Cog, name="social"):
 
       #     await ctx.send(f'You have subscribed to linkedin {url}')
 
-  @commands.hybrid_command(name='unsubscribe',
+  @commands.hybrid_command(name='unsubscribe_social',
                           description='unsubscribe to insta or linkedin user')
-  async def unsubscribe(self, ctx, url):
+  async def unsubscribe_social(self, ctx, url):
     # await ctx.send(embed= get_embeded_message(ctx, 'ping-pong', f'this is body, what:{what}', author=False))
-    SocialMedia.subscribe(user_id=ctx.author.id,
+    SocialMedia.subscribe_social(user_id=ctx.author.id,
                           channel_id=ctx.channel.id,
                           url=url)
     if url.startswith('https://www.instagram.com/'):
