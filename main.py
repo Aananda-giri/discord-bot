@@ -314,78 +314,39 @@ async def send_most_active():
                                                is_most_active_leaderboard=True)
   await channel.send(embed=msg_embed)
 
-@tasks.loop(hours=168)
-async def most_active():
-  print('getting most active members...')
-  # channel_id = 1098474629766578280  # veg to_read
-  # channel_id = 1132858904582311946  # ai4growth moderator_only
-  # channel_id = 1154660261106552832  # ai4growth test_channel
-  channel_id = 1160197406848192613  # ai4growth leaderboard
-  channel = bot.get_channel(channel_id)
-  # await channel.send('.')
+@bot.event
+async def on_ready():
+  # await unleash_rest_of_World()
+  # await send_most_active()
+  # Run tasks concurrently using asyncio.gather
+  # await most_active_task()
 
-  print(f'guild: {dir(channel)} guild:{channel.guild}'
-        )  #  {channel.guild}') # {channel.message.guild}')
-  # await ctx.send('hie')
-  # Get the start of the current day
-  channels_to_exclude = [
-      1132857202911215759, 1132858472212467712, 1132858133413371915,
-      1132858904582311946, 1154660261106552832
-  ]
-  today = datetime.now()
-  # start_of_day = datetime(today.year, today.month, today.day)
-  start_of_week = today - timedelta(days=today.weekday() + 1)  # start_of_week
+  await asyncio.gather(
+      quiz_loop_task(),
+      unleash_subscription_task(),
+      # most_active_task(),  # merged quiz_loop and most_active task for now.
+  )
 
-  message_dict = {}
-  # Iterate over all text channels in the server
-  for msg_channel in channel.guild.text_channels:
-    # for channel in ctx.guild.get_all_channels():
-    if int(msg_channel.id) in channels_to_exclude:
-      continue
-      await asyncio.sleep(.2)
-    try:
-      # List all the messages sent in the channel today
-      messages = msg_channel.history(after=start_of_week)
-      async for message in messages:
-        await asyncio.sleep(.2)
+  # bot.loop.create_task(status_task())
 
-        def to_ignore(message_author_roles):
-          roles_to_ignore = [
-              'admin', 'admins', 'moderator', 'moderators', 'bots'
-          ]
-          for role in message_author_roles:
-            if role.name.lower() in roles_to_ignore:
-              return True
-          return False
+  await bot.tree.sync(
+  )  # sync CommandTree in order for slash commands to appear : https://discordpy.readthedocs.io/en/v2.2.2/ext/commands/commands.html#hybrid-commands
 
-        if not message.author.bot and not to_ignore(message.author.roles):
-          # Dont display messages by bot
-          if message.channel.name not in message_dict:
-            message_dict[message.channel.name] = []
-          message_dict[message.channel.name].append(
-              {
-                  'author': message.author.name,
-                  'content': message.content
-              }
-          )  # 'created_at': message.created_at, 'channel_id': message.channel.id})
-          print(
-              f'{message.author.name} : {message.content} : {message.created_at}'
-          )
-        else:
-          print(f'skip_message: {message.author.name} : {message.content}')
-    except Exception as e:
-      print(f"Couldn't fetch history from {channel.name}, {e}")
-  print(f'\n\n hie2 \n\n')
-  # await channel.send('hie')
-  message_count = count_messages(messages=message_dict, how_many=15)
-  # message_count = [('anon.sepian', 42)]
-  # await channel.send('hie2')
-  print(f'message_count: {message_count}')
-  msg_embed = create_stylish_leaderboard_embed(message_count,
-                                               question_expired=False,
-                                               is_most_active_leaderboard=True)
-  await channel.send(embed=msg_embed)
+  print("Change bot profile pic")
+  pfp_path = "ai4growthorg_logo.jpeg"
+  fp = open(pfp_path, 'rb')
+  pfp = fp.read()
+  await bot.user.edit(avatar=pfp)
+  fp.close()
 
+  print(f"Logged in as {bot.user.name}")
+  print(f"Discord.py API version: {discord.__version__}")
+  print(f"Python version: {platform.python_version()}")
+  print(f"Running on: {platform.system()} {platform.release()} ({os.name})")
+  print("-------------------")
+  # unleashing.start() # reddit posts
+  # unleash_ioe_notifications.start()
+  # unleash_news.start()  # news
 
 def get_one_quiz_question(questions_file='questions.json'):
   # Read questions
@@ -492,8 +453,6 @@ async def unleash_subscription_task():
   await unleash_subscription.start()
 
 
-async def most_active_task():
-  await most_active.start()  # display most active users this week
 
 
 
