@@ -18,7 +18,7 @@ def generate_response(question=None,
         "Nice déjà vu! You've answered this one already!",
     ]
     reaction = random.choice(reactions)
-    message = f"{reaction} \n Your current score remains 20. 🔄"
+    message = f"{reaction} \n Your current score remains {current_score}. 🔄"
   elif is_correct:
     reactions = [
         "Boom! Nailed the AI challenge!",
