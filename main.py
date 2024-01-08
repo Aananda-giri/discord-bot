@@ -448,7 +448,7 @@ async def before():
     tomorrow = now + timedelta(days=1)
     next_start_time = datetime(tomorrow.year, tomorrow.month, tomorrow.day,
                                hour)
-  elif now.hour == hour # or now.hour == hour + 1:
+  elif now.hour == hour: # or now.hour == hour + 1:
     pass
   else:
     # If it's before 9 PM, start the task at 9 PM today
