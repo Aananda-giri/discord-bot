@@ -3,7 +3,7 @@
 config.py
 ./config.py
 tests/config.py
-
+tests/*
 git_help.py
 test.py
 test.ipynb
