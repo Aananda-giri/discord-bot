@@ -1,0 +1,15 @@
+## Updating users scores
+```
+from quiz_db.quiz_scores import *
+QuizScores.get_top_ten(1132851455028637706)
+leaderboard_data
+
+# [(1132851455028637706, 'Rijan', 11), (1132851455028637706, 'Suban', 10), (1132851455028637706, 'Sahaj Raj Malla - Nepal', 9), (1132851455028637706, 'Anish', 9), (1132851455028637706, 'Pocket', 7), (1132851455028637706, 'Tamrakar', 6), (1132851455028637706, 'Sujal Neupane', 6), (1132851455028637706, 'Prabhash', 5), (1132851455028637706, 'Dragneel', 5), (1132851455028637706, 'Salmaa', 4)]
+
+QuizScores.update_scores('1132851455028637706', 'Sahaj Raj Malla - Nepal', 0)
+
+
+QuizScores.get_top_ten(1132851455028637706)
+# [(1132851455028637706, 'Rijan', 11), (1132851455028637706, 'Suban', 10), (1132851455028637706, 'Anish', 9), (1132851455028637706, 'Pocket', 7), (1132851455028637706, 'Tamrakar', 6), (1132851455028637706, 'Sujal Neupane', 6), (1132851455028637706, 'Prabhash', 5), (1132851455028637706, 'Dragneel', 5), (1132851455028637706, 'Salmaa', 4), (1132851455028637706, 'Samundra', 4)]
+
+```

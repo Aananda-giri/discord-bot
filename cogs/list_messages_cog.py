@@ -109,6 +109,73 @@ class ListMessages(commands.Cog, name="list_messages"):
         silent=True)
     await ctx.message.delete()  # delete original message
     # await ctx.channel.send(f'`{str(message_dict)[:1900]}`', silent=True)
+  
+
+  @commands.command(
+      name='dataset',
+      aliases=[],
+      brief='get dataset of all messages sent in servers to train bot to predict reaction to messages',
+      help=
+      'list all messages sent in a server today. \n e.g. `.la or .list_all :  sends list of messages to private message` '
+  )
+  async def dataset(ctx):
+    for guild in bot.guilds:
+        print(f'channel: {guild.id}')
+        # Get the start of the current day
+        channels_to_exclude = []
+        count = 0
+        # today = datetime.now()
+        # start_of_day = datetime(today.year, today.month, today.day)
+        message_dict = {}
+        # Iterate over all text channels in the server
+        # for channel in ctx.guild.text_channels:
+        for channel in guild.text_channels:
+          # if int(channel.id) in channels_to_exclude:
+          #   continue
+          time.sleep(.5)
+          try:
+                # List all the messages sent in the channel today
+                messages = channel.history(after=None)
+                async for message in messages:
+                  time.sleep(.2)
+                  if not message.author.bot:
+                        if message.reactions:
+                            data = {
+                                            'server_id': guild.id,
+                                            'server_name': guild.name,
+                                            "channel_id": message.channel.id,
+                                            'author': message.author.name,
+                                            'content': message.content,
+                                            "reactions": [reaction.emoji for reaction in message.reactions],
+                                            # "created_at": message.created_at
+                                    }
+                            if message.channel.name not in message_dict:
+                                message_dict[message.channel.name] = []
+                            message_dict[message.channel.name].append(data)  # 'created_at': message.created_at, 'channel_id': message.channel.id})
+                        # if message.reactions:
+                        #         print(data)
+                        
+                        if count  < 20:
+                            if message.reactions:
+                                print(data)
+                                count += 1
+                        #   break
+                        # print(
+                        #         f'{message.author.name} : {message.content} : {message.reactions}, {channel.name}'
+                        # )
+          except Exception as e:
+                print(f"Couldn't fetch history from {channel.name}, {e}")
+        # save data in json file
+        import json
+        with open('data_'+ str(guild.id) + '.json', 'w') as outfile:
+                json.dump(message_dict, outfile)
+        await ctx.author.send('saved dataset to json files starting with `data_`')
+        # await ctx.author.send(
+        #         f'## Here is lis of messages today to the server:{ctx.guild.name}`\n {str(message_dict)[:1900]}`',
+        #         silent=True)
+        await ctx.message.delete()  # delete original message
+        # await ctx.channel.send(f'`{str(message_dict)[:1900]}`', silent=True)
+
 
   @commands.command(name='channels', aliases=[])
   async def channels(self, ctx):
