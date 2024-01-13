@@ -173,7 +173,7 @@ class ListMessages(commands.Cog, name="list_messages"):
         # await ctx.author.send(
         #         f'## Here is lis of messages today to the server:{ctx.guild.name}`\n {str(message_dict)[:1900]}`',
         #         silent=True)
-        await ctx.message.delete()  # delete original message
+        # await ctx.message.delete()  # delete original message
         # await ctx.channel.send(f'`{str(message_dict)[:1900]}`', silent=True)
 
 
