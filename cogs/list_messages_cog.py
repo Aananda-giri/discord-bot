@@ -120,7 +120,12 @@ class ListMessages(commands.Cog, name="list_messages"):
   )
   async def dataset(ctx):
     for guild in bot.guilds:
-        print(f'channel: {guild.id}')
+        
+        print(f'server: {guild.id}')
+        
+        if saved_already(guild.id):
+            print(f'data already saved for server: {guild.id}')
+            continue
         # Get the start of the current day
         channels_to_exclude = []
         count = 0
@@ -132,12 +137,12 @@ class ListMessages(commands.Cog, name="list_messages"):
         for channel in guild.text_channels:
           # if int(channel.id) in channels_to_exclude:
           #   continue
-          time.sleep(.5)
+          await asyncio.sleep(.5)
           try:
                 # List all the messages sent in the channel today
                 messages = channel.history(after=None)
                 async for message in messages:
-                  time.sleep(.2)
+                  await asyncio.sleep(.2)
                   if not message.author.bot:
                         if message.reactions:
                             data = {
@@ -169,12 +174,16 @@ class ListMessages(commands.Cog, name="list_messages"):
         import json
         with open('data_'+ str(guild.id) + '.json', 'w') as outfile:
                 json.dump(message_dict, outfile)
-        await ctx.author.send('saved dataset to json files starting with `data_`')
+        try:
+            await ctx.author.send('saved dataset to json files starting with `data_`')
+        except:
+            pass
         # await ctx.author.send(
         #         f'## Here is lis of messages today to the server:{ctx.guild.name}`\n {str(message_dict)[:1900]}`',
         #         silent=True)
         # await ctx.message.delete()  # delete original message
         # await ctx.channel.send(f'`{str(message_dict)[:1900]}`', silent=True)
+    await ctx.author.send('done saving all data')
 
 
   @commands.command(name='channels', aliases=[])
