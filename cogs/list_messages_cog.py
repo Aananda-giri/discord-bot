@@ -151,7 +151,7 @@ class ListMessages(commands.Cog, name="list_messages"):
                                             "channel_id": message.channel.id,
                                             'author': message.author.name,
                                             'content': message.content,
-                                            "reactions": [reaction.emoji for reaction in message.reactions],
+                                            "reactions": [str(reaction.emoji) for reaction in message.reactions],
                                             # "created_at": message.created_at
                                     }
                             if message.channel.name not in message_dict:
