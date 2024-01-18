@@ -118,7 +118,7 @@ class ListMessages(commands.Cog, name="list_messages"):
       help=
       'list all messages sent in a server today. \n e.g. `.la or .list_all :  sends list of messages to private message` '
   )
-  async def dataset(ctx):
+  async def dataset(self, ctx):
     for guild in bot.guilds:
         
         print(f'server: {guild.id}')
