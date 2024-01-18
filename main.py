@@ -254,7 +254,7 @@ async def unleash_rest_of_World():
   channel_id = 1132855697332256849  # ai4growth news channel
   channel = bot.get_channel(channel_id)
   articles = get_articles()
-  print(f'\n\n new articles from rest of world: {articles} \n\n')
+  print(f'\n\n new articles from rest of world: {list(articles)} \n\n')
   for article in articles:
     await channel.send(article['link'])
     await asyncio.sleep(1)
@@ -336,7 +336,7 @@ async def on_ready():
   # await send_most_active()
   # Run tasks concurrently using asyncio.gather
   # await most_active_task()
-
+  print("ready!")
   await asyncio.gather(
       quiz_loop_task(),
       unleash_subscription_task(),
@@ -348,12 +348,12 @@ async def on_ready():
   await bot.tree.sync(
   )  # sync CommandTree in order for slash commands to appear : https://discordpy.readthedocs.io/en/v2.2.2/ext/commands/commands.html#hybrid-commands
 
-  print("Change bot profile pic")
-  pfp_path = "ai4growthorg_logo.jpeg"
-  fp = open(pfp_path, 'rb')
-  pfp = fp.read()
-  await bot.user.edit(avatar=pfp)
-  fp.close()
+  # print("Change bot profile pic")
+  # pfp_path = "ai4growthorg_logo.jpeg"
+  # fp = open(pfp_path, 'rb')
+  # pfp = fp.read()
+  # await bot.user.edit(avatar=pfp)
+  # fp.close()
 
   print(f"Logged in as {bot.user.name}")
   print(f"Discord.py API version: {discord.__version__}")
@@ -467,40 +467,6 @@ async def quiz_loop_task():
 
 async def unleash_subscription_task():
   await unleash_subscription.start()
-
-
-
-
-
-# The code in this event is executed when the bot is ready
-@bot.event
-async def on_ready():
-  # bot.loop.create_task(status_task())
-  # await bot.loop.create_task(unleashing_tasks())
-  
-  await asyncio.gather(
-      quiz_loop_task(),
-      unleash_subscription_task(),
-      # most_active_task(),  # merged quiz_loop and most_active task for now.
-  )
-  await bot.tree.sync() # sync CommandTree in order for slash commands to appear : https://discordpy.readthedocs.io/en/v2.2.2/ext/commands/commands.html#hybrid-commands
-  
-  print("Change bot profile pic")
-  pfp_path = "ai4growthorg_logo.jpeg"
-  fp = open(pfp_path, 'rb')
-  pfp = fp.read()
-  await bot.user.edit(avatar=pfp)
-  fp.close()
-
-  print(f"Logged in as {bot.user.name}")
-  print(f"Discord.py API version: {discord.__version__}")
-  print(f"Python version: {platform.python_version()}")
-  print(f"Running on: {platform.system()} {platform.release()} ({os.name})")
-  print("-------------------")
-  unleashing.start() # reddit posts
-  unleash_ioe_notifications.start()
-  unleash_news.start()  # news
-  
 
 # Setup the game status task of the bot
 async def status_task():
@@ -641,6 +607,7 @@ async def on_reaction_add(reaction, user, a=''):
   #print('hii')
   #await reaction.message.add_reaction('♥️')
   if not user.bot:
+    await reaction.message.add_reaction(reaction)
     return
     # check quiz question
     quiz_question = QuizQuestions.get_question(reaction.message.id)
@@ -774,17 +741,17 @@ async def on_raw_reaction_add(payload):
   print("raw reaction")
   if not payload.member.bot:
     print('not bot')
+    channel = bot.get_channel(payload.channel_id)
+    print(f'channel:{channel}')
+    message = await channel.fetch_message(payload.message_id)
+    print(f'message:{message}')
+    # Mirror Reaction
+    await message.add_reaction(payload.emoji)
     # check quiz question
     quiz_question = QuizQuestions.get_question(payload.message_id)
     print('got question')
     print(f'quiz_question:{quiz_question} {payload.message_id}')
     if quiz_question:
-
-      channel = bot.get_channel(payload.channel_id)
-      print(f'channel:{channel}')
-      message = await channel.fetch_message(payload.message_id)
-      print(f'message:{message}')
-
       leaderboard_data = await update_scores(question=quiz_question,
                                              raw_reaction=True,
                                              message=message,
