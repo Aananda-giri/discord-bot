@@ -7,22 +7,25 @@ from datetime import datetime
 import time
 
 
-
 def count_percentage(message_count):
     '''
-    Returns the percentage of messages by each user in a dictionary.
+    Returns the percentage of messages by each user in a list.
     '''
-    total_messages = sum(message_count.values())
-    
-    percentages = {user: (count / total_messages) * 100 for user, count in message_count.items()}
-    
-    return percentages
+    total_messages = sum(count for username, count in message_count)
+    percentage_list = [(username, (count / total_messages) * 100) for username, count in message_count]
+    return percentage_list
 
-# # Example Usage
-# message_count = {'anon': 1, 'anon2': 2, 'anon3': 3}
+# Example Usage
+# message_count = [('anon3', 3), ('anon2', 2), ('anon', 1)]
 # result = count_percentage(message_count)
 # print(result)
 
+
+# # Example Usage
+# message_count = [('anon3', 3), ('anon2', 2), ('anon', 1)]
+# result = count_percentage(message_count)
+# print(result)
+rank, data in enumerate(leaderboard_data, start=1):
 
 def count_messages(messages, how_many=None):
     print('counting messages')
