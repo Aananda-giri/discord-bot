@@ -5,6 +5,25 @@ from .quiz_functions import get_question_embed, create_stylish_leaderboard_embed
 
 from datetime import datetime
 import time
+
+
+
+def count_percentage(message_count):
+    '''
+    Returns the percentage of messages by each user in a dictionary.
+    '''
+    total_messages = sum(message_count.values())
+    
+    percentages = {user: (count / total_messages) * 100 for user, count in message_count.items()}
+    
+    return percentages
+
+# # Example Usage
+# message_count = {'anon': 1, 'anon2': 2, 'anon3': 3}
+# result = count_percentage(message_count)
+# print(result)
+
+
 def count_messages(messages, how_many=None):
     print('counting messages')
     message_count = {}
@@ -14,9 +33,8 @@ def count_messages(messages, how_many=None):
                 message_count[message['author']] += 1
             else:
                 message_count[message['author']] = 1
-
     message_count = sorted(message_count.items(), key=lambda x: x[1], reverse=True)
-    return message_count[:how_many]
+    return count_percentage(message_count[:how_many])
 
 
 class Stats(commands.Cog, name="stats"):

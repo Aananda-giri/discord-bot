@@ -290,10 +290,18 @@ def create_stylish_leaderboard_embed(leaderboard_data,
     if rank == 3:
       leaderboard_text += "\n"
 
-  # Add a field to the embed with the leaderboard text
-  embed.add_field(
-      name='Rank     User                                           Score',
-      value=leaderboard_text,
-      inline=False  # Set to False for better readability
-  )
+  if is_most_active_leaderboard:
+      # Add a field to the embed with the leaderboard text
+      embed.add_field(
+          name='Rank     User                                           Percentage',
+          value=leaderboard_text,
+          inline=False  # Set to False for better readability
+      )
+  else:
+      # Add a field to the embed with the leaderboard text
+      embed.add_field(
+          name='Rank     User                                           Score',
+          value=leaderboard_text,
+          inline=False  # Set to False for better readability
+      )
   return embed
