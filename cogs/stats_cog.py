@@ -52,7 +52,7 @@ def count_messages(messages, how_many=None):
             #   print(f'error: {Ex}')
 
     message_count = sorted(message_count.items(), key=lambda x: x[1], reverse=True)
-    return count_percentage(message_count[:how_many])
+    return message_count[:how_many], count_percentage(message_count[:how_many])
 
 
 class Stats(commands.Cog, name="stats"):
@@ -134,7 +134,7 @@ class Stats(commands.Cog, name="stats"):
         except Exception as e:
           print(f"Couldn't fetch history from {channel.name}, {e}")
 
-      message_count = count_messages(messages = message_dict, how_many = -1)
+      message_count, message_percentage  = count_messages(messages = message_dict, how_many = -1)
       reactions_count = sorted(reaction_dict.items(), key=lambda x: x[1], reverse=True)
       # Save as json file
       
@@ -145,8 +145,8 @@ class Stats(commands.Cog, name="stats"):
       #   await ctx.author.send(
       #       f'## Here is lis of messages today to the server:{ctx.guild.name}`\n {str(message_dict)[:1900]}`',
       #       silent=True)
-      print(message_count)
-      msg_embed = create_stylish_leaderboard_embed(message_count, question_expired=False, is_most_active_leaderboard=True)
+      # print(message_count)
+      msg_embed = create_stylish_leaderboard_embed(message_percentage, question_expired=False, is_most_active_leaderboard=True)
 
       await ctx.send(embed=msg_embed, silent=True)
 
