@@ -15,7 +15,7 @@ if not os.path.isfile("config.py"):
   sys.exit("'config.py' not found! Please add it and try again.")
 else:
   import config
-config.init()
+  config.init()
 
 # replit db import method
 # from os import environ
@@ -50,8 +50,8 @@ import time
 
 load_dotenv()
 
-intents = config.intents
-client = discord.Client(intents=intents)
+bot = Bot(command_prefix=config.BOT_PREFIX, help_command=None, intents=config.intents)
+client = discord.Client(intents=config.intents)
 
 """  
 Setup bot intents (events restrictions)
@@ -73,9 +73,7 @@ https://discordpy.readthedocs.io/en/latest/intents.html#privileged-intents
 # intents.voice_states = False
 # intents.webhooks = False
 
-bot = Bot(command_prefix=config.BOT_PREFIX, help_command=None, intents=intents)
-# Removes the default help command of discord.py to be able to create our custom help command.
-#bot.remove_command("help")
+
                     
 
 @tasks.loop(hours=6)
@@ -270,7 +268,7 @@ async def send_most_active():
 
   print(f'guild: {dir(channel)} guild:{channel.guild}'
         )  #  {channel.guild}') # {channel.message.guild}')
-  # await ctx.send('hie')
+  # await ctx.send('wait.')
   # Get the start of the current day
   channels_to_exclude = [
       1132857202911215759, 1132858472212467712, 1132858133413371915,
@@ -319,11 +317,11 @@ async def send_most_active():
           print(f'skip_message: {message.author.name} : {message.content}')
     except Exception as e:
       print(f"Couldn't fetch history from {channel.name}, {e}")
-  print(f'\n\n hie2 \n\n')
-  # await channel.send('hie')
+  print(f'\n\n wait.2 \n\n')
+  # await channel.send('wait.')
   message_count = count_messages(messages=message_dict, how_many=15)
   # message_count = [('anon.sepian', 42)]
-  # await channel.send('hie2')
+  # await channel.send('wait.2')
   print(f'message_count: {message_count}')
   msg_embed = create_stylish_leaderboard_embed(message_count,
                                                question_expired=False,
@@ -988,7 +986,7 @@ async def cc(ctx):
       # @commands.command(name='most_active', aliases=[])
       # async def most_active(self, ctx):
       print(f'guild: {dir(ctx)} {ctx.guild} {ctx.message.guild}')
-      await ctx.send('hie')
+      await ctx.send('wait.')
       # Get the start of the current day
       channels_to_exclude = [
           1132857202911215759, 1132858472212467712, 1132858133413371915,
