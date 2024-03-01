@@ -81,7 +81,7 @@ class Stats(commands.Cog, name="stats"):
   async def most_active(self, ctx):
       # @commands.command(name='most_active', aliases=[])
       # async def most_active(self, ctx):
-      print(f'guild: {dir(ctx)} {ctx.guild} {ctx.message.guild}')
+      print(f'guild: {dir(ctx)} \n\n ctx.guild: {ctx.guild} ctx.message.guild: {ctx.message.guild} \n\n ctx: {ctx}')
       await ctx.send('wait.')
       # Get the start of the current day
       channels_to_exclude = [
