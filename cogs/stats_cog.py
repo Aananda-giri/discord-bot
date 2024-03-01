@@ -89,7 +89,7 @@ class Stats(commands.Cog, name="stats"):
       ]
       today = datetime.now()
       # start_of_day = datetime(today.year, today.month, today.day)
-      start_of_week = today - timedelta(days=today.weekday()+1)
+      start_of_week = today - datetime.timedelta(days=today.weekday()+1)
 
       message_dict = {}
       # Iterate over all text channels in the server
