@@ -4,7 +4,7 @@ from .quiz_functions import get_question_embed, create_stylish_leaderboard_embed
 
 
 from datetime import datetime, timedelta
-import time
+import time, json
 
 
 def count_percentage(message_count):
