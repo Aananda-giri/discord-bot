@@ -337,16 +337,16 @@ async def on_ready():
   # Run tasks concurrently using asyncio.gather
   # await most_active_task()
   print("ready!")
-  await asyncio.gather(
-      quiz_loop_task(),
-      unleash_subscription_task(),
-      # most_active_task(),  # merged quiz_loop and most_active task for now.
-  )
+  # await asyncio.gather(
+  #     quiz_loop_task(),
+  #     unleash_subscription_task(),
+  #     # most_active_task(),  # merged quiz_loop and most_active task for now.
+  # )
 
   # bot.loop.create_task(status_task())
 
-  await bot.tree.sync(
-  )  # sync CommandTree in order for slash commands to appear : https://discordpy.readthedocs.io/en/v2.2.2/ext/commands/commands.html#hybrid-commands
+  # await bot.tree.sync(
+  # )  # sync CommandTree in order for slash commands to appear : https://discordpy.readthedocs.io/en/v2.2.2/ext/commands/commands.html#hybrid-commands
 
   # print("Change bot profile pic")
   # pfp_path = "ai4growthorg_logo.jpeg"

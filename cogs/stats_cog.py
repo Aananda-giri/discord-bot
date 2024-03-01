@@ -25,19 +25,33 @@ def count_percentage(message_count):
 # message_count = [('anon3', 3), ('anon2', 2), ('anon', 1)]
 # result = count_percentage(message_count)
 # print(result)
-rank, data in enumerate(leaderboard_data, start=1):
 
 def count_messages(messages, how_many=None):
     print('counting messages')
     message_count = {}
+    reaction_count = {}
     for channel in messages:
         for message in messages[channel]:
+            # Count Message
             if message['author'] in message_count:
                 message_count[message['author']] += 1
             else:
                 message_count[message['author']] = 1
+            try:
+              # Count Reaction
+              for reaction in message['reactions']:
+                  print(f'reaction:{reaction}')
+                  print(f'user:{reaction["user"]} {type(reaction["user"])}')
+                  if reaction['user'] in reaction_count:
+                      reaction_count[reaction['user']] += 1
+                  else:
+                      reaction_count[reaction['user']] = 1
+            except Exception as Ex:
+              print(f'error: {Ex}')
+
     message_count = sorted(message_count.items(), key=lambda x: x[1], reverse=True)
-    return count_percentage(message_count[:how_many])
+    reaction_count = sorted(reaction_count.items(), key=lambda x: x[1], reverse=True)
+    return count_percentage(message_count[:how_many]), count_percentage(reaction_count[:how_many])
 
 
 class Stats(commands.Cog, name="stats"):
