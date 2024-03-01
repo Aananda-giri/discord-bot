@@ -37,22 +37,21 @@ def count_messages(messages, how_many=None):
                 message_count[message['author']] += 1
             else:
                 message_count[message['author']] = 1
-            try:
-              # Count Reaction
-              print(f'reactions:{reactions}')
-              for reaction in message['reactions']:
-                  print(f'reaction:{reaction}')
-                  print(f'user:{reaction["user"]} {type(reaction["user"])}')
-                  if reaction['user'] in reaction_count:
-                      reaction_count[reaction['user']] += 1
-                  else:
-                      reaction_count[reaction['user']] = 1
-            except Exception as Ex:
-              print(f'error: {Ex}')
+            # try:
+              # # Count Reaction
+              # print(f'reactions:{reactions}')
+              # for reaction in message['reactions']:
+              #     print(f'reaction:{reaction}')
+              #     print(f'user:{reaction["user"]} {type(reaction["user"])}')
+              #     if reaction['user'] in reaction_count:
+              #         reaction_count[reaction['user']] += 1
+              #     else:
+              #         reaction_count[reaction['user']] = 1
+            # except Exception as Ex:
+            #   print(f'error: {Ex}')
 
     message_count = sorted(message_count.items(), key=lambda x: x[1], reverse=True)
-    reaction_count = sorted(reaction_count.items(), key=lambda x: x[1], reverse=True)
-    return count_percentage(message_count[:how_many]), count_percentage(reaction_count[:how_many])
+    return count_percentage(message_count[:how_many])
 
 
 class Stats(commands.Cog, name="stats"):
@@ -93,6 +92,7 @@ class Stats(commands.Cog, name="stats"):
       start_of_week = today - timedelta(days=today.weekday()+1)
 
       message_dict = {}
+      reaction_dict = {}
       # Iterate over all text channels in the server
       for channel in ctx.guild.text_channels:
       # for channel in ctx.guild.get_all_channels():
@@ -108,6 +108,10 @@ class Stats(commands.Cog, name="stats"):
               # Dont display messages by bot
               if message.channel.name not in message_dict:
                 message_dict[message.channel.name] = []
+              if message.channel.name not in reaction_dict:
+                reaction_dict[message.channel.name] = []
+              # Append reactions to reaction_dict
+              
               message_dict[message.channel.name].append(
                   {
                       'author': message.author.name,
@@ -128,6 +132,59 @@ class Stats(commands.Cog, name="stats"):
       msg_embed = create_stylish_leaderboard_embed(message_count, question_expired=False, is_most_active_leaderboard=True)
 
       await ctx.send(embed=msg_embed, silent=True)
+
+
+
+
+
+
+
+
+
+
+
+
+      # message_dict = {}
+      # reaction_dict = {}
+      # # Iterate over all text channels in the server
+      # for channel in ctx.guild.text_channels:
+      # # for channel in ctx.guild.get_all_channels():
+      #   if int(channel.id) in channels_to_exclude:
+      #     continue
+      #   time.sleep(.2)
+      #   try:
+      #     # List all the messages sent in the channel today
+      #     messages = channel.history(after=start_of_day)
+      #     async for message in messages:
+      #       time.sleep(.2)
+      #       if not message.author.bot:
+      #         # Dont display messages by bot
+      #         if message.channel.name not in message_dict:
+      #           message_dict[message.channel.name] = []
+      #         if message.channel.name not in reaction_dict:
+      #           reaction_dict[message.channel.name] = []
+      #         # Append reactions to reaction_dict
+
+      #         message_dict[message.channel.name].append(
+      #             {
+      #                 'author': message.author.name,
+      #                 'content': message.content
+      #             }
+      #         )  # 'created_at': message.created_at, 'channel_id': message.channel.id})
+      #         print(
+      #             f'{message.author.name} : {message.content} : {message.created_at}'
+      #         )
+      #   except Exception as e:
+      #     print(f"Couldn't fetch history from {channel.name}, {e}")
+
+      # message_count = count_messages(messages = message_dict, how_many = 15)
+      # await ctx.author.send(
+      #     f'## Here is lis of messages today to the server:{ctx.guild.name}`\n {str(message_dict)[:1900]}`',
+      #     silent=True)
+      # print(message_count)
+      # msg_embed = create_stylish_leaderboard_embed(message_count, question_expired=False, is_most_active_leaderboard=True)
+
+      # await ctx.send(embed=msg_embed, silent=True)
     
 async def setup(bot):
   await bot.add_cog(Stats(bot))
