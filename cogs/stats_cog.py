@@ -38,18 +38,18 @@ def count_messages(messages, how_many=None):
                 message_count[message['author']] += 1
             else:
                 message_count[message['author']] = 1
-            # try:
-              # # Count Reaction
-              # print(f'reactions:{reactions}')
-              # for reaction in message['reactions']:
-              #     print(f'reaction:{reaction}')
-              #     print(f'user:{reaction["user"]} {type(reaction["user"])}')
-              #     if reaction['user'] in reaction_count:
-              #         reaction_count[reaction['user']] += 1
-              #     else:
-              #         reaction_count[reaction['user']] = 1
-            # except Exception as Ex:
-            #   print(f'error: {Ex}')
+            try:
+              # Count Reaction
+              print(f'reactions:{reactions}')
+              for reaction in message['reactions']:
+                  print(f'reaction:{reaction}')
+                  print(f'user:{reaction["user"]} {type(reaction["user"])}')
+                  if reaction['user'] in reaction_count:
+                      reaction_count[reaction['user']] += 1
+                  else:
+                      reaction_count[reaction['user']] = 1
+            except Exception as Ex:
+              print(f'error: {Ex}')
 
     message_count = sorted(message_count.items(), key=lambda x: x[1], reverse=True)
     return message_count[:how_many], count_percentage(message_count[:how_many])
@@ -69,7 +69,7 @@ class Stats(commands.Cog, name="stats"):
                            usage='.pinge')
   async def pinge(self, context):
 
-    await context.send('hie')
+    await context.send('wait.')
   
   @commands.hybrid_command(name="most_active",
                            brief=" short_help: to test if bot responding  ",
@@ -82,7 +82,7 @@ class Stats(commands.Cog, name="stats"):
       # @commands.command(name='most_active', aliases=[])
       # async def most_active(self, ctx):
       print(f'guild: {dir(ctx)} {ctx.guild} {ctx.message.guild}')
-      await ctx.send('hie')
+      await ctx.send('wait.')
       # Get the start of the current day
       channels_to_exclude = [
           1132857202911215759, 1132858472212467712, 1132858133413371915,
@@ -141,7 +141,8 @@ class Stats(commands.Cog, name="stats"):
       with open("messsage_reaction_count.json",'w') as f:
         json.dump({"message_count": message_count, 'reactions_count':reactions_count},f)
       # Send the file to user
-      await ctx.author.send(file=discord.File("messsage_reaction_count.json"))
+      # await ctx.author.send(file=discord.File("messsage_reaction_count.json"))
+      await ctx.send(file=discord.File("messsage_reaction_count.json"))
       #   await ctx.author.send(
       #       f'## Here is lis of messages today to the server:{ctx.guild.name}`\n {str(message_dict)[:1900]}`',
       #       silent=True)
