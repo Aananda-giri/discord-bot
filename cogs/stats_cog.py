@@ -28,7 +28,7 @@ def count_percentage(message_count):
 # print(result)
 
 def count_messages(messages, how_many=None):
-    print('counting messages')
+    print(f'counting messages: {messages}')
     message_count = {}
     reaction_count = {}
     for channel in messages:
@@ -38,18 +38,6 @@ def count_messages(messages, how_many=None):
                 message_count[message['author']] += 1
             else:
                 message_count[message['author']] = 1
-            try:
-              # Count Reaction
-              print(f'reactions:{reactions}')
-              for reaction in message['reactions']:
-                  print(f'reaction:{reaction}')
-                  print(f'user:{reaction["user"]} {type(reaction["user"])}')
-                  if reaction['user'] in reaction_count:
-                      reaction_count[reaction['user']] += 1
-                  else:
-                      reaction_count[reaction['user']] = 1
-            except Exception as Ex:
-              print(f'error: {Ex}')
 
     message_count = sorted(message_count.items(), key=lambda x: x[1], reverse=True)
     return message_count[:how_many], count_percentage(message_count[:how_many])
