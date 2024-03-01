@@ -39,6 +39,7 @@ def count_messages(messages, how_many=None):
                 message_count[message['author']] = 1
             try:
               # Count Reaction
+              print(f'reactions:{reactions}')
               for reaction in message['reactions']:
                   print(f'reaction:{reaction}')
                   print(f'user:{reaction["user"]} {type(reaction["user"])}')
