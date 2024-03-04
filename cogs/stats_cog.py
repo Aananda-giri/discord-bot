@@ -40,7 +40,11 @@ def count_messages(messages, how_many=None):
                 message_count[message['author']] = 1
 
     message_count = sorted(message_count.items(), key=lambda x: x[1], reverse=True)
-    return message_count[:how_many], count_percentage(message_count[:how_many])
+    if how_many:
+      # print(f'returnong message_count: {message_count[:how_many]} \n how_many: {how_many}')
+      return message_count[:how_many], count_percentage(message_count[:how_many])
+    else:
+      return message_count, count_percentage(message_count)
 
 
 class Stats(commands.Cog, name="stats"):
@@ -57,7 +61,7 @@ class Stats(commands.Cog, name="stats"):
                            usage='.pinge')
   async def pinge(self, context):
 
-    await context.send('wait.')
+    await context.send('wait.', silent=True)
   
   @commands.hybrid_command(name="most_active",
                            brief=" short_help: to test if bot responding  ",
@@ -70,7 +74,7 @@ class Stats(commands.Cog, name="stats"):
       # @commands.command(name='most_active', aliases=[])
       # async def most_active(self, ctx):
       print(f'guild: {dir(ctx)} \n\n ctx.guild: {ctx.guild} ctx.message.guild: {ctx.message.guild} \n\n ctx: {ctx}')
-      await ctx.send('wait.')
+      await ctx.send('wait.', silent=True)
       # Get the start of the current day
       channels_to_exclude = [
           1132857202911215759, 1132858472212467712, 1132858133413371915,
@@ -91,7 +95,8 @@ class Stats(commands.Cog, name="stats"):
         time.sleep(.2)
         try:
           # List all the messages sent in the channel today
-          messages = channel.history(after=start_of_day)
+          # messages = channel.history(after=start_of_day)
+          messages = await channel.history()  # .flatten() to get all messages at a time ; no need for async for
           print(f'messages:{messages}')
           async for message in messages:
             time.sleep(.2)
@@ -121,8 +126,9 @@ class Stats(commands.Cog, name="stats"):
               )
         except Exception as e:
           print(f"Couldn't fetch history from {channel.name}, {e}")
-
-      message_count, message_percentage  = count_messages(messages = message_dict, how_many = -1)
+      
+      message_count, message_percentage  = count_messages(messages = message_dict)
+      print(f'got message_count: {message_count}')
       reactions_count = sorted(reaction_dict.items(), key=lambda x: x[1], reverse=True)
       # Save as json file
       
@@ -130,7 +136,7 @@ class Stats(commands.Cog, name="stats"):
         json.dump({"message_count": message_count, 'reactions_count':reactions_count},f)
       # Send the file to user
       # await ctx.author.send(file=discord.File("messsage_reaction_count.json"))
-      await ctx.send(file=discord.File("messsage_reaction_count.json"))
+      await ctx.send(file=discord.File("messsage_reaction_count.json"), silent=True)
       #   await ctx.author.send(
       #       f'## Here is lis of messages today to the server:{ctx.guild.name}`\n {str(message_dict)[:1900]}`',
       #       silent=True)
@@ -139,6 +145,5 @@ class Stats(commands.Cog, name="stats"):
 
       await ctx.send(embed=msg_embed, silent=True)
 
-    
 async def setup(bot):
   await bot.add_cog(Stats(bot))

@@ -80,6 +80,29 @@ class Commands(commands.Cog, name="reddit_commands"):
         please enter `.vent` To to enable/disable a vent channel
         """
         await context.send(response_message)
+    
+    @commands.command(name='chat', aliases=[], brief='chat with gemini', help='chat with gemini')
+    async def chat(self, context, *args):
+
+        print('\n\n chat invoked \n\n')
+        gemini_chat_db = db('gemini_chat')
+        gemini_chat_channels = gemini_chat_db.get_all()
+
+        if int(context.channel.id) not in gemini_chat_channels:
+            print('\n\n adding channel  to chat\n\n')
+            # enabling a vent channel
+            gemini_chat_db.add_one(context.channel.id)
+            response_message = """
+        \n**Gemini response enabled...**
+        """
+        else:
+            print('\n\n removing gemini_chat channel \n\n')
+            # disabling a vent channel
+            gemini_chat_db.remove_one(str(context.channel.id))
+            response_message = """
+        \n**Gemini response disabled...**
+        """
+        await context.send(response_message)
 
 
 def setup(bot):
