@@ -145,5 +145,55 @@ class Stats(commands.Cog, name="stats"):
 
       await ctx.send(embed=msg_embed, silent=True)
 
+  @commands.hybrid_command(name="stats",
+                           brief=" short_help: count number of messages and reactions by eac user",
+                           help='stats: e.g. .stats',
+                           aliases=[],
+                           ephermal=True,
+                           hidden=True,
+                           usage='.stats')
+  async def stats(self, ctx):
+    members = {}
+    for m in  ctx.guild.members:
+        members[m.id] = {
+            "name": m.name,
+            "roles": [role.name for role in m.roles],
+            "bot": m.bot,
+            "messages": 0,
+            # "replies": 0,
+            "reactions": 0,
+        }
+    
+    # import pdb;pdb.set_trace()
+    # Iterate over all text channels in the server
+    print(f'ctx.guild')
+    for channel in ctx.guild.text_channels:
+        time.sleep(.2)
+        try:
+          # List all the messages sent in the channel today
+          messages = channel.history()
+          print(f'messages:{messages}')
+          async for message in messages:
+            time.sleep(.2)
+            if not message.author.bot:
+                print(f'channel:{channel.name} \n\n message:{message}\n\nfucking reactions: {message.reactions}')
+                #   print(f'author:{message.reactions[0].author} \n\n ')
+                for reaction in  message.reactions:
+                    async for user in reaction.users():
+                        members[user.id]["reactions"] += 1
+                members[message.author.id]["messages"] += 1
+            
+            print(
+                  f'message:{message}\n\n {message.author.name} : {message.content} : {message.created_at}'
+              )
+            
+        except Exception as e:
+            print(f"Couldn't fetch history from {channel.name}, {e}")
+        
+        # Save after processing every channel
+        with open("members_data.json",'w') as f:
+            json.dump(members,f)
+    await ctx.author.send(file=discord.File("members_data.json"))
+
 async def setup(bot):
   await bot.add_cog(Stats(bot))
