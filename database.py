@@ -511,3 +511,11 @@ def update_word(channel_id, new_word, new_author=None, current_score = 0, new_hi
   # to update data of channel_id with: new_word, new_author, current_score, highest_score
   pass
 '''
+
+
+if __name__ == "__main__":
+  # from database import db
+  gemini_chat_db = db('gemini_chat')
+  
+  # Crreate table: gemini_chat
+  gemini_chat_db.create_ioe_notification_table('gemini_chat')
