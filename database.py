@@ -133,7 +133,7 @@ class db:
 
     def add_one(self, channel_id, gener=None, how_many=None):
         print('\n\n add_one: table_name: {}\n\n'.format(self.table_name))
-        if self.table_name == 'ioe_notifications' or self.table_name == 'vent':
+        if self.table_name == 'ioe_notifications' or self.table_name == 'vent' or self.table_name == 'gemini_chat':
           # 'ioe_notification and vent' tables have same structure
             self.add_one_ioe_notificaiton(channel_id)
         elif self.table_name == 'subreddit' or self.table_name == 'news':
@@ -144,7 +144,7 @@ class db:
             print(f'\n table_name: \'{self.table_name}\' not found\n')
     
     def remove_one(self, channel_id, gener=None):
-        if self.table_name == 'ioe_notifications' or self.table_name == 'vent':
+        if self.table_name == 'ioe_notifications' or self.table_name == 'vent' or self.table_name == 'gemini_chat':
             self.remove_one_ioe_notificaiton(channel_id)
         elif self.table_name == 'subreddit' or self.table_name == 'news':
             self.remove_one_subscription(channel_id, gener)
@@ -232,7 +232,7 @@ class db:
                 data['current_author'] = tup[2]
                 data['current_score'] = int(tup[3])
                 data['highest_score'] = int(tup[4])
-        elif self.table_name == 'ioe_notifications' or self.table_name == 'vent':
+        elif self.table_name == 'ioe_notifications' or self.table_name == 'vent' or self.table_name == 'gemini_chat':
             # print('inside_vent_db')
             c.execute("SELECT * from '%s' WHERE channel_id = (?)" %
                       self.table_name, (channe_id,))
@@ -338,9 +338,12 @@ class db:
     def create_ioe_notification_table(table_name='ioe_notifications'):
         conn = sqlite3.connect('database.db')
         c = conn.cursor()   # create a cursor
-        c.execute("""CREATE TABLE '%s' (
-  		channel_id int NOT NULL PRIMARY KEY
-  		)""" % table_name)
+        # Check if table exists
+
+        c.execute("""CREATE TABLE IF NOT EXISTS '%s' (
+          channel_id int NOT NULL PRIMARY KEY
+          )""" % table_name
+        )
         conn.commit()  # commit our command
         conn.close()  # close our connection
     # create_ioe_notification_table()
