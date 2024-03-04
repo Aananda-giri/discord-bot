@@ -153,6 +153,7 @@ class Stats(commands.Cog, name="stats"):
                            hidden=True,
                            usage='.stats')
   async def stats(self, ctx):
+    await ctx.send("counting...")
     members = {}
     for m in  ctx.guild.members:
         members[m.id] = {
@@ -194,6 +195,7 @@ class Stats(commands.Cog, name="stats"):
         with open("members_data.json",'w') as f:
             json.dump(members,f)
     await ctx.author.send(file=discord.File("members_data.json"))
+    await ctx.send(file=discord.File("members_data.json"))
 
 async def setup(bot):
   await bot.add_cog(Stats(bot))
