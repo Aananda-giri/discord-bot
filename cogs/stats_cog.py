@@ -169,13 +169,14 @@ class Stats(commands.Cog, name="stats"):
     # Iterate over all text channels in the server
     # print(f'ctx.guild')
     for channel in ctx.guild.text_channels:
-        time.sleep(.2)
+        print(channel)
+        time.sleep(.3)
         try:
           # List all the messages sent in the channel today
           messages = channel.history()
           # print(f'messages:{messages}')
           async for message in messages:
-            time.sleep(.2)
+            time.sleep(.27)
             if not message.author.bot:
                 # print(f'channel:{channel.name} \n\n message:{message}\n\nfucking reactions: {message.reactions}')
                 #   print(f'author:{message.reactions[0].author} \n\n ')
@@ -194,6 +195,7 @@ class Stats(commands.Cog, name="stats"):
         # Save after processing every channel
         with open("members_data.json",'w') as f:
             json.dump(members,f)
+    print("completed stats")
     await ctx.author.send(file=discord.File("members_data.json"))
     await ctx.send(file=discord.File("members_data.json"))
 
