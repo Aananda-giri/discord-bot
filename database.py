@@ -271,7 +271,7 @@ class db:
         '''
         conn = sqlite3.connect('database.db')
         c = conn.cursor()   # create a cursor
-        if self.table_name == 'ioe_notifications' or self.table_name == 'vent':
+        if self.table_name == 'ioe_notifications' or self.table_name == 'vent' or self.table_name == 'gemini_chat':
             # print('inside_vent_db')
             c.execute("SELECT channel_id FROM '%s'" % self.table_name)
             data = [tup[0] for tup in c.fetchall()]
