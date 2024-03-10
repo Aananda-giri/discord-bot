@@ -13,28 +13,29 @@ print(current_path)
 class IoeSpider(scrapy.Spider):
     name = "ioe"
     start_urls = [
-            'https://exam.ioe.edu.np/',
+            'http://exam.ioe.edu.np/',
         ]
     def parse(self, response):
         tds = response.css('td')
         i=[str(a) for a in range(1,11)]
-        
+
         notices = []
         for td in tds:
             # tds[0] -> s.no  ,tds[1] -> title  , tds[2] -> notice date
             if td.css('td::text').get() in i:
-                title = tds[tds.index(td)+1].css('span::text').get()
+                title = tds[tds.index(td)+1].css('a::text').get()
                 url = str(response.url).split('/?')[0][:-1] + str(tds[tds.index(td)+1].css('a::attr(href)').get())
                 date = tds[tds.index(td)+2].css('td::text').get()
                 notices.append({'title':title, 'url':url, 'date':date})
-        
-        with open(os.path.join(current_path, 'new_notices.json'),'w') as file:
-            json.dump(notices, file, indent = 4)
+                print(f"\n\n\n ---------------  notice: {title} \t url:{url}, date:{date}")
+                
+                with open(os.path.join(current_path, 'new_notices.json'),'w') as file:
+                    json.dump(notices, file, indent = 4)
 
-        #next_page = response.css('li.PagedList-skipToNext a::attr(href)').get()
-        
-        #if next_page is not None:
-        #    yield response.follow(next_page, callback=self.parse)
+                #next_page = response.css('li.PagedList-skipToNext a::attr(href)').get()
+                
+                #if next_page is not None:
+                #    yield response.follow(next_page, callback=self.parse)
 
 
 
