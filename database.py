@@ -147,6 +147,7 @@ class db:
         if self.table_name == 'ioe_notifications' or self.table_name == 'vent' or self.table_name == 'gemini_chat':
             self.remove_one_ioe_notificaiton(channel_id)
         elif self.table_name == 'subreddit' or self.table_name == 'news':
+            # print(f'genre is {gener} channel id:{channel_id}')
             self.remove_one_subscription(channel_id, gener)
         elif self.table_name == 'vent':
             self.remove_one_vent_channel(channel_id)
@@ -187,7 +188,7 @@ class db:
 
     # add_one_reddit(123,'sub', 3)
 
-    def remove_one_subscription(self, channel_id, gener):
+    def remove_one_subscription(self, channel_id, gener=None):
         '''
           removes one from 'subreddit'/'news' table that matches channel_id and gener.
           gener = 'subreddit_name' for table_name='subreddit', 'country_prefix' for table_name= news
@@ -195,9 +196,13 @@ class db:
 
         conn = sqlite3.connect('database.db')
         c = conn.cursor()   # create a cursor
-
-        c.execute("DELETE FROM '%s' WHERE channel_id = (?) AND gener = (?) " %
-                  self.table_name, (channel_id, gener,))
+        if gener == None:
+            # print(f'genre is {gener} channel id:{channel_id}')
+            c.execute("DELETE FROM '%s' WHERE channel_id = (?)" %
+                    self.table_name, (channel_id, ))
+        else:
+            c.execute("DELETE FROM '%s' WHERE channel_id = (?) AND gener = (?) " %
+                    self.table_name, (channel_id, gener,))
         message = f"Delete: channel_id: {channel_id}, {self.table_name}: {gener}"
 
         conn.commit()  # commit our command
