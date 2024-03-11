@@ -243,7 +243,7 @@ async def unleash_ioe_notifications():
 
 from cogs.rest_of_world_functions import get_articles
 
-
+@tasks.loop(hours=4)
 async def unleash_rest_of_World():
   # channel_id = 1098474629766578280  # veg
   # channel_id = 1132858904582311946  # ai4growth moderator_only
@@ -327,16 +327,28 @@ async def send_most_active():
                                                question_expired=False,
                                                is_most_active_leaderboard=True)
   await channel.send(embed=msg_embed)
-1
+
+async def quiz_loop_task():
+  await quiz_loop.start()
+
+async def ioe_notifices_task():
+  await unleash_ioe_notifications.start()
+
+async def rest_of_world_task():
+  await unleash_rest_of_World.start()
+
 @bot.event
 async def on_ready():
-  # await unleash_rest_of_World()
+  await unleash_rest_of_World()
   # await send_most_active()
   # Run tasks concurrently using asyncio.gather
   # await most_active_task()
   print("ready!")
-  # await asyncio.gather(
-  #     quiz_loop_task(),
+  await asyncio.gather(
+      quiz_loop_task(),
+      ioe_notifices_task(),
+      rest_of_world_task()
+  )
   #     unleash_subscription_task(),
   #     # most_active_task(),  # merged quiz_loop and most_active task for now.
   # )
@@ -415,7 +427,7 @@ async def quiz_loop():
   await command(ctx, *command_args)
 
   # send new articles from rest of world
-  await unleash_rest_of_World()
+  # await unleash_rest_of_World()
 
   now = datetime.now()
   if now.weekday() == 6:  # 6 is Sunday.
@@ -458,9 +470,6 @@ async def before():
     print(
         f'next_quiz_start_time: {next_start_time}, sleep:{sleep_seconds} sec.')
     await asyncio.sleep(sleep_seconds)
-
-async def quiz_loop_task():
-  await quiz_loop.start()
 
 
 async def unleash_subscription_task():
