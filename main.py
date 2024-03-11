@@ -247,9 +247,9 @@ from cogs.rest_of_world_functions import get_articles
 async def unleash_rest_of_World():
   # channel_id = 1098474629766578280  # veg
   # channel_id = 1132858904582311946  # ai4growth moderator_only
-  # channel_id = 1154660261106552832  # ai4growth test_channel
+  channel_id = 1154660261106552832  # ai4growth test_channel
   # channel_id = 1160197406848192613  # ai4growth leaderboard channel
-  channel_id = 1132855697332256849  # ai4growth news channel
+  # channel_id = 1132855697332256849  # ai4growth news channel
   channel = bot.get_channel(channel_id)
   articles = get_articles()
   print(f'\n\n new articles from rest of world: {list(articles)} \n\n')
