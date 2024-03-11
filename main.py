@@ -245,6 +245,7 @@ from cogs.rest_of_world_functions import get_articles
 
 @tasks.loop(hours=4)
 async def unleash_rest_of_World():
+  print('unleash rest of world')
   # channel_id = 1098474629766578280  # veg
   # channel_id = 1132858904582311946  # ai4growth moderator_only
   channel_id = 1154660261106552832  # ai4growth test_channel
@@ -346,8 +347,9 @@ async def on_ready():
   print("ready!")
   await asyncio.gather(
       quiz_loop_task(),
-      ioe_notifices_task(),
-      rest_of_world_task()
+      rest_of_world_task(),
+      ioe_notifices_task()
+      
   )
   #     unleash_subscription_task(),
   #     # most_active_task(),  # merged quiz_loop and most_active task for now.
