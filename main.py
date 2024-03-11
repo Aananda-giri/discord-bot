@@ -255,6 +255,7 @@ async def unleash_rest_of_World():
   articles = get_articles()
   print(f'\n\n new articles from rest of world: {list(articles)} \n\n')
   for article in articles:
+    print(f'sending article: {article} channel:{channel}')
     await channel.send(article['link'])
     await asyncio.sleep(1)
 
