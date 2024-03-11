@@ -340,7 +340,7 @@ async def rest_of_world_task():
 
 @bot.event
 async def on_ready():
-  await unleash_rest_of_World()
+  # await unleash_rest_of_World()
   # await send_most_active()
   # Run tasks concurrently using asyncio.gather
   # await most_active_task()
