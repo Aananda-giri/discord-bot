@@ -3,7 +3,9 @@ from discord.ext import commands
 from cogs.functions import get_embeded_message
 # from replit import db
 from database import db
-import config
+import dotenv
+
+dotenv.load_dotenv()
 
 # import math, asyncpraw, asyncprawcore
 # import config, discord
@@ -25,20 +27,20 @@ async def send_news(channel, country="", how_many = 10, language='en', last_coun
           await channel.send(link)
   else:
     if country=="" or country=="world":
-        api_link = f"https://newsapi.org/v2/top-headlines?country=&category=business&apiKey={config.NEWS_API_KEY}&language={language}"
+        api_link = f"https://newsapi.org/v2/top-headlines?country=&category=business&apiKey={os.environ.get('NEWS_API_KEY')}&language={language}"
         # api_link = f"https://newsapi.org/v2/top-headlines?country=&category=business&apiKey={os.environ['NEWS_API_KEY']}&language={language}"
     else:
-      api_link = f"https://newsapi.org/v2/top-headlines?country={country}&category=business&apiKey={config.NEWS_API_KEY}"
-      # api_link = f"https://newsapi.org/v2/top-headlines?country={country}&category=business&apiKey={os.environ['NEWS_API_KEY']}" # replit native
-      #api_link = "https://newsapi.org/v2/top-headlines?category=business&apiKey=19506b2fc6aa4bddb287495e65dd0cd0"
-      news = requests.get(api_link).json()
-      for new in news['articles'][:10]:
-          url = new['url']
-          title = new['title']
-          description = new['description']
-          image = new['publishedAt']
-          await channel.send(url)
-  
+        api_link = f"https://newsapi.org/v2/top-headlines?country={country}&category=business&apiKey={os.environ.get('NEWS_API_KEY')}"
+        # api_link = f"https://newsapi.org/v2/top-headlines?country={country}&category=business&apiKey={os.environ['NEWS_API_KEY']}" # replit native
+        #api_link = "https://newsapi.org/v2/top-headlines?category=business&apiKey=19506b2fc6aa4bddb287495e65dd0cd0"
+    news = requests.get(api_link).json()
+    for new in news['articles'][:10]:
+        url = new['url']
+        title = new['title']
+        description = new['description']
+        image = new['publishedAt']
+        await channel.send(url)
+
   if last_country:
     # send subscription list at the end of sending news
     # print(f'\n\nnews.send_news:  channel_id:{channel.id}\n\n')
@@ -52,14 +54,16 @@ class News(commands.Cog, name="news_commands"):
     self.bot=bot
   
   @commands.hybrid_group(name='subscribe', aliases=[],  brief='subscribe to news', help='e.g. `.subscribe news us 3` To subscribe to \'us\' daily news 3 at a time', fallback="subscribe")
-  async def news(self, context, country='world', how_many=7):
+  async def subscribe(self, context, country='world', how_many=7):
+      print(f'channel: {channel_id}\n genre:{country} {type(country)} \n how_many:{how_many}')
       
       channel_id = str(context.channel.id)
       # print('country:{}'.format(country))
 
       news_db = db('news')   # {'np': {'ch1_id':3, 'ch2_id':3, }}
       # set and update country,how_many database
-      news_db.add_one(channel_id = channel_id, gener=country, how_many=how_many)
+      print(f'channel: {channel_id}\n genre:{country} {type(country)} \n how_many:{how_many}')
+      news_db.add_one(channel_id = channel_id, gener=country, how_many=int(how_many))
       message = 'added daily news to channel: '
       print('\n news.subscribe: subscribed to news country:{country}\n')
           
@@ -68,6 +72,35 @@ class News(commands.Cog, name="news_commands"):
       embed = get_embeded_message(context, message)
       await context.send(embed=embed) # send confirmation message
       await send_news(context.channel, country=country) # send news
+  @commands.hybrid_group(name='news', aliases=[],  brief='subscribe to news', help='e.g. `.news` To send technology news every 12 hours', fallback="news")
+  async def news(self, context):
+      print(f'channel: {channel_id}')
+      
+      gemini_chat_db = db('gemini_chat')
+      gemini_chat_channels = gemini_chat_db.get_all()
+
+
+      channel_id = str(context.channel.id)
+      # print('country:{}'.format(country))
+
+      news_db = db('news')   # {'np': {'ch1_id':3, 'ch2_id':3, }}
+      # set and update country,how_many database
+      print(f'channel: {channel_id}')
+      if channel_id in news_db.get_all():
+          news_db.remove_one(channel_id = channel_id)
+          message = 'ai news disabled...'
+          # print('\n news.subscribe: subscribed to news country:{country}\n')
+          print(message)
+      else:
+          news_db.add_one(channel_id = channel_id, gener='', how_many=0)
+          message = 'ai news enabled...'
+          # print('\n news.subscribe: subscribed to news country:{country}\n')
+          print(message)
+      # message = f'\n\nsubscribed:country: {country}, how_many:{how_many}, channel_id:{channel_id}'
+      
+      embed = get_embeded_message(context, message)
+      await context.send(embed=embed) # send confirmation message
+      await send_ai_news(context.channel) # send ai news
 
   @news.command(name='unsubscribe', aliases=[],  brief='unsubscribe news from a channel', help='e.g. `.unsubscribe news us gb` To unsubscribe to \'us\' and \'gb\' daily news from a channel')
   async def unsubscribe(self, context, countries='all'):

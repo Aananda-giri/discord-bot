@@ -41,7 +41,8 @@ from cogs.social_media_cog import SocialMedia
 
 #from discord import FFmpegPCMAudio
 from dotenv import load_dotenv
-
+from cogs.gemini_response import GeminiResponse
+gemini = GeminiResponse()
 
 import time
 
@@ -242,7 +243,16 @@ async def unleash_ioe_notifications():
   return(1)
 
 from cogs.rest_of_world_functions import get_articles
+# Comment the post
+def is_ai_related_post(post_content, image_path = None):
+    response_text, the_history = gemini.get_gemini_response(image_path = image_path, prompt="This is mastodon post. Your job is to classify whether or not this post is related to AI. give one word respose: \"true\" if this post is related to AI and \"false\" if this post is not related to AI. Also respond with \"false\" if this post is spreading hate speech or negativity. i.e. you will respond \"false\" if either this is not ai related post or it is spreading hate speedh. The post content: ```" + post_content+"```", temperature=0.0)
+    
+    # print(f'response_text:{response_text}')     # , \n\n history:{the_history} \n\n')
 
+    if response_text in ['false', 'False', '"false"', '\'false\'', 'False', 'False', '"False"', '\'False\'', 'FALSE', 'FALSE', '"FALSE"', '\'FALSE\'']:
+        return False
+    else:
+        return True
 @tasks.loop(hours=4)
 async def unleash_rest_of_World():
   print('unleash rest of world')
@@ -250,14 +260,18 @@ async def unleash_rest_of_World():
   # channel_id = 1132858904582311946  # ai4growth moderator_only
   channel_id = 1154660261106552832  # ai4growth test_channel
   # channel_id = 1160197406848192613  # ai4growth leaderboard channel
-  # channel_id = 1132855697332256849  # ai4growth news channel
+  channel_id = 1132855697332256849  # ai4growth news channel
   channel = bot.get_channel(channel_id)
   articles = get_articles()
   print(f'\n\n new articles from rest of world: {list(articles)} \n\n')
-  for article in articles:
+  # import pdb; pdb.set_trace()
+  # for article in articles: p article
+  for article in list(articles):
     print(f'sending article: {article} channel:{channel}')
-    await channel.send(article['link'])
-    await asyncio.sleep(1)
+    
+    if is_ai_related_post(str(article['heading'])):
+        await channel.send(article['link'])
+        await asyncio.sleep(1)
 
 async def send_most_active():
   print('getting most active members...')
@@ -347,7 +361,7 @@ async def on_ready():
   # await most_active_task()
   print("ready!")
   await asyncio.gather(
-      quiz_loop_task(),
+      # quiz_loop_task(),
       rest_of_world_task(),
       ioe_notifices_task()
       
@@ -557,19 +571,19 @@ generation_config = {
 safety_settings = [
   {
     "category": "HARM_CATEGORY_HARASSMENT",
-    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+    "threshold": 'BLOCK_NONE',               # "BLOCK_MEDIUM_AND_ABOVE"
   },
   {
     "category": "HARM_CATEGORY_HATE_SPEECH",
-    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+    "threshold": 'BLOCK_NONE',               # "BLOCK_MEDIUM_AND_ABOVE"
   },
   {
     "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+    "threshold": 'BLOCK_NONE',               # "BLOCK_MEDIUM_AND_ABOVE"
   },
   {
     "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+    "threshold": 'BLOCK_NONE',               # "BLOCK_MEDIUM_AND_ABOVE"
   },
 ]
 history = [
@@ -640,7 +654,8 @@ async def process_vent_and_games(message):
     
     elif int(message.channel.id) in gemini_chat_channels and message.clean_content != '.chat':
         # with bot.typing(message.channel):
-        gemini_response, _ = get_gemini_response(str(message.clean_content))
+        gemini_response, _ = gemini.get_gemini_response(str(message.clean_content)) # get_gemini_response(str(message.clean_content))
+        
         await message.reply(gemini_response)
     elif count_db.exists(message.channel.id) and message.clean_content != '.count':
        print('\nproceed count\n')

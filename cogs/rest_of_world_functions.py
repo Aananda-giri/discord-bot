@@ -7,6 +7,9 @@ import requests
 
 
 def crawl_articles():
+  # ===================
+  # rest of world
+  # ===================
   response = requests.get('https://restofworld.org/series/the-rise-of-ai/')
   soup = bs4.BeautifulSoup(response.text, 'html.parser')
   soup.select('.article-info')
@@ -31,6 +34,33 @@ def crawl_articles():
   all_articles = []
   for heading, article in zip(headings_text, links_urls):
     all_articles.append({'heading': heading, 'link': article})
+  
+  # ========================
+  # HBR latest articles
+  # ========================
+  response = requests.get('https://hbr.org/the-latest')
+  soup = bs4.BeautifulSoup(response.text, 'html.parser')
+  hed_divs = soup.find_all(class_='hed')
+  # print(hed_divs)
+  for div in hed_divs:
+      # Find the first <a> tag within each div
+      a_tag = div.find('a')
+      # Extract href and text
+      href = "https://hbr.org" + a_tag.get('href')
+      text = a_tag.get_text()
+      # print(f"href: {href}, text: {text}")
+      all_articles.append({'heading': text, 'link': href})
+  
+
+  # ========================
+  # reuter latest articles
+  # ========================
+  '''
+  * reuter and bloomberg do not allow fetching using requests
+  '''
+
+
+
   return all_articles
 
 
@@ -77,7 +107,7 @@ def get_articles():
   if new_articles:
     old_articles = new_articles + old_articles
     save_articles(old_articles)
-    return reversed(new_articles)
+    return new_articles
   return []
 
 
