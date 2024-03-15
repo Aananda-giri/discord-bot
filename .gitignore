@@ -8,3 +8,4 @@ git_help.py
 test.py
 test.ipynb
 downloads/*
+cogs/.env
