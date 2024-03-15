@@ -1,38 +1,6 @@
 {
     "questions": [
         [
-            "Which type of learning involves learning from experience and making decisions based on that knowledge?",
-            "Supervised learning",
-            "Unsupervised learning",
-            "Reinforcement learning",
-            "Semi-supervised learning",
-            "3"
-        ],
-        [
-            "What is the purpose of the term 'dropout' in neural networks?",
-            "Eliminate outliers in the dataset",
-            "Reduce overfitting by randomly dropping neurons during training",
-            "Increase the number of hidden layers",
-            "Adjust the learning rate dynamically",
-            "2"
-        ],
-        [
-            "Which type of learning is associated with making predictions or classifications without explicit programming?",
-            "Reinforcement learning",
-            "Unsupervised learning",
-            "Supervised learning",
-            "Semi-supervised learning",
-            "3"
-        ],
-        [
-            "What is the primary objective of a neural network's activation function?",
-            "Determine the learning rate",
-            "Introduce non-linearity to the model",
-            "Control the number of layers",
-            "Specify the output format",
-            "2"
-        ],
-        [
             "Which algorithm is commonly used for solving classification problems with multiple classes?",
             "Linear Regression",
             "K-Nearest Neighbors",

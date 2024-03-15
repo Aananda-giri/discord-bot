@@ -689,6 +689,30 @@
                 "uesrname": "kendochelo0",
                 "times_excuted": 1
             }
+        },
+        {
+            "389871757084983296": {
+                "uesrname": "xricardo2x0",
+                "times_excuted": 1
+            }
+        },
+        {
+            "389871757084983296": {
+                "uesrname": "xricardo2x0",
+                "times_excuted": 1
+            }
+        },
+        {
+            "389871757084983296": {
+                "uesrname": "xricardo2x0",
+                "times_excuted": 1
+            }
+        },
+        {
+            "389871757084983296": {
+                "uesrname": "xricardo2x0",
+                "times_excuted": 1
+            }
         }
     ],
     "info": [
@@ -703,7 +727,7 @@
         {
             "861131196779331624": {
                 "uesrname": "Nathan.9449",
-                "times_excuted": 35
+                "times_excuted": 37
             }
         }
     ],
@@ -751,7 +775,7 @@
         {
             "861131196779331624": {
                 "uesrname": "Nathan.9449",
-                "times_excuted": 16
+                "times_excuted": 18
             }
         },
         {
@@ -1227,6 +1251,54 @@
         {
             "861131196779331624": {
                 "uesrname": "anon.sepian0",
+                "times_excuted": 1
+            }
+        }
+    ],
+    "chat": [
+        {
+            "861131196779331624": {
+                "uesrname": "anon.sepian0",
+                "times_excuted": 6
+            }
+        },
+        {
+            "728796840245329951": {
+                "uesrname": "aixi40060",
+                "times_excuted": 1
+            }
+        },
+        {
+            "728796840245329951": {
+                "uesrname": "aixi40060",
+                "times_excuted": 1
+            }
+        },
+        {
+            "515381251981443073": {
+                "uesrname": "wittgenstein_0",
+                "times_excuted": 1
+            }
+        },
+        {
+            "515381251981443073": {
+                "uesrname": "wittgenstein_0",
+                "times_excuted": 1
+            }
+        }
+    ],
+    "stats": [
+        {
+            "861131196779331624": {
+                "uesrname": "anon.sepian0",
+                "times_excuted": 3
+            }
+        }
+    ],
+    "ioe_notice": [
+        {
+            "837600913932681226": {
+                "uesrname": "learner08680",
                 "times_excuted": 1
             }
         }
